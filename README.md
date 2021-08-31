@@ -1,2 +1,2 @@
 # Gold_Miner_3D
-CSCI-526 Group Project
+CSCI-526 Group Project: Team Nine-AM
