@@ -5,11 +5,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    public float moveSpeed = 10.0f;     // player's move speed
+    public float moveSpeed = 60.0f;     // player's move speed
     public float rotateSpeed = 40.0f;   // player's rorate speed
 
-    private Rigidbody _rigidbody;
-    
     // TODO: animation when move???
     // private Animator _animator; 
 
@@ -20,7 +18,6 @@ public class PlayerMove : MonoBehaviour
     void Start()
     {
         // _animator = GetComponent<Animator>(); 
-        _rigidbody = GetComponent<Rigidbody>();
     }
 
 
