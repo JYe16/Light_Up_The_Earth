@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class CaptureGoals : MonoBehaviour
 {
-    public float captureRange = 50.0f;          // max capture range
+    public float captureRange = 1500.0f;          // max capture range
     public float timeBetweenCaptures = 1.0f;    // min intervals between two captures
+    public GameObject targetCross;
     
     // TODO: sound effects & animation when launch hook...
     // public AudioClip captureAudio;
@@ -45,13 +46,13 @@ public class CaptureGoals : MonoBehaviour
     {
         // TODO: play sound effect
         // ...
-
+        
         ray.origin = Camera.main.transform.position;
-        ray.direction = Camera.main.transform.forward;
+        ray.direction = targetCross.transform.forward;
         if (Physics.Raycast(ray, out hitInfo, captureRange))
         {
             // the hook touches a goal
-            if (hitInfo.collider.gameObject.tag == "Goals")
+            if (hitInfo.collider.gameObject.tag == "Goal")
             {
                 GameObject goal = hitInfo.collider.gameObject;
                 // draw the rope route
