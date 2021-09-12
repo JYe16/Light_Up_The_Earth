@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DrawHookLine : MonoBehaviour
 {
     public Transform startPoint;  
@@ -55,6 +56,7 @@ public class DrawHookLine : MonoBehaviour
                 // TODO: reverse draw line
                 lineRenderer.SetPosition(1, target.transform.position);
             }
+            UpdateScore.score = 10;
         }
     }
 }
