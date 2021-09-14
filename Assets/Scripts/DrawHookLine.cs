@@ -56,7 +56,6 @@ public class DrawHookLine : MonoBehaviour
                 // TODO: reverse draw line
                 lineRenderer.SetPosition(1, target.transform.position);
             }
-            UpdateScore.score = 10;
         }
     }
 }
