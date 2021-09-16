@@ -14,7 +14,8 @@ GameObject:
   - component: {fileID: 5377125520391387602}
   - component: {fileID: 908037837062332805}
   - component: {fileID: 2414314794796724296}
-  - component: {fileID: 2233724169150896836}
+  - component: {fileID: 936109757}
+  - component: {fileID: 936109758}
   m_Layer: 0
   m_Name: Stone_5
   m_TagString: Goal
@@ -127,7 +128,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
---- !u!114 &2233724169150896836
+--- !u!114 &936109757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383543143103670786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9206a184db2a409ab1f5a39c6fe9d20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  value: 50
+  captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
+  isCaptured: 0
+--- !u!114 &936109758
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,9 +152,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4383543143103670786}
   m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6912411361f6497786401b156b411d9, type: 3}
+  m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 10
-  moveSpeed: 8
-  minDistance: 2
+  moveSpeed: 10
+  minDistance: 100
+  target: {fileID: 0}
