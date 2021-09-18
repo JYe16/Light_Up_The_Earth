@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public int targetScore = 150;
     private int currentScore;
+    public float timeRemaining;
     public enum GameState
     {
         Playing,
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     };
     public GameState gameState;
     public Text scoreText;
+    public Text timeText;
     
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         currentScore = 0;
+        timeRemaining = 10;
         gm.gameState = GameState.Playing;
     }
 
@@ -36,16 +39,24 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 scoreText.text = "Score: " + currentScore;
-                if (currentScore >= targetScore)
-                    gm.gameState = GameState.Winning;
-                // else if ()
-                //     gm.gameState = GameState.GameOver;
+                //update time remaining
+                if(timeRemaining > 0){
+                    timeRemaining -= Time.deltaTime;
+                    Debug.Log(timeRemaining);
+                    timeText.text = "Time Remain: " + timeRemaining.ToString("f0") + "s";
+                }else{
+                    //if no time left and not enough points collected, player lost
+                    if (currentScore < targetScore){
+                        gm.gameState = GameState.GameOver;
+                    }else{
+                        gm.gameState = GameState.Winning;
+                    }
+                }
                 break;
             case GameState.Winning:
                 // TODO: load next level
                 break;
             case GameState.GameOver:
-                // TODO: restart menu
                 break;
         }
     }
