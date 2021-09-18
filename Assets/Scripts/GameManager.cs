@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
     public GameObject player;
-    public int targetScore = 150;
+    public int targetScore;
     private int currentScore;
     public float timeRemaining;
     public enum GameState
@@ -28,7 +28,6 @@ public class GameManager : MonoBehaviour
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         currentScore = 0;
-        timeRemaining = 10;
         gm.gameState = GameState.Playing;
     }
 
@@ -38,12 +37,12 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Playing:
-                scoreText.text = "Score: " + currentScore;
+                scoreText.text = currentScore.ToString();
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
-                    Debug.Log(timeRemaining);
-                    timeText.text = "Time Remain: " + timeRemaining.ToString("f0") + "s";
+                    Debug.Log("Time: " + timeRemaining + ", Score: " + currentScore);
+                    timeText.text = "Time: " +  timeRemaining.ToString("f0") + "s";
                 }else{
                     //if no time left and not enough points collected, player lost
                     if (currentScore < targetScore){
@@ -54,11 +53,11 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
+                Debug.Log("You Win!");
                 // TODO: load next level
                 break;
             case GameState.GameOver:
                 Debug.Log("You Lost!");
-                return;
                 break;
         }
     }

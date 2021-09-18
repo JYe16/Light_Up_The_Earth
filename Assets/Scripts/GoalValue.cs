@@ -18,8 +18,11 @@ public class GoalValue : MonoBehaviour
     {
         if(captureGoalAudio != null) 
             AudioSource.PlayClipAtPoint(captureGoalAudio, Camera.main.transform.position);
-        if(GameManager.gm != null) 
+        if (GameManager.gm != null)
+        {
             GameManager.gm.AddScore(value);
+            Debug.Log("Score updated: " + value);
+        }
         Destroy(gameObject);
     }
 }
