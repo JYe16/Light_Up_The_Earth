@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
                 // TODO: load next level
                 break;
             case GameState.GameOver:
+                Debug.Log("You Lost!");
+                return;
                 break;
         }
     }
