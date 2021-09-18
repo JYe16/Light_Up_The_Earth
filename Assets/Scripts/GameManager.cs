@@ -37,11 +37,11 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Playing:
-                scoreText.text = currentScore.ToString();
+                //update scure text
+                scoreText.text = "Score: " + currentScore.ToString();
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
-                    Debug.Log("Time: " + timeRemaining + ", Score: " + currentScore);
                     timeText.text = "Time: " +  timeRemaining.ToString("f0") + "s";
                 }else{
                     //if no time left and not enough points collected, player lost

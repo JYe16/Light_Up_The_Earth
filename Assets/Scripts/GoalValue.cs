@@ -21,7 +21,6 @@ public class GoalValue : MonoBehaviour
         if (GameManager.gm != null)
         {
             GameManager.gm.AddScore(value);
-            Debug.Log("Score updated: " + value);
         }
         Destroy(gameObject);
     }
