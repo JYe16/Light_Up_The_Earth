@@ -53,11 +53,11 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
-                Debug.Log("You Win!");
+                // Debug.Log("You Win!");
                 // TODO: load next level
                 break;
             case GameState.GameOver:
-                Debug.Log("You Lost!");
+                // Debug.Log("You Lost!");
                 break;
         }
     }

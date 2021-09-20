@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Goal
   - Hook Line
+  - PlayerController
   layers:
   - Default
   - TransparentFX

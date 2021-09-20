@@ -39,7 +39,7 @@ public class GoalMove : MonoBehaviour
             goalValue.CapturedEffect();
             // hide laser line
             target.GetComponent<LaserLine>().enabled = false;
-            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = true;
+            // GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = true;
         }
     }
 }

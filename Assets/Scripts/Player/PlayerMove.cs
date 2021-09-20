@@ -8,7 +8,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 60.0f;     // player's move speed
     public float rotateSpeed = 40.0f;   // player's rorate speed
 
-    public bool canMove;
+    [HideInInspector]public bool canMove;
     // TODO: animation when move???
     // private Animator _animator; 
 

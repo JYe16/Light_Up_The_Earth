@@ -7,7 +7,7 @@ public class PlayerCapture : MonoBehaviour
 {
     public float captureRange = 50.0f;
     // public AudioClip shootingAudio;
-    public GameObject targetCross;
+    public Transform targetCross;
 
     private float timer;                // count intervals between two captures
     private Ray ray;
@@ -30,6 +30,7 @@ public class PlayerCapture : MonoBehaviour
             timer = 0.0f;
             GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = false;
             CaptureGoals();
+            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = true;
         }
         else
         {
@@ -42,18 +43,18 @@ public class PlayerCapture : MonoBehaviour
     {
         // AudioSource.PlayClipAtPoint(shootingAudio, transform.position);
         ray.origin = Camera.main.transform.position;
-        ray.direction = targetCross.transform.forward;
+        ray.direction = targetCross.forward;
         if (Physics.Raycast(ray, out hitInfo, captureRange))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
-                laserLine.SetProps(hitInfo.collider.gameObject,captureRange, targetCross.transform.position);
+                laserLine.SetProps(hitInfo.collider.gameObject,captureRange, targetCross.position);
                 laserLine.enabled = true;
             }
         }
         else
         {
-            laserLine.SetProps(null,captureRange, targetCross.transform.position);
+            laserLine.SetProps(null,captureRange, targetCross.position);
             laserLine.enabled = true;
         }
     }
