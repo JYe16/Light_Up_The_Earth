@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour
     public float moveSpeed = 60.0f;     // player's move speed
     public float rotateSpeed = 40.0f;   // player's rorate speed
 
+    public bool canMove;
     // TODO: animation when move???
     // private Animator _animator; 
 
@@ -17,16 +18,19 @@ public class PlayerMove : MonoBehaviour
     // initialization: get player's components
     void Start()
     {
-        // _animator = GetComponent<Animator>(); 
+        canMove = true;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-        float h = Input.GetAxisRaw("Horizontal"); 
-        float v = Input.GetAxisRaw("Vertical");
-        MoveAndRotate(h, v);
+        if (canMove)
+        {
+            float h = Input.GetAxisRaw("Horizontal"); 
+            float v = Input.GetAxisRaw("Vertical");
+            MoveAndRotate(h, v);
+        }
     }
 
     void MoveAndRotate(float h, float v)
