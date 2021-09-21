@@ -21,7 +21,6 @@ public class PlayerCapture : MonoBehaviour
     {
         timer = 0.0f;
         laserLine = GetComponent<LaserLine>();
-        // if (laserLine != null) laserLine.enabled = false;
     }
 
     void LateUpdate()
@@ -29,6 +28,7 @@ public class PlayerCapture : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
+            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = false;
             CaptureGoals();
         }
         else
@@ -47,13 +47,14 @@ public class PlayerCapture : MonoBehaviour
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
-                laserLine.SetTarget(hitInfo.collider.gameObject);
+                laserLine.SetProps(hitInfo.collider.gameObject,captureRange, targetCross.transform.position);
                 laserLine.enabled = true;
             }
         }
         else
         {
-            
+            laserLine.SetProps(null,captureRange, targetCross.transform.position);
+            laserLine.enabled = true;
         }
     }
 }
