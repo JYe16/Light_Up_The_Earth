@@ -118,13 +118,44 @@ public class PlayerController : MonoBehaviour
 
    private void CameraChangeView()
    {
-      
+      if (northInput.longPress)
+      {
+         isThirdPerson = true;
+         Vector3 newPosition=new Vector3(5,8,-300);
+         cameraPivot.localPosition =
+            Vector3.Lerp(cameraPivot.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
+      }
+      else
+      {
+         isThirdPerson = false;
+         Vector3 newPosition = Vector3.zero;
+         cameraPivot.localPosition =
+            Vector3.Lerp(cameraPivot.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
+      }
    }
 
    private void CameraMovement()
    {
       cameraSystem.position = Vector3.Lerp(cameraSystem.position, cameraFollowTarget.position,
          Time.deltaTime * cameraFollowSpeed);
+      cameraAngles.x += (cameraInput.x * cameraFollowSpeed) * Time.fixedDeltaTime;
+      cameraAngles.y += (cameraInput.y * cameraFollowSpeed) * Time.fixedDeltaTime;
+      if (isThirdPerson)
+      {
+         cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle, cameraMaxAngle);
+      }
+      else
+      {
+         cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle * 1.5f, cameraMaxAngle * 1.5f);
+      }
+
+      Vector3 rotation = Vector3.zero;
+      rotation.y = cameraAngles.x;
+      cameraSystem.rotation = Quaternion.Euler(rotation);
+      
+      rotation = Vector3.zero;
+      rotation.x = cameraAngles.y;
+      cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
 
    // Start is called before the first frame update
