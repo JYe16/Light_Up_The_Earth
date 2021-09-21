@@ -116,7 +116,7 @@ public class @InputController : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""03b9314e-9e5a-4883-ad6b-b58a0b5ac024"",
-                    ""path"": ""<Mouse>/press"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

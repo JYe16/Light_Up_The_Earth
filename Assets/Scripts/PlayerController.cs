@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
       projectedVelocity.Normalize();
       projectedVelocity *= movementSpeed;
-      controller.Move(projectedVelocity * Time.deltaTime);
+      controller.Move(projectedVelocity * Time.deltaTime*5f);
    }
 
    private void MovementRotation()
