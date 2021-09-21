@@ -33,13 +33,11 @@ public class GoalMove : MonoBehaviour
         }
         else
         {
-            Vector3 endPosition = transform.position;
             goalValue.isCaptured = true;
             // play sound effect and update score
             goalValue.CapturedEffect();
             // hide laser line
             target.GetComponent<LaserLine>().enabled = false;
-            // GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = true;
         }
     }
 }

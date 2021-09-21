@@ -5,10 +5,8 @@ using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
-    public float captureRange = 50.0f;
     // public AudioClip shootingAudio;
     public Transform targetCross;
-
     private float timer;                // count intervals between two captures
     private Ray ray;
     private RaycastHit hitInfo;
@@ -28,9 +26,7 @@ public class PlayerCapture : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
-            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = false;
             CaptureGoals();
-            GameObject.FindGameObjectWithTag("PlayerController").GetComponent<PlayerMove>().canMove = true;
         }
         else
         {
@@ -44,18 +40,25 @@ public class PlayerCapture : MonoBehaviour
         // AudioSource.PlayClipAtPoint(shootingAudio, transform.position);
         ray.origin = Camera.main.transform.position;
         ray.direction = targetCross.forward;
-        if (Physics.Raycast(ray, out hitInfo, captureRange))
+        if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
-                laserLine.SetProps(hitInfo.collider.gameObject,captureRange, targetCross.position);
+                GameObject goal =  hitInfo.collider.gameObject;
+                laserLine.target = goal;
+                laserLine.goalMove = goal.GetComponent<GoalMove>();
                 laserLine.enabled = true;
             }
         }
         else
         {
-            laserLine.SetProps(null,captureRange, targetCross.position);
+            laserLine.boundaryPoint = GetBoundaryPoint();
             laserLine.enabled = true;
         }
+    }
+    
+    private Vector3 GetBoundaryPoint()
+    {
+        return transform.position + (targetCross.position - transform.position).normalized * Gloable.MAX_CAPTURE_RADIUS;
     }
 }
