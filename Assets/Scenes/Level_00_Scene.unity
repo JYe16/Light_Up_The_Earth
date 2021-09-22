@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23083481, g: 0.23335955, b: 0.2714298, a: 1}
+  m_IndirectSpecularColor: {r: 0.23084259, g: 0.23334324, b: 0.27140918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -870,7 +870,7 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 25
+    m_FontSize: 200
     m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 0
@@ -907,7 +907,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 20, y: 100}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2048074938
 GameObject:
