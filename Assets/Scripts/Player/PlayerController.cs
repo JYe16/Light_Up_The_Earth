@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 using UnityEngine.InputSystem;
@@ -10,31 +11,38 @@ public class PlayerController : MonoBehaviour
 {
    [Header("Player Control Data")] 
    InputController inputController;
-   Vector2 movemenInput;
+   Vector2 movementInput;
    Vector2 cameraInput;
-
+   private float hor;
    public InputElement northInput = new InputElement();
-
+  
+   
    [Header("Player Camera Data")] 
    public Transform cameraSystem;
    public Transform cameraPivot;
    public Transform camera;
+   
    public Transform cameraFollowTarget;
+   
    [Range(0, 10)] 
    public float cameraFollowSpeed;
-   [Range(0, 10)] 
+   
+   [Range(0, 10)]
    public float cameraRotatedSpeed;
+   
    public float cameraMaxAngle;
    public float cameraMinAngle;
+   
    public Vector2 cameraAngles;
    
    [Header("Player Movement Data")] 
-   public CharacterController controller;
+   public CharacterController SpaceShipcontroller;
    public Vector3 moveDirection;
    [Range(0, 10)] 
-   public float rotatioSpeed;
+   public float rotationSpeed;
    [Range(0,10)]
    public float movementSpeed;
+   
    public bool isThirdPerson;
 
    public void OnEnable()
@@ -45,11 +53,11 @@ public class PlayerController : MonoBehaviour
          inputController = new InputController();  
          //the movement of object
          inputController.Movement.Move.performed += 
-            inputController => movemenInput = inputController.ReadValue<Vector2>();
+            inputController => movementInput = inputController.ReadValue<Vector2>();
          //the movement of camera
          inputController.Movement.Camera.performed +=
-            inputController => movemenInput = inputController.ReadValue<Vector2>();
-         
+            inputController => cameraInput = inputController.ReadValue<Vector2>();
+
          //the start view
          inputController.Actions.ChangeView.started += inputController => northInput.risingEdge = true;
          inputController.Actions.ChangeView.performed += inputController => northInput.longPress = true;
@@ -67,52 +75,56 @@ public class PlayerController : MonoBehaviour
    {
       HandleMovement();
       MovementRotation();
-     
-      //TODO:
       
-      CameraChangeView();
-      CameraMovement();
+      
+     CameraChangeView();
+     CameraMovement();
    }
-
    private void LateUpdate()
    {
       northInput.resetEdge();
    }
 
+   
+   
+   
    Vector3 normalVector=Vector3.up;
+   //character movement function
    private void HandleMovement()
    {
-      moveDirection = camera.forward * movemenInput.y;
-      moveDirection += camera.right * movemenInput.x;
+      moveDirection = camera.forward * movementInput.y;
+      moveDirection += camera.right * movementInput.x;
+      moveDirection.y = 0;
       Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
       projectedVelocity.Normalize();
       projectedVelocity *= movementSpeed;
-      controller.Move(projectedVelocity * Time.deltaTime*5f);
+      SpaceShipcontroller.Move(projectedVelocity * Time.deltaTime*5f);
    }
 
    private void MovementRotation()
    {
-      Vector3 targetDirection=Vector3.zero;
+      Vector3 targetDir=Vector3.zero;
       if (isThirdPerson)
       {
-         targetDirection = camera.forward * movemenInput.y;
-         targetDirection = camera.right * movemenInput.y;
-      }
-      else
+         targetDir = camera.forward * movementInput.y;
+         targetDir += camera.right * movementInput.x;
+      }else
       {
-         targetDirection = camera.forward;
+         targetDir = camera.forward;
       }
 
-      if (targetDirection == Vector3.zero)
+      if (targetDir == Vector3.zero)
       {
-         targetDirection = transform.forward;
+         targetDir = transform.forward;
       }
 
-      Vector3 projectedDirection =Vector3.ProjectOnPlane(targetDirection,normalVector);
+      Vector3 projectedDirection =Vector3.ProjectOnPlane(targetDir,normalVector);
       projectedDirection.Normalize();
 
-      Quaternion targerDir = Quaternion.LookRotation(projectedDirection);
-      Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targerDir, rotatioSpeed * Time.deltaTime);
+      
+
+      Quaternion targetDirection = Quaternion.LookRotation(projectedDirection);
+      Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetDirection, rotationSpeed * Time.deltaTime);
       transform.rotation = smoothRotation;
    }
 
@@ -121,9 +133,9 @@ public class PlayerController : MonoBehaviour
       if (northInput.longPress)
       {
          isThirdPerson = true;
-         Vector3 newPosition=new Vector3(5,8,-300);
+         Vector3 newPosition=new Vector3(0,10,-300);
          cameraPivot.localPosition =
-            Vector3.Lerp(cameraPivot.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
+            Vector3.Lerp(cameraPivot.localPosition,  newPosition, Time.deltaTime * cameraFollowSpeed*2f);
       }
       else
       {
@@ -150,18 +162,19 @@ public class PlayerController : MonoBehaviour
       }
 
       Vector3 rotation = Vector3.zero;
-      rotation.y = cameraAngles.x;
+      rotation.x = cameraAngles.x;
       cameraSystem.rotation = Quaternion.Euler(rotation);
       
       rotation = Vector3.zero;
-      rotation.x = cameraAngles.y;
+      rotation.y = cameraAngles.y;
       cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
+
 
    // Start is called before the first frame update
    void Start()
    {
-        
+      
    }
-
+   
 }
