@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text timeText;
+	public Text statusText;
     
     // Start is called before the first frame update
     void Start()
@@ -38,7 +39,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 //update scure text
-                scoreText.text = "Score: " + currentScore.ToString();
+                scoreText.text = "Score: " + currentScore.ToString() + "/" + targetScore;
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
@@ -53,11 +54,11 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
-                // Debug.Log("You Win!");
+                statusText.text = "You Win!!";
                 // TODO: load next level
                 break;
             case GameState.GameOver:
-                // Debug.Log("You Lost!");
+                statusText.text = "You Lost!!";
                 break;
         }
     }
