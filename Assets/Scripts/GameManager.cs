@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -56,9 +57,11 @@ public class GameManager : MonoBehaviour
             case GameState.Winning:
                 statusText.text = "You Win!!";
                 // TODO: load next level
+                SceneManager.LoadScene("Level_01");
                 break;
             case GameState.GameOver:
-                statusText.text = "You Lost!!";
+                //load the score rank scene
+                SceneManager.LoadScene("GameOver");
                 break;
         }
     }
