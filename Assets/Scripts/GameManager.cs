@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 //load the score rank scene
+                PlayerPrefs.SetInt("Score", currentScore);
                 SceneManager.LoadScene("GameOver");
                 break;
         }
