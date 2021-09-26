@@ -26,21 +26,22 @@ public class RandomSpawner : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            Vector3 randomPos = RingAreaPos(innerRadius, outerRadius, transform.position);
             GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+            float objHeight = prefab.GetComponent<MeshRenderer>().bounds.size.y / 2;
+            Vector3 randomPos = RingAreaPos(innerRadius, outerRadius, transform.position, objHeight);
             Instantiate(prefab, randomPos, Quaternion.identity);
         }
     }
     
     // spawn in a ring area
-    public Vector3 RingAreaPos(float innerRadius, float outerRadius, Vector3 centerPos)
+    public Vector3 RingAreaPos(float innerRadius, float outerRadius, Vector3 centerPos, float objHeight)
     {
         Vector3 position;
         do
         {
             position = Random.insideUnitSphere * outerRadius + centerPos;
             position = position.normalized * (innerRadius + position.magnitude);
-        } while (position.y < platformTransform.position.y + 5.0f && !Physics.CheckSphere(position, collisionCheckRadius));
+        } while (position.y - objHeight < platformTransform.position.y + 5.0f && !Physics.CheckSphere(position, collisionCheckRadius));
         return position;
     }
 }
