@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text timeText;
 	public Text statusText;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +29,15 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-        currentScore = 0;
+		//load game data from playerprefs
+        if (PlayerPrefs.HasKey("baseScore"))
+        {
+            currentScore = PlayerPrefs.GetInt("baseScore");
+        }
+        else
+        {
+            currentScore = 0;   
+        }
         gm.gameState = GameState.Playing;
     }
 
@@ -55,8 +63,10 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
+                int newBase = currentScore - targetScore;
+                PlayerPrefs.SetInt("baseScore", newBase);
+                Debug.Log(PlayerPrefs.GetInt("total"));
                 SceneManager.LoadScene("WinPage");
-                // TODO: load next level
                 break;
             case GameState.GameOver:
                 //load the score rank scene
@@ -68,6 +78,18 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int value)
     {
+        //update the playerprefs also
+        int newTotal;
+        if (PlayerPrefs.HasKey("total"))
+        {
+            newTotal = PlayerPrefs.GetInt("total") + value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
+        else
+        {
+            newTotal = value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
         currentScore += value;
     }
 }

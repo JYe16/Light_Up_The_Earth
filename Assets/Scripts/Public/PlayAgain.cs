@@ -15,6 +15,7 @@ public class PlayAgain : MonoBehaviour
 
     void PlayAgainOnClick()
     {
+		PlayerPrefs.DeleteAll();
         SceneManager.LoadScene("Level_00_Scene");
     }
 
