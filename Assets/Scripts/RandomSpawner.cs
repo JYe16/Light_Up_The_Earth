@@ -20,7 +20,7 @@ public class RandomSpawner : MonoBehaviour
         public int propsSum = 0;
     }
     [System.Serializable]
-    public class SpawnerJsonData
+    public class SpawnerOriginJson
     {
         public SpawnerData[] spawnerDataList;
     }
@@ -62,6 +62,6 @@ public class RandomSpawner : MonoBehaviour
     {
         string json = Utils.ReadDataFromFile("Configuration/SpawnerData.json");
         // TODO: auto update level
-        spawnerData = JsonUtility.FromJson<SpawnerJsonData>(json).spawnerDataList[level];
+        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
     }
 }
