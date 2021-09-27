@@ -1,0 +1,11 @@
+{
+  "spawnerDataList": [
+    {
+      "valuelessSum": 30,
+      "valuableSum": 5,
+      "collisionCheckRadius": 5,
+      "outerRadius": 250,
+      "innerRadius": 180
+    }
+  ]
+}

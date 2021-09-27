@@ -7,7 +7,8 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] valuelessPrefabList;
     public GameObject[] valuablePrefabList;
     public Transform platformTransform;
-    
+    public int level = 0;
+    [System.Serializable]
     public class SpawnerData
     {
         public float innerRadius = 0.0f;
@@ -15,6 +16,11 @@ public class RandomSpawner : MonoBehaviour
         public float collisionCheckRadius = 0.0f;
         public int valuableSum = 0;
         public int valuelessSum = 0;
+    }
+    [System.Serializable]
+    public class SpawnerOriginJson
+    {
+        public SpawnerData[] spawnerDataList;
     }
     private SpawnerData spawnerData;
     
@@ -51,8 +57,8 @@ public class RandomSpawner : MonoBehaviour
 
     private void Init()
     {
-        spawnerData = new SpawnerData();
-        string json = Utils.ReadDataFromFile("Configuration/Level_1/SpawnerData.json");
-        JsonUtility.FromJsonOverwrite(json, spawnerData);
+        string json = Utils.ReadDataFromFile("Configuration/SpawnerData.json");
+        // TODO: auto update level
+        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
     }
 }
