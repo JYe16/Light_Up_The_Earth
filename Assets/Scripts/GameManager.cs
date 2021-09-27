@@ -55,7 +55,7 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
-                statusText.text = "You Win!!";
+                SceneManager.LoadScene("WinPage");
                 // TODO: load next level
                 break;
             case GameState.GameOver:

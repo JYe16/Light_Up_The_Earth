@@ -250,6 +250,7 @@ MonoBehaviour:
   valuablePrefabList:
   - {fileID: 1000012006197310, guid: 465c505844950da499dcf096a6da4409, type: 3}
   platformTransform: {fileID: 7926790865455924939}
+  level: 0
 --- !u!4 &304932427
 Transform:
   m_ObjectHideFlags: 0
@@ -759,8 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 106397321}
-  targetScore: 1000
-  timeRemaining: 1000
+  targetScore: 0
+  timeRemaining: 5
   gameState: 0
   scoreText: {fileID: 2061648471}
   timeText: {fileID: 1090413144}
