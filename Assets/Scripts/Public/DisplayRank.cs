@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Windows;
 
-public class Rank_Score : MonoBehaviour
+public class DisplayRank : MonoBehaviour
 {
     //Score imported from Levels
     private int Score;
@@ -13,22 +13,21 @@ public class Rank_Score : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if(File.Exists("Configuration/Level_1/RankData.json"))
-        {
-            
-        }
-        else
-        {
-            
-        }
-
-        }
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
         Score = PlayerPrefs.GetInt("Score");
-        rankText.text = "You Lost!!!\nScore: " + Score;
+        rankText.text = "Score Rank\nScore: " + Score;
         //Debug.Log(Score);
     }
+}
+
+//class for storing the rank
+public class Rank
+{
+    public int score;
+    public string name;
 }
