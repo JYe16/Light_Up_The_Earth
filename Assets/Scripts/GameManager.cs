@@ -7,8 +7,8 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
     public GameObject player;
+    [HideInInspector] public GameObject currentGoal;
     public int targetScore;
-    private int currentScore;
     public float timeRemaining;
     public enum GameState
     {
@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text timeText;
 	public Text statusText;
+    
+    private int currentScore;
+
+    
     
     // Start is called before the first frame update
     void Start()
@@ -38,8 +42,8 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Playing:
-                //update scure text
-                scoreText.text = "Score: " + currentScore.ToString() + "/" + targetScore;
+                //update score text
+                scoreText.text = "Score: " + currentScore + "/" + targetScore;
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
@@ -66,5 +70,10 @@ public class GameManager : MonoBehaviour
     public void AddScore(int value)
     {
         currentScore += value;
+    }
+
+    public void AddRemainingTime(int bounsTime)
+    {
+        timeRemaining += bounsTime;
     }
 }
