@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 40
+  moveSpeed: 0.5
   minDistance: 100
   target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
 --- !u!114 &3879024654286454536
@@ -155,6 +155,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9206a184db2a409ab1f5a39c6fe9d20f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 40
+  value: 5
   captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
   isCaptured: 0

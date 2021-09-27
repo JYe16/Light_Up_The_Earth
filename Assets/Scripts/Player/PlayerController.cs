@@ -45,6 +45,14 @@ public class PlayerController : MonoBehaviour
    
    public bool isThirdPerson;
 
+   public bool canMove;
+
+   // Start is called before the first frame update
+   void Start()
+   {
+      canMove = true;
+   }
+   
    public void OnEnable()
    {
       
@@ -73,29 +81,27 @@ public class PlayerController : MonoBehaviour
 
    private void Update()
    {
-      HandleMovement();
-      MovementRotation();
-      
-      
-     CameraChangeView();
-     CameraMovement();
+      if (canMove)
+      {
+         HandleMovement();
+         MovementRotation();
+         
+         CameraChangeView();
+         CameraMovement();
+      }
    }
    private void LateUpdate()
    {
       northInput.resetEdge();
    }
-
    
-   
-   
-   Vector3 normalVector=Vector3.up;
    //character movement function
    private void HandleMovement()
    {
       moveDirection = camera.forward * movementInput.y;
       moveDirection += camera.right * movementInput.x;
       moveDirection.y = 0;
-      Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, normalVector);
+      Vector3 projectedVelocity = Vector3.ProjectOnPlane(moveDirection, Vector3.up);
       projectedVelocity.Normalize();
       projectedVelocity *= movementSpeed;
       SpaceShipcontroller.Move(projectedVelocity * Time.deltaTime*5f);
@@ -118,10 +124,8 @@ public class PlayerController : MonoBehaviour
          targetDir = transform.forward;
       }
 
-      Vector3 projectedDirection =Vector3.ProjectOnPlane(targetDir,normalVector);
+      Vector3 projectedDirection =Vector3.ProjectOnPlane(targetDir,Vector3.up);
       projectedDirection.Normalize();
-
-      
 
       Quaternion targetDirection = Quaternion.LookRotation(projectedDirection);
       Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetDirection, rotationSpeed * Time.deltaTime);
@@ -169,12 +173,9 @@ public class PlayerController : MonoBehaviour
       rotation.y = cameraAngles.y;
       cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
-
-
-   // Start is called before the first frame update
-   void Start()
-   {
-      
-   }
    
+   public void changeMoveStatus(bool status)
+   {
+      canMove = status;
+   }
 }

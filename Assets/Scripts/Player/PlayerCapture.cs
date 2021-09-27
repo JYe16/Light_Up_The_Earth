@@ -5,19 +5,23 @@ using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
-    // public AudioClip shootingAudio;
     public Transform targetCross;
+    
     private float timer;                // count intervals between two captures
     private Ray ray;
     private RaycastHit hitInfo;
     private LaserLine laserLine;
+    private Camera m_camera;
+    private PlayerController playerController;
     
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
-    
+
     // Start is called before the first frame update
     void Start()
     {
         timer = 0.0f;
+        m_camera = Camera.main;
+        playerController = GetComponentInParent<PlayerController>();
         laserLine = GetComponent<LaserLine>();
     }
 
@@ -26,6 +30,7 @@ public class PlayerCapture : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
+            playerController.changeMoveStatus(false);
             CaptureGoals();
         }
         else
@@ -37,8 +42,8 @@ public class PlayerCapture : MonoBehaviour
 
     void CaptureGoals()
     {
-        // AudioSource.PlayClipAtPoint(shootingAudio, transform.position);
-        ray.origin = Camera.main.transform.position;
+        
+        ray.origin = m_camera.transform.position;
         ray.direction = targetCross.forward;
         if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
         {

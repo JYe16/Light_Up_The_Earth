@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 
 public class GoalMove : MonoBehaviour
@@ -21,15 +22,16 @@ public class GoalMove : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (goalValue.isCaptured || target == null) return;
         distance = Vector3.Distance(transform.position, target.transform.position);
+        float t = distance / moveSpeed;
         if (distance > minDistance)
         {
-            transform.LookAt(target.transform);
-            transform.eulerAngles = new Vector3(0.0f, transform.eulerAngles.y, 0.0f);
-            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+            Vector3 goalPosition = transform.position;
+            Vector3 spaceshipPosition = target.transform.position;
+            transform.position = Vector3.MoveTowards(goalPosition, Vector3.Lerp(goalPosition, spaceshipPosition, t), moveSpeed);
         }
         else
         {
