@@ -1,7 +1,0 @@
-{
-  "innerRadius": 180,
-  "outerRadius": 250,
-  "collisionCheckRadius": 5,
-  "valuableSum": 5,
-  "valuelessSum": 30
-}
