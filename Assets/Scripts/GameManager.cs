@@ -57,12 +57,11 @@ public class GameManager : MonoBehaviour
             case GameState.Winning:
                 statusText.text = "You Win!!";
                 // TODO: load next level
-                SceneManager.LoadScene("Level_01");
                 break;
             case GameState.GameOver:
                 //load the score rank scene
                 PlayerPrefs.SetInt("Score", currentScore);
-                SceneManager.LoadScene("GameOver");
+                SceneManager.LoadScene("Rank_Score");
                 break;
         }
     }

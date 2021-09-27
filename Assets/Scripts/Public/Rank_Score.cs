@@ -20,6 +20,6 @@ public class Rank_Score : MonoBehaviour
     {
         Score = PlayerPrefs.GetInt("Score");
         rankText.text = "You Lost!!!\nScore: " + Score;
-        Debug.Log(Score);
+        //Debug.Log(Score);
     }
 }
