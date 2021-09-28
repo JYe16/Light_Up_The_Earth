@@ -52,11 +52,16 @@ public class GameManager : MonoBehaviour
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
                     timeText.text = "Time: " +  timeRemaining.ToString("f0") + "s";
-                }else{
+                }
+                else
+                {
                     //if no time left and not enough points collected, player lost
-                    if (currentScore < targetScore){
+                    if (currentScore < targetScore)
+                    {
                         gm.gameState = GameState.GameOver;
-                    }else{
+                    }
+                    else
+                    {
                         gm.gameState = GameState.Winning;
                     }
                 }
@@ -70,8 +75,6 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("WinPage");
                 break;
             case GameState.GameOver:
-                //load the score rank scene
-                PlayerPrefs.SetInt("Score", currentScore);
                 //TODO: replace this scene with GameOver
                 SceneManager.LoadScene("EnterName");
                 break;
