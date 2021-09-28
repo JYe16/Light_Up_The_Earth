@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
+    
     public GameObject player;
+    public Slider timeBar;
     public int targetScore;
-    private int currentScore;
     public float timeRemaining;
+    [HideInInspector] public GameObject currentGoal;
     public enum GameState
     {
         Playing,
@@ -19,7 +21,10 @@ public class GameManager : MonoBehaviour
     };
     public GameState gameState;
     public Text scoreText;
-    public Text timeText;
+	public Text statusText;
+    public Text targetScoreText;
+    
+    private int currentScore;
 
     // Start is called before the first frame update
     void Start()
@@ -28,15 +33,7 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-		//load game data from playerprefs
-        if (PlayerPrefs.HasKey("baseScore"))
-        {
-            currentScore = PlayerPrefs.GetInt("baseScore");
-        }
-        else
-        {
-            currentScore = 0;   
-        }
+        initUI();
         gm.gameState = GameState.Playing;
     }
 
@@ -46,13 +43,14 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Playing:
-                //update scure text
-                scoreText.text = "Score: " + currentScore.ToString() + "/" + targetScore;
+                //update score text
+                scoreText.text = currentScore.ToString();
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
-                    timeText.text = "Time: " +  timeRemaining.ToString("f0") + "s";
-                }else{
+                    timeBar.value = timeRemaining;
+                }
+                else{
                     //if no time left and not enough points collected, player lost
                     if (currentScore < targetScore){
                         gm.gameState = GameState.GameOver;
@@ -94,5 +92,26 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("total", newTotal);
         }
         currentScore += value;
+    }
+
+    public void AddRemainingTime(int bounsTime)
+    {
+        timeRemaining += bounsTime;
+    }
+
+    private void initUI()
+    {
+        //load game data from playerprefs
+        if (PlayerPrefs.HasKey("baseScore"))
+        {
+            currentScore = PlayerPrefs.GetInt("baseScore");
+        }
+        else
+        {
+            currentScore = 0;   
+        }
+        targetScoreText.text = targetScore.ToString();
+        timeBar.value = timeRemaining;
+        timeBar.maxValue = timeRemaining;
     }
 }
