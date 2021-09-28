@@ -67,11 +67,11 @@ public class GameManager : MonoBehaviour
                 //save the new base score to system
                 PlayerPrefs.SetInt("baseScore", newBase);
                 //jump to the winning page
-                SceneManager.LoadScene("WinPage");
+                SceneManager.LoadScene("Pass_Level");
                 break;
             case GameState.GameOver:
                 //TODO: replace this scene with GameOver
-                SceneManager.LoadScene("EnterName");
+                SceneManager.LoadScene("GameOver");
                 break;
         }
     }
