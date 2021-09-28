@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class GoalMove : MonoBehaviour
 {
-    public float moveSpeed = 10.0f;
-    public float minDistance = 100.0f;
+    public float moveSpeed;
     public GameObject target;
-
+    
     private float distance;
     private GoalValue goalValue;
+    private bool isHide = false;
     private RotateBySelf rotateEffect;
+    private float minDistance = 100.0f;
     
-    // Start is called before the first frame update
     void Start()
     {
         goalValue = GetComponent<GoalValue>();
@@ -21,10 +21,9 @@ public class GoalMove : MonoBehaviour
         if (rotateEffect != null) rotateEffect.enabled = false;
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
-        if (goalValue.isCaptured || target == null) return;
+        if ( goalValue.isCaptured || target == null) return;
         distance = Vector3.Distance(transform.position, target.transform.position);
         float t = distance / moveSpeed;
         if (distance > minDistance)
@@ -36,10 +35,16 @@ public class GoalMove : MonoBehaviour
         else
         {
             goalValue.isCaptured = true;
-            // play sound effect and update score
-            goalValue.CapturedEffect();
+            if(!isHide) goalValue.CapturedEffect();
             // hide laser line
             target.GetComponent<LaserLine>().enabled = false;
         }
+    }
+
+    public void HideGoal()
+    {
+        gameObject.GetComponent<Renderer>().enabled = false;
+        moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+        isHide = true;
     }
 }

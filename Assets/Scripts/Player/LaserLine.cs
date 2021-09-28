@@ -9,7 +9,7 @@ public class LaserLine : MonoBehaviour
     [HideInInspector]public GameObject target;
     [HideInInspector]public GoalMove goalMove;
     
-    private float moveSpeed = 6.0f;
+    private float moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
     private LineRenderer lineRenderer;
     private float distance;
     private float counter;
