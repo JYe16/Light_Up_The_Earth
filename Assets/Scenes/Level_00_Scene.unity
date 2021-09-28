@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.23083481, g: 0.23335955, b: 0.2714298, a: 1}
+  m_IndirectSpecularColor: {r: 0.23084259, g: 0.23334324, b: 0.27140918, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -249,12 +249,8 @@ MonoBehaviour:
   - {fileID: 4383543143103670786, guid: 524403dc3f56843b1b5a6b9a50fcbcb2, type: 3}
   valuablePrefabList:
   - {fileID: 1000012006197310, guid: 465c505844950da499dcf096a6da4409, type: 3}
-  innerRadius: 180
-  outerRadius: 250
-  valuableSum: 5
-  valuelessSum: 30
-  collisionCheckRadius: 1
   platformTransform: {fileID: 7926790865455924939}
+  level: 0
 --- !u!4 &304932427
 Transform:
   m_ObjectHideFlags: 0
@@ -764,8 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 106397321}
-  targetScore: 50
-  timeRemaining: 45
+  targetScore: 100
+  timeRemaining: 30
   gameState: 0
   scoreText: {fileID: 2061648471}
   timeText: {fileID: 1090413144}

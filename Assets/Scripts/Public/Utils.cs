@@ -27,4 +27,10 @@ public static class Utils
             return "";
         }
     }
+
+    public static void WriteJSON(string fileName, string json)
+    {
+        fileName = GetFilePath(fileName);
+        File.WriteAllText(fileName, json);
+    }
 }

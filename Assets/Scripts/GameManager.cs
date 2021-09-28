@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -19,8 +20,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text timeText;
-	public Text statusText;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,15 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-        currentScore = 0;
+		//load game data from playerprefs
+        if (PlayerPrefs.HasKey("baseScore"))
+        {
+            currentScore = PlayerPrefs.GetInt("baseScore");
+        }
+        else
+        {
+            currentScore = 0;   
+        }
         gm.gameState = GameState.Playing;
     }
 
@@ -54,17 +62,37 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
-                statusText.text = "You Win!!";
-                // TODO: load next level
+                //calculate the base score for the next level
+                int newBase = currentScore - targetScore;
+                //save the new base score to system
+                PlayerPrefs.SetInt("baseScore", newBase);
+                //jump to the winning page
+                SceneManager.LoadScene("WinPage");
                 break;
             case GameState.GameOver:
-                statusText.text = "You Lost!!";
+                //load the score rank scene
+                PlayerPrefs.SetInt("Score", currentScore);
+                //TODO: replace this scene with GameOver
+                SceneManager.LoadScene("EnterName");
                 break;
         }
     }
 
     public void AddScore(int value)
     {
+        //update the playerprefs also
+        int newTotal;
+        //update the total score when the player has captured something
+        if (PlayerPrefs.HasKey("total"))
+        {
+            newTotal = PlayerPrefs.GetInt("total") + value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
+        else
+        {
+            newTotal = value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
         currentScore += value;
     }
 }
