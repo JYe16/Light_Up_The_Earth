@@ -36,16 +36,16 @@ public class PropsManager : MonoBehaviour
 
     void FixedUpdate()
     {
-        bombBtText.text = "BOMB " + propsCounter.bombCounter;
-        timeExtensionBtText.text = "TIME EXTENSION " + propsCounter.timeIncreaseCounter;
-        powerWaterBtText.text = "POWER WATER " + propsCounter.powerWaterCounter;
-        bonusBtText.text = "BONUS " + propsCounter.bombCounter;
+        bombBtText.text = propsCounter.bombCounter.ToString();
+        timeExtensionBtText.text = propsCounter.timeIncreaseCounter.ToString();
+        powerWaterBtText.text = propsCounter.powerWaterCounter.ToString();
+        bonusBtText.text = propsCounter.scoreIncreaseCounter.ToString();
     }
 
     public void IncreaseScore()
     {
         GameManager.gm.AddScore(BOUNS_VALUE);
-        propsCounter.bombCounter--;
+        propsCounter.scoreIncreaseCounter--;
     }
 
     public void IncreaseTime()

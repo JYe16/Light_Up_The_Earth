@@ -33,6 +33,7 @@ public class GoalValue : MonoBehaviour
             if(!isProps)
             {
                 GameManager.gm.AddScore(value);
+                GameManager.gm.currentGoal = null;
             }
             else
             {
