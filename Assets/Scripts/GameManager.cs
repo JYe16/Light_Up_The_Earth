@@ -7,10 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
+    
     public GameObject player;
+    public Slider timeBar;
     public int targetScore;
-    private int currentScore;
     public float timeRemaining;
+    [HideInInspector] public GameObject currentGoal;
     public enum GameState
     {
         Playing,
@@ -19,9 +21,10 @@ public class GameManager : MonoBehaviour
     };
     public GameState gameState;
     public Text scoreText;
-    public Text timeText;
-	public Text statusText;
+    public Text targetScoreText;
     
+    private int currentScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +32,7 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-        currentScore = 0;
+        initUI();
         gm.gameState = GameState.Playing;
     }
 
@@ -39,36 +42,76 @@ public class GameManager : MonoBehaviour
         switch (gameState)
         {
             case GameState.Playing:
-                //update scure text
-                scoreText.text = "Score: " + currentScore.ToString() + "/" + targetScore;
+                //update score text
+                scoreText.text = currentScore.ToString();
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
-                    timeText.text = "Time: " +  timeRemaining.ToString("f0") + "s";
-                }else{
+                    timeBar.value = timeRemaining;
+                }
+                else{
                     //if no time left and not enough points collected, player lost
-                    if (currentScore < targetScore){
+                    if (currentScore < targetScore)
+                    {
                         gm.gameState = GameState.GameOver;
-                    }else{
+                    }
+                    else
+                    {
                         gm.gameState = GameState.Winning;
                     }
                 }
                 break;
             case GameState.Winning:
-                statusText.text = "You Win!!";
-                // TODO: load next level
-                SceneManager.LoadScene("Level_01");
+                //calculate the base score for the next level
+                int newBase = currentScore - targetScore;
+                //save the new base score to system
+                PlayerPrefs.SetInt("baseScore", newBase);
+                //jump to the winning page
+                SceneManager.LoadScene("WinPage");
                 break;
             case GameState.GameOver:
-                //load the score rank scene
-                PlayerPrefs.SetInt("Score", currentScore);
-                SceneManager.LoadScene("GameOver");
+                //TODO: replace this scene with GameOver
+                SceneManager.LoadScene("EnterName");
                 break;
         }
     }
 
     public void AddScore(int value)
     {
+        //update the playerprefs also
+        int newTotal;
+        //update the total score when the player has captured something
+        if (PlayerPrefs.HasKey("total"))
+        {
+            newTotal = PlayerPrefs.GetInt("total") + value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
+        else
+        {
+            newTotal = value;
+            PlayerPrefs.SetInt("total", newTotal);
+        }
         currentScore += value;
+    }
+
+    public void AddRemainingTime(int bounsTime)
+    {
+        timeRemaining += bounsTime;
+    }
+
+    private void initUI()
+    {
+        //load game data from playerprefs
+        if (PlayerPrefs.HasKey("baseScore"))
+        {
+            currentScore = PlayerPrefs.GetInt("baseScore");
+        }
+        else
+        {
+            currentScore = 0;   
+        }
+        targetScoreText.text = targetScore.ToString();
+        timeBar.value = timeRemaining;
+        timeBar.maxValue = timeRemaining;
     }
 }

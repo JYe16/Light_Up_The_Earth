@@ -1,17 +1,27 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GoalValue : MonoBehaviour
 {
     public int value;   // earned score after capture this goal
     public AudioClip captureGoalAudio;
-    public bool isCaptured;
+    public bool isProps = false;
+    
+    [HideInInspector]public bool isCaptured;
+    private Gloable.PropsType type;
 
     // Start is called before the first frame update
     void Start()
     {
         isCaptured = false;
+        if (isProps)
+        {
+            RandomSetProp();
+        }
     }
 
     public void CapturedEffect()
@@ -20,8 +30,35 @@ public class GoalValue : MonoBehaviour
             AudioSource.PlayClipAtPoint(captureGoalAudio, Camera.main.transform.position);
         if (GameManager.gm != null)
         {
-            GameManager.gm.AddScore(value);
+            if(!isProps)
+            {
+                GameManager.gm.AddScore(value);
+                GameManager.gm.currentGoal = null;
+            }
+            else
+            {
+                // work immediately (time extension & score increase)
+                if (type == Gloable.PropsType.TIME_INCREASE)
+                {
+                    PropsManager.manager.IncreaseTime();
+                }
+                else if (type == Gloable.PropsType.SCORE_INCREASE)
+                {
+                    PropsManager.manager.IncreaseScore();
+                }
+                else
+                {
+                    PropsManager.manager.UpdatePropsCounter(type);
+                }
+            }
         }
         Destroy(gameObject);
+    }
+    
+    private void RandomSetProp()
+    {
+        List<Gloable.PropsType> propsList =
+            Enum.GetValues(typeof(Gloable.PropsType)).Cast<Gloable.PropsType>().ToList();
+        type = propsList[Random.Range(0, propsList.Count)];
     }
 }

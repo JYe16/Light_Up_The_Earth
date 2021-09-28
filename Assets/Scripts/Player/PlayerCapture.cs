@@ -11,7 +11,6 @@ public class PlayerCapture : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     private LaserLine laserLine;
-    private Camera m_camera;
     private PlayerController playerController;
     
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
@@ -20,7 +19,6 @@ public class PlayerCapture : MonoBehaviour
     void Start()
     {
         timer = 0.0f;
-        m_camera = Camera.main;
         playerController = GetComponentInParent<PlayerController>();
         laserLine = GetComponent<LaserLine>();
     }
@@ -43,13 +41,14 @@ public class PlayerCapture : MonoBehaviour
     void CaptureGoals()
     {
         
-        ray.origin = m_camera.transform.position;
+        ray.origin = Camera.main.transform.position;
         ray.direction = targetCross.forward;
         if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
                 GameObject goal =  hitInfo.collider.gameObject;
+                GameManager.gm.currentGoal = goal;
                 laserLine.target = goal;
                 laserLine.goalMove = goal.GetComponent<GoalMove>();
                 laserLine.enabled = true;
