@@ -20,7 +20,6 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text timeText;
-	public Text statusText;
 
     // Start is called before the first frame update
     void Start()
@@ -63,15 +62,18 @@ public class GameManager : MonoBehaviour
                 }
                 break;
             case GameState.Winning:
+                //calculate the base score for the next level
                 int newBase = currentScore - targetScore;
+                //save the new base score to system
                 PlayerPrefs.SetInt("baseScore", newBase);
-                Debug.Log(PlayerPrefs.GetInt("total"));
+                //jump to the winning page
                 SceneManager.LoadScene("WinPage");
                 break;
             case GameState.GameOver:
                 //load the score rank scene
                 PlayerPrefs.SetInt("Score", currentScore);
-                SceneManager.LoadScene("Rank_Score");
+                //TODO: replace this scene with GameOver
+                SceneManager.LoadScene("EnterName");
                 break;
         }
     }
@@ -80,6 +82,7 @@ public class GameManager : MonoBehaviour
     {
         //update the playerprefs also
         int newTotal;
+        //update the total score when the player has captured something
         if (PlayerPrefs.HasKey("total"))
         {
             newTotal = PlayerPrefs.GetInt("total") + value;

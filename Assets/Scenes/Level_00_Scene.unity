@@ -760,8 +760,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 106397321}
-  targetScore: 1
-  timeRemaining: 20
+  targetScore: 100
+  timeRemaining: 30
   gameState: 0
   scoreText: {fileID: 2061648471}
   timeText: {fileID: 1090413144}

@@ -28,4 +28,9 @@ public static class Utils
         }
     }
 
+    public static void WriteJSON(string fileName, string json)
+    {
+        fileName = GetFilePath(fileName);
+        File.WriteAllText(fileName, json);
+    }
 }

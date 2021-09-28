@@ -10,24 +10,21 @@ public class DisplayRank : MonoBehaviour
     private int Score;
     //Text to show
     public Text rankText;
+	string rank = "Score Ranking:\nName\t\tScore\t\t";
     // Start is called before the first frame update
     void Start()
     {
-        
+       	string content = Utils.ReadDataFromFile("Rank.json");
+		Records recvJSON = JsonUtility.FromJson<Records>(content);
+		for(int i = 0; i < recvJSON.list.Count; i++)
+		{
+			rank += recvJSON.list[i].name + "\t\t" + recvJSON.list[i].score + "\n";
+		}
     }
 
     // Update is called once per frame
     void Update()
     {
-        Score = PlayerPrefs.GetInt("Score");
-        rankText.text = "Score Rank\nScore: " + Score;
-        //Debug.Log(Score);
+        rankText.text = rank;
     }
-}
-
-//class for storing the rank
-public class Rank
-{
-    public int score;
-    public string name;
 }
