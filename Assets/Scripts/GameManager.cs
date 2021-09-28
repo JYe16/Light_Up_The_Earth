@@ -21,7 +21,6 @@ public class GameManager : MonoBehaviour
     };
     public GameState gameState;
     public Text scoreText;
-	public Text statusText;
     public Text targetScoreText;
     
     private int currentScore;
