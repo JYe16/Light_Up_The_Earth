@@ -6,6 +6,7 @@ public class RandomSpawner : MonoBehaviour
 {
     public GameObject[] valuelessPrefabList;
     public GameObject[] valuablePrefabList;
+    public GameObject[] propsPrefabList;
     public Transform platformTransform;
     public int level = 0;
     [System.Serializable]
@@ -16,6 +17,7 @@ public class RandomSpawner : MonoBehaviour
         public float collisionCheckRadius = 0.0f;
         public int valuableSum = 0;
         public int valuelessSum = 0;
+        public int propsSum = 0;
     }
     [System.Serializable]
     public class SpawnerOriginJson
@@ -30,6 +32,7 @@ public class RandomSpawner : MonoBehaviour
         Init();
         AddObject(spawnerData.valuelessSum, valuelessPrefabList);
         AddObject(spawnerData.valuableSum, valuablePrefabList);
+        AddObject(spawnerData.propsSum, propsPrefabList);
     }
 
     private void AddObject(int count, GameObject[] prefabs)
