@@ -18,10 +18,10 @@ EditorBuildSettings:
     path: Assets/Scenes/ScoreRank.unity
     guid: 0c0e4d0d533b07f49b70a004191fbb7f
   - enabled: 1
-    path: Assets/Scenes/WinPage.unity
-    guid: bbccb26c1fa020d4d977a6df04a4af1b
-  - enabled: 1
     path: Assets/Scenes/GameOver.unity
     guid: 198f3065197ae4298b39b3fa68b0ec88
+  - enabled: 1
+    path: Assets/Scenes/Pass_Level.unity
+    guid: 10e6d17415518504887c65e7e254d069
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c532c2d6de07e40a9847d373cdb42eb4, type: 2}
