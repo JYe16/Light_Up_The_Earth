@@ -575,7 +575,12 @@ MonoBehaviour:
   - {fileID: 5776603108085280973, guid: fe8d56d6c6f0742f2ba1d09e893929b4, type: 3}
   - {fileID: 4383543143103670786, guid: 524403dc3f56843b1b5a6b9a50fcbcb2, type: 3}
   valuablePrefabList:
+  - {fileID: 3786948766358546220, guid: d70ec488ca14e4031aafeb77afaa4c82, type: 3}
   - {fileID: 1000012006197310, guid: 465c505844950da499dcf096a6da4409, type: 3}
+  - {fileID: 2439257883254694350, guid: 7aef54f08bfca4480b67726a94b9265f, type: 3}
+  - {fileID: 7762474622665818668, guid: ee9076b616955470dbeadcf91dcdfb45, type: 3}
+  - {fileID: 1914368380903524182, guid: 3f0715ec32ebf4cc8be27bda2f142e65, type: 3}
+  - {fileID: 2891991860764727477, guid: 7cb9fbb85058147c7865ff88c95745df, type: 3}
   propsPrefabList:
   - {fileID: 4634720436632843782, guid: 92ea265839af74af6a3419b4b69182a7, type: 3}
   platformTransform: {fileID: 7926790865455924939}
@@ -2346,7 +2351,7 @@ MonoBehaviour:
   player: {fileID: 106397321}
   timeBar: {fileID: 191239406}
   targetScore: 10
-  timeRemaining: 1000
+  timeRemaining: 80
   currentGoal: {fileID: 0}
   gameState: 0
   scoreText: {fileID: 937811820}
