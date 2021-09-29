@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 4383543143106672130}
   - component: {fileID: 4383543143105672386}
   - component: {fileID: 5377125520391387602}
-  - component: {fileID: 908037837062332805}
   - component: {fileID: 2414314794796724296}
   - component: {fileID: 936109758}
   - component: {fileID: 936109757}
+  - component: {fileID: -6450656564840394755}
   m_Layer: 0
   m_Name: Stone_5
   m_TagString: Goal
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 4383543143103670786}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 130, y: 100, z: 80}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4383543143103670786}
-  m_Mesh: {fileID: 4300000, guid: 1e2ef0cc5c65717479848f40d793d3ee, type: 3}
+  m_Mesh: {fileID: 4300000, guid: e4c29fbf464d3b3429e6cb1507506144, type: 3}
 --- !u!23 &4383543143105672386
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6745167470224e74db37c9f8c2cf4d25, type: 2}
+  - {fileID: 2100000, guid: 720f66b8f1880c2449d38286edba163a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,19 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &908037837062332805
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4383543143103670786}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.42566392, y: 0.43922898, z: 0.65112615}
-  m_Center: {x: 0.0008135214, y: 0.0078976005, z: -0.0030842125}
 --- !u!114 &2414314794796724296
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  minDistance: 100
   target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
 --- !u!114 &936109757
 MonoBehaviour:
@@ -157,4 +143,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 10
   captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
+  isProps: 0
   isCaptured: 0
+--- !u!65 &-6450656564840394755
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4383543143103670786}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5515995, y: 3.2651544, z: 5.632247}
+  m_Center: {x: 0.00000023841858, y: 0.00000029802322, z: 0.00000011920929}

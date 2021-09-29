@@ -28,7 +28,6 @@ public class PlayerCapture : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
-            playerController.changeMoveStatus(false);
             CaptureGoals();
         }
         else
@@ -40,7 +39,6 @@ public class PlayerCapture : MonoBehaviour
 
     void CaptureGoals()
     {
-        
         ray.origin = Camera.main.transform.position;
         ray.direction = targetCross.forward;
         if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
@@ -52,13 +50,13 @@ public class PlayerCapture : MonoBehaviour
                 laserLine.target = goal;
                 laserLine.goalMove = goal.GetComponent<GoalMove>();
                 laserLine.enabled = true;
+                playerController.changeMoveStatus(false);
+                return;
             }
         }
-        else
-        {
-            laserLine.boundaryPoint = GetBoundaryPoint();
-            laserLine.enabled = true;
-        }
+        laserLine.boundaryPoint = GetBoundaryPoint();
+        laserLine.enabled = true;
+        playerController.changeMoveStatus(false);
     }
     
     private Vector3 GetBoundaryPoint()
