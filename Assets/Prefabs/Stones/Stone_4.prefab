@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5776603108086181069}
   - component: {fileID: 5776603108087279117}
   - component: {fileID: 89660561217992971}
-  - component: {fileID: 907578553592778964}
   - component: {fileID: 4119809003450428601}
   - component: {fileID: 2812952096902015288}
   - component: {fileID: 3879024654286454536}
+  - component: {fileID: -7193352570643301978}
   m_Layer: 0
   m_Name: Stone_4
   m_TagString: Goal
@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 5776603108085280973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalScale: {x: 8, y: 8, z: 8}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5776603108085280973}
-  m_Mesh: {fileID: 4300000, guid: 043111edfa1d129478e041d0c2a324c8, type: 3}
+  m_Mesh: {fileID: 4300000, guid: a0e55ee91dfa51344aa183e7f43be07f, type: 3}
 --- !u!23 &5776603108087279117
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6745167470224e74db37c9f8c2cf4d25, type: 2}
+  - {fileID: 2100000, guid: 720f66b8f1880c2449d38286edba163a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -102,19 +102,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!65 &907578553592778964
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5776603108085280973}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.48198694, y: 0.28297955, z: 0.52529526}
-  m_Center: {x: -0.003875345, y: -0.001062572, z: 0.0036155581}
 --- !u!114 &4119809003450428601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -141,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 0.5
-  minDistance: 100
   target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
 --- !u!114 &3879024654286454536
 MonoBehaviour:
@@ -157,4 +143,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 5
   captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
+  isProps: 0
   isCaptured: 0
+--- !u!65 &-7193352570643301978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5776603108085280973}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.9520824, y: 1.9252028, z: 1.9252028}
+  m_Center: {x: -0.00000014901161, y: -0.00000020861626, z: 0}

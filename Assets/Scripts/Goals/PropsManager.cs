@@ -45,13 +45,11 @@ public class PropsManager : MonoBehaviour
     public void IncreaseScore()
     {
         GameManager.gm.AddScore(BOUNS_VALUE);
-        propsCounter.scoreIncreaseCounter--;
     }
 
     public void IncreaseTime()
     {
         GameManager.gm.AddRemainingTime(BONUS_TIME);
-        propsCounter.timeIncreaseCounter--;
     }
 
     public void DestoryGoal(GameObject goal)
