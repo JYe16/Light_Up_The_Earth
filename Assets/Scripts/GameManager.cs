@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int targetScore;
     public float timeRemaining;
     [HideInInspector] public GameObject currentGoal;
+    [HideInInspector] public int currentLevel;
     public enum GameState
     {
         Playing,
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text targetScoreText;
-    
+    public Text levelText;
     private int currentScore;
 
     // Start is called before the first frame update
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
+        currentLevel = 1;
         initUI();
         gm.gameState = GameState.Playing;
     }
@@ -113,5 +115,6 @@ public class GameManager : MonoBehaviour
         targetScoreText.text = targetScore.ToString();
         timeBar.value = timeRemaining;
         timeBar.maxValue = timeRemaining;
+        levelText.text = currentLevel.ToString();
     }
 }

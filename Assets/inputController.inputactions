@@ -136,7 +136,7 @@
                 {
                     "name": "left",
                     "id": "1652df27-a346-4284-abce-19627e271790",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -147,7 +147,7 @@
                 {
                     "name": "right",
                     "id": "7d783622-0700-472c-8c5a-ae1cd88d0bf7",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
