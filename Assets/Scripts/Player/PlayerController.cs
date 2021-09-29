@@ -139,6 +139,7 @@ public class PlayerController : MonoBehaviour
       {
          isThirdPerson = true;
          Vector3 newPosition=new Vector3(0,10,-300);
+         
          camera.localPosition =
             Vector3.Lerp(camera.localPosition,  newPosition, Time.deltaTime * cameraFollowSpeed*2f);
       }
@@ -146,6 +147,7 @@ public class PlayerController : MonoBehaviour
       {
          isThirdPerson = false;
          Vector3 newPosition = Vector3.zero;
+         
          camera.localPosition =
             Vector3.Lerp(camera.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
       }
@@ -168,7 +170,9 @@ public class PlayerController : MonoBehaviour
 
       Vector3 rotation = Vector3.zero;
       rotation.x = cameraAngles.x;
+     
       rotation.y = cameraAngles.y;
+      
       cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
    
