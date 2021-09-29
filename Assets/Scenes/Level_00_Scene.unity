@@ -2346,7 +2346,7 @@ MonoBehaviour:
   player: {fileID: 106397321}
   timeBar: {fileID: 191239406}
   targetScore: 10
-  timeRemaining: 30
+  timeRemaining: 1000
   currentGoal: {fileID: 0}
   gameState: 0
   scoreText: {fileID: 937811820}

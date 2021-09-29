@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
    public float cameraMinAngle;
    
    public Vector2 cameraAngles;
+  
    
    [Header("Player Movement Data")] 
    public CharacterController SpaceShipcontroller;
@@ -138,15 +139,15 @@ public class PlayerController : MonoBehaviour
       {
          isThirdPerson = true;
          Vector3 newPosition=new Vector3(0,10,-300);
-         cameraPivot.localPosition =
-            Vector3.Lerp(cameraPivot.localPosition,  newPosition, Time.deltaTime * cameraFollowSpeed*2f);
+         camera.localPosition =
+            Vector3.Lerp(camera.localPosition,  newPosition, Time.deltaTime * cameraFollowSpeed*2f);
       }
       else
       {
          isThirdPerson = false;
          Vector3 newPosition = Vector3.zero;
-         cameraPivot.localPosition =
-            Vector3.Lerp(cameraPivot.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
+         camera.localPosition =
+            Vector3.Lerp(camera.localPosition, newPosition, Time.deltaTime * cameraFollowSpeed*2f);
       }
    }
 
@@ -162,14 +163,11 @@ public class PlayerController : MonoBehaviour
       }
       else
       {
-         cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle * 1.5f, cameraMaxAngle * 1.5f);
+         cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle , cameraMaxAngle);
       }
 
       Vector3 rotation = Vector3.zero;
       rotation.x = cameraAngles.x;
-      cameraSystem.rotation = Quaternion.Euler(rotation);
-      
-      rotation = Vector3.zero;
       rotation.y = cameraAngles.y;
       cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
