@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
    [Header("Player Movement Data")] 
    public CharacterController SpaceShipcontroller;
    public Vector3 moveDirection;
-   [Range(0, 10)] 
+   [Range(0, 40)] 
    public float rotationSpeed;
    [Range(0,10)]
    public float movementSpeed;
@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
       projectedDirection.Normalize();
 
       Quaternion targetDirection = Quaternion.LookRotation(projectedDirection);
-      Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetDirection, rotationSpeed * Time.deltaTime);
+      Quaternion smoothRotation = Quaternion.Slerp(transform.rotation, targetDirection, rotationSpeed *10f* Time.deltaTime);
       transform.rotation = smoothRotation;
    }
 
@@ -162,10 +162,12 @@ public class PlayerController : MonoBehaviour
       if (isThirdPerson)
       {
          cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle, cameraMaxAngle);
+         cameraAngles.x = Mathf.Clamp(cameraAngles.x, cameraMinAngle, -3);
       }
       else
       {
          cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle , cameraMaxAngle);
+         cameraAngles.x = Mathf.Clamp(cameraAngles.x, cameraMinAngle, -3);
       }
 
       Vector3 rotation = Vector3.zero;
