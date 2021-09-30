@@ -85,8 +85,7 @@ public class PlayerController : MonoBehaviour
       if (canMove)
       {
          HandleMovement();
-         MovementRotation();
-         
+         MovementRotation(); 
          CameraChangeView();
          CameraMovement();
       }
@@ -138,7 +137,7 @@ public class PlayerController : MonoBehaviour
       if (northInput.longPress)
       {
          isThirdPerson = true;
-         Vector3 newPosition=new Vector3(0,10,-300);
+         Vector3 newPosition=new Vector3(0,100,-800);
          
          camera.localPosition =
             Vector3.Lerp(camera.localPosition,  newPosition, Time.deltaTime * cameraFollowSpeed*2f);
@@ -155,10 +154,11 @@ public class PlayerController : MonoBehaviour
 
    private void CameraMovement()
    {
-      cameraSystem.position = Vector3.Lerp(cameraSystem.position, cameraFollowTarget.position,
-         Time.deltaTime * cameraFollowSpeed);
-      cameraAngles.x += (cameraInput.x * cameraFollowSpeed) * Time.fixedDeltaTime;
-      cameraAngles.y += (cameraInput.y * cameraFollowSpeed) * Time.fixedDeltaTime;
+      Vector3 pos = new Vector3(0, 10, -20);
+      cameraSystem.position = Vector3.Lerp(cameraSystem.position, cameraFollowTarget.position+pos,
+         Time.deltaTime * cameraFollowSpeed*10f);
+      cameraAngles.x += (cameraInput.x * cameraFollowSpeed*8f) * Time.fixedDeltaTime;
+      cameraAngles.y += (cameraInput.y * cameraFollowSpeed*8f) * Time.fixedDeltaTime;
       if (isThirdPerson)
       {
          cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle, cameraMaxAngle);
@@ -172,9 +172,7 @@ public class PlayerController : MonoBehaviour
 
       Vector3 rotation = Vector3.zero;
       rotation.x = cameraAngles.x;
-     
       rotation.y = cameraAngles.y;
-      
       cameraPivot.localRotation = Quaternion.Euler(rotation);
    }
    
