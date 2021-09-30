@@ -54,7 +54,7 @@ public class RandomSpawner : MonoBehaviour
         {
             position = Random.insideUnitSphere * outerRadius + centerPos;
             position = position.normalized * (innerRadius + position.magnitude);
-        } while (position.y - objHeight < platformTransform.position.y + 5.0f && !Physics.CheckSphere(position, spawnerData.collisionCheckRadius));
+        } while (position.y - objHeight < platformTransform.position.y + 25.0f && !Physics.CheckSphere(position, spawnerData.collisionCheckRadius));
         return position;
     }
 
