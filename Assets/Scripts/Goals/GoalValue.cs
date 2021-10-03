@@ -40,11 +40,11 @@ public class GoalValue : MonoBehaviour
                 // work immediately (time extension & score increase)
                 if (type == Gloable.PropsType.TIME_INCREASE)
                 {
-                    PropsManager.manager.IncreaseTime();
+                    PropsManager.manager.IncreaseTime(true);
                 }
                 else if (type == Gloable.PropsType.SCORE_INCREASE)
                 {
-                    PropsManager.manager.IncreaseScore();
+                    PropsManager.manager.IncreaseScore(true);
                 }
                 else
                 {

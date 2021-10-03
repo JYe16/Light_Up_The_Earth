@@ -42,19 +42,27 @@ public class PropsManager : MonoBehaviour
         bonusBtText.text = propsCounter.scoreIncreaseCounter.ToString();
     }
 
-    public void IncreaseScore()
+    public void IncreaseScore(bool isAuto)
     {
-        GameManager.gm.AddScore(BOUNS_VALUE);
+        GameManager.gm.PlusScore(BOUNS_VALUE);
+        if (!isAuto)
+        {
+            propsCounter.timeIncreaseCounter--;
+        }
     }
 
-    public void IncreaseTime()
+    public void IncreaseTime(bool isAuto)
     {
         GameManager.gm.AddRemainingTime(BONUS_TIME);
+        if (!isAuto)
+        {
+            propsCounter.timeIncreaseCounter--;
+        }
     }
 
     public void DestoryGoal(GameObject goal)
     {
-        goal.GetComponent<GoalMove>().HideGoal();
+        goal.GetComponent<GoalMove>().ExplosionAndHide();
         propsCounter.bombCounter--;
     }
 
