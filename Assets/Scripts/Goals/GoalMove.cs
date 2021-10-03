@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 //using TreeEditor;
@@ -7,7 +8,8 @@ public class GoalMove : MonoBehaviour
 {
     public float moveSpeed;
     public GameObject target;
-    
+    public GameObject explosion;
+    public AudioClip destroyGoalAudio;
     private float distance;
     private GoalValue goalValue;
     private bool isHide = false;
@@ -41,10 +43,20 @@ public class GoalMove : MonoBehaviour
         }
     }
 
-    public void HideGoal()
+    public void ExplosionAndHide()
     {
-        gameObject.GetComponent<Renderer>().enabled = false;
-        moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+        StartCoroutine(GoalExplosion());
+    }
+
+    IEnumerator GoalExplosion()
+    {
+        Vector3 screenCenter = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         isHide = true;
+        Destroy(Instantiate(explosion, screenCenter, Quaternion.identity), 3f);
+        if(destroyGoalAudio != null) 
+            AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position);
+        gameObject.GetComponent<Renderer>().enabled = false;
+        yield return new WaitForSeconds(1);
+        moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
     }
 }
