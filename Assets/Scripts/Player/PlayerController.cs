@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour
       if (isThirdPerson)
       {
          cameraAngles.y = Mathf.Clamp(cameraAngles.y, cameraMinAngle, cameraMaxAngle);
-         cameraAngles.x = Mathf.Clamp(cameraAngles.x, cameraMinAngle, -3);
+         cameraAngles.x = Mathf.Clamp(cameraAngles.x, cameraMinAngle, -10);
       }
       else
       {
