@@ -18,7 +18,7 @@ public class PropsButtons : MonoBehaviour
     {
         if (PropsManager.manager.propsCounter.timeIncreaseCounter > 0)
         {
-            PropsManager.manager.IncreaseTime();
+            PropsManager.manager.IncreaseTime(false);
             if (PropsManager.manager.propsCounter.timeIncreaseCounter <= 0)
             {
                 curImage.sprite = unableBtnLists.TimeExtensionBtn;
@@ -44,7 +44,7 @@ public class PropsButtons : MonoBehaviour
     {
         if ( PropsManager.manager.propsCounter.scoreIncreaseCounter > 0)
         {
-            PropsManager.manager.IncreaseScore();
+            PropsManager.manager.IncreaseScore(false);
             if (PropsManager.manager.propsCounter.scoreIncreaseCounter <= 0)
             {
                 curImage.sprite = unableBtnLists.BonusBtn;

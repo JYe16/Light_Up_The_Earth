@@ -112,6 +112,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 1
   target: {fileID: -927199367670048503, guid: b10dbf1081a91c54d948bfca5f9038ce, type: 3}
+  explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
+  destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
 --- !u!114 &-4790246991387918322
 MonoBehaviour:
   m_ObjectHideFlags: 0

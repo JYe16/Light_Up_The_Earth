@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text targetScoreText;
     public Text levelText;
+    public Text plusScoreText;
     private int currentScore;
 
     // Start is called before the first frame update
@@ -96,13 +97,34 @@ public class GameManager : MonoBehaviour
         currentScore += value;
     }
 
+    public void PlusScore(int value)
+    {
+        Time.timeScale = 1.5f;
+        StartCoroutine(PlusScoreAnimation(value));
+    }
+
+    IEnumerator PlusScoreAnimation(int value)
+    {
+        plusScoreText.enabled = true;
+        plusScoreText.text = "+" + value;
+        plusScoreText.GetComponentInChildren<ParticleSystem>().Play();
+        AddScore(value);
+        yield return new WaitForSeconds(1);
+        plusScoreText.enabled = false;
+    }
+
     public void AddRemainingTime(int bounsTime)
     {
+        GameObject handle = GameObject.FindGameObjectWithTag("TimeHandle");
+        if(handle != null)
+            handle.GetComponent<SmoothScale>().enabled = true;
         timeRemaining += bounsTime;
     }
 
     private void initUI()
     {
+        plusScoreText.enabled = false;
+        plusScoreText.GetComponentInChildren<ParticleSystem>().Stop();
         //load game data from playerprefs
         if (PlayerPrefs.HasKey("baseScore"))
         {
