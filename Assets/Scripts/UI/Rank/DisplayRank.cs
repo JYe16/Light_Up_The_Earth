@@ -9,7 +9,7 @@ public class DisplayRank : MonoBehaviour
     private int Score;
     //Text to show
     public Text rankText;
-	string rank = "Score Ranking:\nName\t\t\t\tScore\n";
+	string rank = "";
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +17,7 @@ public class DisplayRank : MonoBehaviour
 		Records recvJSON = JsonUtility.FromJson<Records>(content);
 		for(int i = 0; i < recvJSON.list.Count; i++)
 		{
-			rank += recvJSON.list[i].name + "\t\t\t\t" + recvJSON.list[i].score + "\n";
+			rank += recvJSON.list[i].name + "\t\t\t\t\t\t" + recvJSON.list[i].score + "\n";
 		}
     }
 
