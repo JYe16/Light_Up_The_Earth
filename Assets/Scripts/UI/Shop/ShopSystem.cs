@@ -104,11 +104,13 @@ public class ShopSystem : MonoBehaviour
 
     public void ClearAfterCheck()
     {
-        foreach (PropInfo prop in propsInfoMap.Values)
+        foreach (var prop in propsInfoMap)
         {
-            prop.buyStep = 0;
+            string key = prop.Key.ToString();
+            int curCount = PlayerPrefs.GetInt(key);
+            PlayerPrefs.SetInt(key, curCount + prop.Value.buyStep);
+            prop.Value.buyStep = 0;
         }
-
         countText.text = "0";
     }
 

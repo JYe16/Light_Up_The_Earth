@@ -29,12 +29,26 @@ public class PropsManager : MonoBehaviour
     private void Init()
     {
         propsCounter = new Dictionary<Gloable.PropsType, int>();
-        propsCounter.Add(Gloable.PropsType.BOMB, 0);
-        propsCounter.Add(Gloable.PropsType.TIME_INCREASE, 0);
-        propsCounter.Add(Gloable.PropsType.SCORE_INCREASE, 0);
-        propsCounter.Add(Gloable.PropsType.POWER_WATER, 0);
-      }
+        propsCounter.Add(Gloable.PropsType.BOMB, InitCountByType(Gloable.PropsType.BOMB));
+        propsCounter.Add(Gloable.PropsType.TIME_INCREASE, InitCountByType(Gloable.PropsType.TIME_INCREASE));
+        propsCounter.Add(Gloable.PropsType.SCORE_INCREASE, InitCountByType(Gloable.PropsType.SCORE_INCREASE));
+        propsCounter.Add(Gloable.PropsType.POWER_WATER, InitCountByType(Gloable.PropsType.POWER_WATER));
+    }
 
+    private int InitCountByType(Gloable.PropsType type)
+    {
+        string key = type.ToString();
+        int res = 1;
+        if (PlayerPrefs.HasKey(key))
+        {
+            res += PlayerPrefs.GetInt(key);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(key, 0);
+        }
+        return res;
+    }
     void FixedUpdate()
     {
         bombBtText.text = propsCounter[Gloable.PropsType.BOMB].ToString();
