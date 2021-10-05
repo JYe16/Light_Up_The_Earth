@@ -1,11 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PausePanel : MonoBehaviour
 {
-    
+    public Text scoreText;
     public void ShowPausePanel(bool isShow)
     {
         gameObject.SetActive(isShow);
@@ -20,22 +22,13 @@ public class PausePanel : MonoBehaviour
         }
     }
 
-    public void exitLevel()
+    private void OnEnable()
     {
-        SceneManager.LoadScene("GameOver");
-    }
-    
-	/*
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+        scoreText.text = GameManager.gm.currentScore.ToString();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void exitLevel()
     {
-        
+        SceneManager.LoadScene("StartPage");
     }
-	*/
 }
