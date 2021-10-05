@@ -16,10 +16,10 @@ public class PropsButtons : MonoBehaviour
     public UnableBtnSprites unableBtnLists;
     public void OnClikeTimeExtension(Image curImage)
     {
-        if (PropsManager.manager.propsCounter.timeIncreaseCounter > 0)
+        if (PropsManager.manager.propsCounter[Gloable.PropsType.TIME_INCREASE] > 0)
         {
             PropsManager.manager.IncreaseTime(false);
-            if (PropsManager.manager.propsCounter.timeIncreaseCounter <= 0)
+            if (PropsManager.manager.propsCounter[Gloable.PropsType.TIME_INCREASE] <= 0)
             {
                 curImage.sprite = unableBtnLists.TimeExtensionBtn;
             }
@@ -28,12 +28,12 @@ public class PropsButtons : MonoBehaviour
 
     public void OnClickBomb(Image curImage)
     {
-        int count = PropsManager.manager.propsCounter.bombCounter;
+        int count = PropsManager.manager.propsCounter[Gloable.PropsType.BOMB];
         bool canClick = count > 0 && GameManager.gm.currentGoal;
         if (canClick)
         {
             PropsManager.manager.DestoryGoal(GameManager.gm.currentGoal);
-            if (PropsManager.manager.propsCounter.bombCounter <= 0 || !GameManager.gm.currentGoal)
+            if (PropsManager.manager.propsCounter[Gloable.PropsType.BOMB] <= 0 || !GameManager.gm.currentGoal)
             {
                 curImage.sprite = unableBtnLists.BombBtn;
             }
@@ -42,10 +42,10 @@ public class PropsButtons : MonoBehaviour
 
     public void OnClickBonus(Image curImage)
     {
-        if ( PropsManager.manager.propsCounter.scoreIncreaseCounter > 0)
+        if ( PropsManager.manager.propsCounter[Gloable.PropsType.SCORE_INCREASE] > 0)
         {
             PropsManager.manager.IncreaseScore(false);
-            if (PropsManager.manager.propsCounter.scoreIncreaseCounter <= 0)
+            if (PropsManager.manager.propsCounter[Gloable.PropsType.SCORE_INCREASE] <= 0)
             {
                 curImage.sprite = unableBtnLists.BonusBtn;
             }
@@ -54,12 +54,12 @@ public class PropsButtons : MonoBehaviour
 
     public void OnClickPowerWater(Image curImage)
     {
-        int count = PropsManager.manager.propsCounter.powerWaterCounter;
+        int count = PropsManager.manager.propsCounter[Gloable.PropsType.POWER_WATER];
         bool canClick = count > 0 && GameManager.gm.currentGoal;
         if (canClick)
         {
             PropsManager.manager.FastMove(GameManager.gm.currentGoal);
-            if (PropsManager.manager.propsCounter.powerWaterCounter <= 0 || !GameManager.gm.currentGoal)
+            if (PropsManager.manager.propsCounter[Gloable.PropsType.POWER_WATER] <= 0 || !GameManager.gm.currentGoal)
             {
                 curImage.sprite = unableBtnLists.PowerWaterBtn;
             }

@@ -416,7 +416,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 618, y: 226}
+  m_AnchoredPosition: {x: 647, y: 226}
   m_SizeDelta: {x: 100, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &191239406
@@ -956,8 +956,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -2.3999996, y: 0}
+  m_AnchoredPosition: {x: -1, y: 0}
+  m_SizeDelta: {x: -3.9999993, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &604210095
 MonoBehaviour:
@@ -1997,7 +1997,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 80
+  m_Text: 0
 --- !u!222 &955635808
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3105,6 +3105,7 @@ MonoBehaviour:
   targetScoreText: {fileID: 436199633}
   levelText: {fileID: 1994485363}
   plusScoreText: {fileID: 243176825}
+  currentScore: 0
   pauseBtn: {fileID: 74715027}
   pausePanel: {fileID: 1830819756}
 --- !u!4 &1547580588
@@ -3450,11 +3451,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4e530f12a8d4a8bbab1ff864f923ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  propsCounter:
-    bombCounter: 1
-    powerWaterCounter: 1
-    timeIncreaseCounter: 1
-    scoreIncreaseCounter: 1
   bombBtText: {fileID: 781077280}
   timeExtensionBtText: {fileID: 1647443835}
   powerWaterBtText: {fileID: 1066440138}
@@ -8568,7 +8564,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1830819757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8645,6 +8641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf6854f2ec2f05f4c80da8fea4f8f8af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  scoreText: {fileID: 955635807}
 --- !u!1 &1994485361
 GameObject:
   m_ObjectHideFlags: 0

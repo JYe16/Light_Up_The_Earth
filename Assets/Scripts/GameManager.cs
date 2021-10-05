@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
     public Text targetScoreText;
     public Text levelText;
     public Text plusScoreText;
-    private int currentScore;
+    public int currentScore;
     
     public Button pauseBtn;
 
