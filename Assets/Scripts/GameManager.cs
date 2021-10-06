@@ -25,7 +25,13 @@ public class GameManager : MonoBehaviour
     public Text targetScoreText;
     public Text levelText;
     public Text plusScoreText;
-    private int currentScore;
+    public int currentScore;
+    
+    public Button pauseBtn;
+
+    public GameObject pausePanel;
+
+    private bool isPause;
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,10 @@ public class GameManager : MonoBehaviour
         currentLevel = 1;
         initUI();
         gm.gameState = GameState.Playing;
+        
+        isPause = false;
+        pauseBtn.onClick.AddListener(PauseGame);
+        pausePanel.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -138,5 +148,23 @@ public class GameManager : MonoBehaviour
         timeBar.value = timeRemaining;
         timeBar.maxValue = timeRemaining;
         levelText.text = currentLevel.ToString();
+    }
+    
+    public void PauseGame()
+    {
+        isPause = !isPause;
+
+        if (isPause == true)
+        {
+            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/resume");
+            pausePanel.gameObject.SetActive(true);
+            Time.timeScale = 0;
+        }
+        else
+        {
+            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/pause");
+            pausePanel.gameObject.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }
