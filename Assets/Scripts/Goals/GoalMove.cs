@@ -14,7 +14,7 @@ public class GoalMove : MonoBehaviour
     private GoalValue goalValue;
     private bool isHide = false;
     private RotateBySelf rotateEffect;
-    private float minDistance = 100.0f;
+    private float minDistance = 180.0f;
     
     void Start()
     {
