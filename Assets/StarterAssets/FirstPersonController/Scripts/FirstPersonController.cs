@@ -70,6 +70,8 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		public bool canMove;
+
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -87,13 +89,18 @@ namespace StarterAssets
 			// reset our timeouts on start
 			_jumpTimeoutDelta = JumpTimeout;
 			_fallTimeoutDelta = FallTimeout;
+
+			canMove = true;
 		}
 
 		private void Update()
 		{
 			//JumpAndGravity();
-			GroundedCheck();
-			Move();
+			if (canMove)
+			{
+				GroundedCheck();
+				Move();
+			}
 		}
 
 		private void LateUpdate()
@@ -113,8 +120,8 @@ namespace StarterAssets
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold)
 			{
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime;
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/2;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/2;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -239,6 +246,11 @@ namespace StarterAssets
 
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
+		}
+		
+		public void changeMoveStatus(bool status)
+		{
+			canMove = status;
 		}
 	}
 }
