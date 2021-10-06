@@ -41,8 +41,8 @@ public class PurchasePopup : MonoBehaviour
     {
         if (totalMoney <= score)
         {
-            int newTotal = PlayerPrefs.GetInt("total") - totalMoney;
-            PlayerPrefs.SetInt("total", newTotal);
+            int newBase = PlayerPrefs.GetInt("baseScore") - totalMoney;
+            PlayerPrefs.SetInt("baseScore", newBase);
             ShopSystem.shopSystem.UpdateScore();
             ShopSystem.shopSystem.ClearAfterCheck();
             toast.GetComponent<Toast>().ShowToast("Thanks for your purchase!");
