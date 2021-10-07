@@ -3153,8 +3153,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   timeBar: {fileID: 191239406}
-  targetScore: 10
-  timeRemaining: 80
+  targetScore: 20
+  timeRemaining: 20
   currentGoal: {fileID: 0}
   currentLevel: 0
   gameState: 0
