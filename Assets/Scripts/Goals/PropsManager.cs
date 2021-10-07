@@ -8,16 +8,7 @@ using UnityEngine.UI;
 public class PropsManager : MonoBehaviour
 {
     public static PropsManager manager;
-    [System.Serializable]
-    public class PropsCounter
-    {
-        public int bombCounter = 0;
-        public int powerWaterCounter = 0;
-        public int timeIncreaseCounter = 0;
-        public int scoreIncreaseCounter = 0;
-    }
-    public PropsCounter propsCounter;
-    
+    public Dictionary<Gloable.PropsType, int> propsCounter;
     public Text bombBtText;
     public Text timeExtensionBtText;
     public Text powerWaterBtText;
@@ -32,54 +23,72 @@ public class PropsManager : MonoBehaviour
     void Start()
     {
         if(manager == null)  manager = GetComponent<PropsManager>();
+        Init();
+    }
+    
+    private void Init()
+    {
+        propsCounter = new Dictionary<Gloable.PropsType, int>();
+        propsCounter.Add(Gloable.PropsType.BOMB, InitCountByType(Gloable.PropsType.BOMB));
+        propsCounter.Add(Gloable.PropsType.TIME_INCREASE, InitCountByType(Gloable.PropsType.TIME_INCREASE));
+        propsCounter.Add(Gloable.PropsType.SCORE_INCREASE, InitCountByType(Gloable.PropsType.SCORE_INCREASE));
+        propsCounter.Add(Gloable.PropsType.POWER_WATER, InitCountByType(Gloable.PropsType.POWER_WATER));
     }
 
+    private int InitCountByType(Gloable.PropsType type)
+    {
+        string key = type.ToString();
+        int res = 1;
+        if (PlayerPrefs.HasKey(key))
+        {
+            res += PlayerPrefs.GetInt(key);
+        }
+        else
+        {
+            PlayerPrefs.SetInt(key, 0);
+        }
+        return res;
+    }
     void FixedUpdate()
     {
-        bombBtText.text = propsCounter.bombCounter.ToString();
-        timeExtensionBtText.text = propsCounter.timeIncreaseCounter.ToString();
-        powerWaterBtText.text = propsCounter.powerWaterCounter.ToString();
-        bonusBtText.text = propsCounter.scoreIncreaseCounter.ToString();
+        bombBtText.text = propsCounter[Gloable.PropsType.BOMB].ToString();
+        timeExtensionBtText.text = propsCounter[Gloable.PropsType.TIME_INCREASE].ToString();
+        powerWaterBtText.text = propsCounter[Gloable.PropsType.POWER_WATER].ToString();
+        bonusBtText.text = propsCounter[Gloable.PropsType.SCORE_INCREASE].ToString();
     }
 
-    public void IncreaseScore()
+    public void IncreaseScore(bool isAuto)
     {
-        GameManager.gm.AddScore(BOUNS_VALUE);
+        GameManager.gm.PlusScore(BOUNS_VALUE);
+        if (!isAuto)
+        {
+            propsCounter[Gloable.PropsType.SCORE_INCREASE]--;
+        }
     }
 
-    public void IncreaseTime()
+    public void IncreaseTime(bool isAuto)
     {
         GameManager.gm.AddRemainingTime(BONUS_TIME);
+        if (!isAuto)
+        {
+            propsCounter[Gloable.PropsType.TIME_INCREASE]--;
+        }
     }
 
     public void DestoryGoal(GameObject goal)
     {
-        goal.GetComponent<GoalMove>().HideGoal();
-        propsCounter.bombCounter--;
+        goal.GetComponent<GoalMove>().ExplosionAndHide();
+        propsCounter[Gloable.PropsType.BOMB]--;
     }
 
     public void FastMove(GameObject goal)
     {
         goal.GetComponent<GoalMove>().moveSpeed *= BONUS_SPEED;
-        propsCounter.powerWaterCounter--;
+        propsCounter[Gloable.PropsType.POWER_WATER]--;
     }
 
     public void UpdatePropsCounter(Gloable.PropsType type)
     {
-        switch (type)
-        {
-            case Gloable.PropsType.BOMB:
-                propsCounter.bombCounter++;
-                break;
-            case Gloable.PropsType.POWER_WATER:
-                propsCounter.powerWaterCounter++;
-                break;
-            case Gloable.PropsType.TIME_INCREASE:
-                propsCounter.timeIncreaseCounter++;
-                break;
-            case Gloable.PropsType.SCORE_INCREASE:
-                propsCounter.scoreIncreaseCounter++;
-                break;
-        }
+        propsCounter[type]++;
     }
 }
