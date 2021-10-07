@@ -126,6 +126,7 @@ public class ShopSystem : MonoBehaviour
     
     public void OnClickPlus()
     {
+        if (propsInfoMap.ElementAt(curIndex).Value.buyStep == 99) return;
         countText.text = (++propsInfoMap.ElementAt(curIndex).Value.buyStep).ToString();
     }
     
