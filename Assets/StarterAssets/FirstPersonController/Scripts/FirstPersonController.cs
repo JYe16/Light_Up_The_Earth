@@ -20,7 +20,7 @@ namespace StarterAssets
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 30.0f;
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 20.0f;
+		public float RotationSpeed = 60.0f;
 		[Tooltip("Acceleration and deceleration")]
 		public float SpeedChangeRate = 60.0f;
 	
@@ -78,7 +78,7 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			//JumpAndGravity();
+			
 			if (canMove)
 			{
 				
@@ -94,11 +94,10 @@ namespace StarterAssets
 	
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/2;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/2;
+			
+		
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime*20;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime*20;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -108,7 +107,7 @@ namespace StarterAssets
 
 				// rotate the player left and right
 				transform.Rotate(Vector3.up * _rotationVelocity);
-			}
+			
 		}
 
 		private void Move()
