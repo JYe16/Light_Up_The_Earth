@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class LaserLine : MonoBehaviour
@@ -15,7 +16,7 @@ public class LaserLine : MonoBehaviour
     private float counter;
     private bool backWithNothing;
     private float lastX;   // check if the hook touch the goal(when to drag back)
-    private PlayerController playerController;
+    private FirstPersonController playerController;
     
     private static float LINE_RENDERER_START = 0.2F;
     private static float LINE_RENDERER_END = 0.5F;
@@ -23,7 +24,7 @@ public class LaserLine : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<FirstPersonController>();
         lineRenderer = GetComponent<LineRenderer>();
         
         lineRenderer.startWidth = LINE_RENDERER_START;

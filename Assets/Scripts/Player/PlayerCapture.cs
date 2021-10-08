@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
@@ -11,7 +12,7 @@ public class PlayerCapture : MonoBehaviour
     private Ray ray;
     private RaycastHit hitInfo;
     private LaserLine laserLine;
-    private PlayerController playerController;
+    private FirstPersonController playerController;
     
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
 
@@ -19,7 +20,7 @@ public class PlayerCapture : MonoBehaviour
     void Start()
     {
         timer = 0.0f;
-        playerController = GetComponentInParent<PlayerController>();
+        playerController = GetComponentInParent<FirstPersonController>();
         laserLine = GetComponent<LaserLine>();
     }
 
