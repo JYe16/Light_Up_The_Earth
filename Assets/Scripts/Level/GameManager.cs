@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
     
-    public GameObject player;
     public Slider timeBar;
     public int targetScore;
     public float timeRemaining;
@@ -24,12 +23,11 @@ public class GameManager : MonoBehaviour
     public Text scoreText;
     public Text levelText;
     public int currentScore;
-    
     public Button pauseBtn;
-
     public GameObject pausePanel;
 
     private bool isPause;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
