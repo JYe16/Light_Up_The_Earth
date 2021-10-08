@@ -24,6 +24,7 @@ public class RandomSpawner : MonoBehaviour
     {
         public SpawnerData[] spawnerDataList;
     }
+
     private SpawnerData spawnerData;
     
     // Start is called before the first frame update
@@ -60,8 +61,16 @@ public class RandomSpawner : MonoBehaviour
 
     private void Init()
     {
-        string json = Utils.ReadDataFromFile("Configuration/SpawnerData.json");
         // TODO: auto update level
-        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
+        // TODO: read json error in IOS
+        spawnerData = new SpawnerData();
+        // string json = Utils.ReadDataFromFile("Configuration/SpawnerData.json");
+        // spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
+        spawnerData.innerRadius = 180;
+        spawnerData.outerRadius = 250;
+        spawnerData.collisionCheckRadius = 5;
+        spawnerData.propsSum = 10;
+        spawnerData.valuableSum = 5;
+        spawnerData.valuelessSum = 30;
     }
 }

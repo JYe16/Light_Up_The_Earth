@@ -8,11 +8,12 @@ TagManager:
   - Hook Line
   - PlayerController
   - TimeHandle
+  - CinemachineTarget
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Control Canvas
   - Water
   - UI
   - 

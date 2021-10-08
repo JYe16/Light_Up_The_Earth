@@ -12,9 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/EnterName.unity
     guid: a18f61002bcbb2b4e9ef8131868bf554
   - enabled: 1
-    path: Assets/Scenes/Level_00_Scene.unity
-    guid: 50279255c759b4190b33bb9bf9360246
-  - enabled: 1
     path: Assets/Scenes/ScoreRank.unity
     guid: 0c0e4d0d533b07f49b70a004191fbb7f
   - enabled: 1
@@ -26,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ShopPage.unity
     guid: 7add4956b6f584209aca08afe4045f52
+  - enabled: 1
+    path: Assets/Scenes/Level_00_Scene.unity
+    guid: 24d9f7e513ce54bb1a8263ec51dc07e7
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c532c2d6de07e40a9847d373cdb42eb4, type: 2}
