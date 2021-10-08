@@ -23,7 +23,6 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    public Text plusScoreText;
     public int currentScore;
     
     public Button pauseBtn;
@@ -106,22 +105,6 @@ public class GameManager : MonoBehaviour
         currentScore += value;
     }
 
-    public void PlusScore(int value)
-    {
-        Time.timeScale = 1.5f;
-        StartCoroutine(PlusScoreAnimation(value));
-    }
-
-    IEnumerator PlusScoreAnimation(int value)
-    {
-        plusScoreText.enabled = true;
-        plusScoreText.text = "+" + value;
-        plusScoreText.GetComponentInChildren<ParticleSystem>().Play();
-        AddScore(value);
-        yield return new WaitForSeconds(1);
-        plusScoreText.enabled = false;
-    }
-
     public void AddRemainingTime(int bounsTime)
     {
         GameObject handle = GameObject.FindGameObjectWithTag("TimeHandle");
@@ -132,8 +115,6 @@ public class GameManager : MonoBehaviour
 
     private void initUI()
     {
-        plusScoreText.enabled = false;
-        plusScoreText.GetComponentInChildren<ParticleSystem>().Stop();
         //load game data from playerprefs
         if (PlayerPrefs.HasKey("baseScore"))
         {

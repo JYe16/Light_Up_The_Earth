@@ -59,7 +59,7 @@ public class PropsManager : MonoBehaviour
 
     public void IncreaseScore(bool isAuto)
     {
-        GameManager.gm.PlusScore(BOUNS_VALUE);
+        GameManager.gm.AddScore(BOUNS_VALUE);
         if (!isAuto)
         {
             propsCounter[Gloable.PropsType.SCORE_INCREASE]--;
