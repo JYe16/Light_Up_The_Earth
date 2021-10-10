@@ -9,6 +9,7 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] propsPrefabList;
     public Transform platformTransform;
     public int level = 0;
+
     [System.Serializable]
     public class SpawnerData
     {
@@ -19,14 +20,15 @@ public class RandomSpawner : MonoBehaviour
         public int valuelessSum = 0;
         public int propsSum = 0;
     }
+
     [System.Serializable]
     public class SpawnerOriginJson
     {
-        public SpawnerData[] spawnerDataList;
+        public List<SpawnerData> list = new List<SpawnerData>();
     }
 
     private SpawnerData spawnerData;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,11 +44,12 @@ public class RandomSpawner : MonoBehaviour
         {
             GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
             float objHeight = prefab.GetComponent<MeshRenderer>().bounds.size.y / 2;
-            Vector3 randomPos = RingAreaPos(spawnerData.innerRadius, spawnerData.outerRadius, transform.position, objHeight);
+            Vector3 randomPos = RingAreaPos(spawnerData.innerRadius, spawnerData.outerRadius, transform.position,
+                objHeight);
             Instantiate(prefab, randomPos, Quaternion.identity);
         }
     }
-    
+
     // spawn in a ring area
     public Vector3 RingAreaPos(float innerRadius, float outerRadius, Vector3 centerPos, float objHeight)
     {
@@ -55,22 +58,42 @@ public class RandomSpawner : MonoBehaviour
         {
             position = Random.insideUnitSphere * outerRadius + centerPos;
             position = position.normalized * (innerRadius + position.magnitude);
-        } while (position.y - objHeight < platformTransform.position.y + 25.0f && !Physics.CheckSphere(position, spawnerData.collisionCheckRadius));
+        } while (position.y - objHeight < platformTransform.position.y + 25.0f &&
+                 !Physics.CheckSphere(position, spawnerData.collisionCheckRadius));
+
         return position;
     }
 
     private void Init()
     {
         // TODO: auto update level
-        // TODO: read json error in IOS
         spawnerData = new SpawnerData();
-        // string json = Utils.ReadDataFromFile("Configuration/SpawnerData.json");
-        // spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
-        spawnerData.innerRadius = 180;
-        spawnerData.outerRadius = 250;
-        spawnerData.collisionCheckRadius = 5;
-        spawnerData.propsSum = 10;
-        spawnerData.valuableSum = 5;
-        spawnerData.valuelessSum = 30;
+        //read file from device first
+        string json = Utils.ReadDataFromFile("SpawnerData.json");
+        //if the file hasn't been created
+        if (json == "")
+        {
+            generateSpawnData();
+            json = Utils.ReadDataFromFile("SpawnerData.json");
+        }
+
+        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
     }
+
+    //TODO: Write a method to generate level difficulty automatically
+    public void generateSpawnData()
+    {
+        SpawnerData spawner = new SpawnerData();
+        spawner.valuelessSum = 30;
+        spawner.valuableSum = 5;
+        spawner.propsSum = 10;
+        spawner.collisionCheckRadius = 5.0f;
+        spawner.outerRadius = 250.0f;
+        spawner.innerRadius = 170.0f;
+        SpawnerOriginJson spawnData = new SpawnerOriginJson();
+        spawnData.list.Add(spawner);
+        string content = JsonUtility.ToJson(spawnData);
+        Utils.WriteJSON("SpawnerData.json", content);
+    }
+
 }
