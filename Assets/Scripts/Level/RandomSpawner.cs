@@ -8,17 +8,17 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] valuablePrefabList;
     public GameObject[] propsPrefabList;
     public Transform platformTransform;
-    public int level = 0;
 
     [System.Serializable]
     public class SpawnerData
     {
-        public float innerRadius = 0.0f;
-        public float outerRadius = 0.0f;
-        public float collisionCheckRadius = 0.0f;
-        public int valuableSum = 0;
-        public int valuelessSum = 0;
-        public int propsSum = 0;
+        public float innerRadius;
+        public float outerRadius;
+        public float collisionCheckRadius;
+        public int valuableSum;
+        public int valuelessSum;
+        public int propsSum;
+		public int targetScore;
     }
 
     [System.Serializable]
@@ -32,7 +32,8 @@ public class RandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Init();
+		int level = PlayerPrefs.GetInt("level") - 1;
+        Init(level);
         AddObject(spawnerData.valuelessSum, valuelessPrefabList);
         AddObject(spawnerData.valuableSum, valuablePrefabList);
         AddObject(spawnerData.propsSum, propsPrefabList);
@@ -64,7 +65,7 @@ public class RandomSpawner : MonoBehaviour
         return position;
     }
 
-    private void Init()
+    private void Init(int level)
     {
         // TODO: auto update level
         spawnerData = new SpawnerData();
@@ -76,22 +77,25 @@ public class RandomSpawner : MonoBehaviour
             generateSpawnData();
             json = Utils.ReadDataFromFile("SpawnerData.json");
         }
-
         spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
     }
 
     //TODO: Write a method to generate level difficulty automatically
     public void generateSpawnData()
     {
-        SpawnerData spawner = new SpawnerData();
-        spawner.valuelessSum = 30;
-        spawner.valuableSum = 5;
-        spawner.propsSum = 10;
-        spawner.collisionCheckRadius = 5.0f;
-        spawner.outerRadius = 250.0f;
-        spawner.innerRadius = 170.0f;
-        SpawnerOriginJson spawnData = new SpawnerOriginJson();
-        spawnData.list.Add(spawner);
+		SpawnerOriginJson spawnData = new SpawnerOriginJson();
+		for(int i = 0; i < 100; i++)
+		{
+			SpawnerData spawner = new SpawnerData();
+        	spawner.valuelessSum = 30;
+       		spawner.valuableSum = 5;
+        	spawner.propsSum = 10;
+        	spawner.collisionCheckRadius = 5.0f;
+        	spawner.outerRadius = 250.0f;
+        	spawner.innerRadius = 170.0f;
+			spawner.targetScore = 30 + (5 * i);
+        	spawnData.list.Add(spawner);	
+		}
         string content = JsonUtility.ToJson(spawnData);
         Utils.WriteJSON("SpawnerData.json", content);
     }

@@ -36,10 +36,18 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-        currentLevel = 1;
+        if (PlayerPrefs.HasKey("level"))
+        {
+            currentLevel = PlayerPrefs.GetInt("level") + 1;
+        }
+        else
+        {
+            currentLevel = 1;
+            
+        }
+        PlayerPrefs.SetInt("level", currentLevel);
         initUI();
         gm.gameState = GameState.Playing;
-        
         isPause = false;
         pauseBtn.onClick.AddListener(PauseGame);
         pausePanel.gameObject.SetActive(false);
