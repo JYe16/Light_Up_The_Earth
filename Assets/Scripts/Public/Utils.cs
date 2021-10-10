@@ -8,7 +8,6 @@ public static class Utils
 {
     public static string GetFilePath(string fileName)
     {
-        Debug.Log(Application.persistentDataPath + "/" + fileName);
         return Application.persistentDataPath + "/" + fileName;
     }
 
