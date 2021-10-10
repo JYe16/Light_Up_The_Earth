@@ -32,8 +32,12 @@ public class RandomSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-		int level = PlayerPrefs.GetInt("level") - 1;
-        Init(level);
+		int level = 1;
+		if (PlayerPrefs.HasKey("level"))
+		{
+			level = PlayerPrefs.GetInt("level");
+		}
+        Init(level - 1);
         AddObject(spawnerData.valuelessSum, valuelessPrefabList);
         AddObject(spawnerData.valuableSum, valuablePrefabList);
         AddObject(spawnerData.propsSum, propsPrefabList);
@@ -93,7 +97,6 @@ public class RandomSpawner : MonoBehaviour
         	spawner.collisionCheckRadius = 5.0f;
         	spawner.outerRadius = 250.0f;
         	spawner.innerRadius = 170.0f;
-			spawner.targetScore = 30 + (5 * i);
         	spawnData.list.Add(spawner);	
 		}
         string content = JsonUtility.ToJson(spawnData);

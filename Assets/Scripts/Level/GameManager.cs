@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     static public GameManager gm;
     
     public Slider timeBar;
-    public int targetScore;
+    private int targetScore;
     public float timeRemaining;
     [HideInInspector] public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
@@ -39,11 +39,12 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("level"))
         {
             currentLevel = PlayerPrefs.GetInt("level") + 1;
+            targetScore = 30 + (10 * (currentLevel - 1));
         }
         else
         {
             currentLevel = 1;
-            
+            targetScore = 30;
         }
         PlayerPrefs.SetInt("level", currentLevel);
         initUI();

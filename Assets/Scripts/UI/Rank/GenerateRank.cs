@@ -26,6 +26,7 @@ public class GenerateRank : MonoBehaviour
 		string json = "";
         Record record = new Record();
         record.score = PlayerPrefs.GetInt("total");
+		record.level = PlayerPrefs.GetInt("level");
         //If the player did not enter his/her name
         if (nameInputField.text == "")
         {
@@ -74,6 +75,7 @@ public class Record
 {
     public int score;
     public string name;
+	public int level;
 }
 
 [System.Serializable]

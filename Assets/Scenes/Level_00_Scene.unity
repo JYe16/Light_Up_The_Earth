@@ -716,7 +716,6 @@ MonoBehaviour:
   propsPrefabList:
   - {fileID: 4634720436632843782, guid: 92ea265839af74af6a3419b4b69182a7, type: 3}
   platformTransform: {fileID: 7926790865455924939}
-  level: 0
 --- !u!4 &304932427
 Transform:
   m_ObjectHideFlags: 0
@@ -3305,8 +3304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBar: {fileID: 191239406}
-  targetScore: 10
-  timeRemaining: 80
+  timeRemaining: 60
   currentGoal: {fileID: 0}
   currentLevel: 0
   gameState: 0
