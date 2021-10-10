@@ -1,31 +1,32 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using StarterAssets;
 using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
     public Transform targetCross;
     
+    private GameObject player;
     private float timer;                // count intervals between two captures
-    private Ray ray;
-    private RaycastHit hitInfo;
     private LaserLine laserLine;
-    private PlayerController playerController;
-    
+    private FirstPersonController playerController;
+    public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
 
-    // Start is called before the first frame update
     void Start()
     {
+        if (player == null)
+            player = GameObject.FindGameObjectWithTag("Player");
         timer = 0.0f;
-        playerController = GetComponentInParent<PlayerController>();
-        laserLine = GetComponent<LaserLine>();
+        playerController = player.GetComponentInParent<FirstPersonController>();
+        laserLine = player.GetComponentInChildren<LaserLine>();
     }
 
     void LateUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && timer > TIME_BETWEEN_CAPTURE)
+        if (isShoot && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
             CaptureGoals();
@@ -34,13 +35,19 @@ public class PlayerCapture : MonoBehaviour
         {
             // not meet the requirements of capture
             timer += Time.deltaTime;
+            if (isShoot) isShoot = false;
         }
+    }
+
+    public void Shoot()
+    {
+        isShoot = true;
     }
 
     void CaptureGoals()
     {
-        ray.origin = Camera.main.transform.position;
-        ray.direction = targetCross.forward;
+        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
+        RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
@@ -56,11 +63,13 @@ public class PlayerCapture : MonoBehaviour
         }
         laserLine.boundaryPoint = GetBoundaryPoint();
         laserLine.enabled = true;
+        isShoot = false;
         playerController.changeMoveStatus(false);
     }
     
     private Vector3 GetBoundaryPoint()
     {
-        return transform.position + (targetCross.position - transform.position).normalized * Gloable.MAX_CAPTURE_RADIUS;
+        Vector3 playerPos = player.transform.position;
+        return playerPos + (targetCross.position - playerPos).normalized * Gloable.MAX_CAPTURE_RADIUS;
     }
 }

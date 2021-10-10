@@ -8,7 +8,6 @@ public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
     
-    public GameObject player;
     public Slider timeBar;
     public int targetScore;
     public float timeRemaining;
@@ -22,16 +21,13 @@ public class GameManager : MonoBehaviour
     };
     public GameState gameState;
     public Text scoreText;
-    public Text targetScoreText;
     public Text levelText;
-    public Text plusScoreText;
     public int currentScore;
-    
     public Button pauseBtn;
-
     public GameObject pausePanel;
 
     private bool isPause;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +52,7 @@ public class GameManager : MonoBehaviour
         {
             case GameState.Playing:
                 //update score text
-                scoreText.text = currentScore.ToString();
+                scoreText.text = currentScore + "/" + targetScore;
                 //update time remaining
                 if(timeRemaining > 0){
                     timeRemaining -= Time.deltaTime;
@@ -107,22 +103,6 @@ public class GameManager : MonoBehaviour
         currentScore += value;
     }
 
-    public void PlusScore(int value)
-    {
-        Time.timeScale = 1.5f;
-        StartCoroutine(PlusScoreAnimation(value));
-    }
-
-    IEnumerator PlusScoreAnimation(int value)
-    {
-        plusScoreText.enabled = true;
-        plusScoreText.text = "+" + value;
-        plusScoreText.GetComponentInChildren<ParticleSystem>().Play();
-        AddScore(value);
-        yield return new WaitForSeconds(1);
-        plusScoreText.enabled = false;
-    }
-
     public void AddRemainingTime(int bounsTime)
     {
         GameObject handle = GameObject.FindGameObjectWithTag("TimeHandle");
@@ -133,8 +113,6 @@ public class GameManager : MonoBehaviour
 
     private void initUI()
     {
-        plusScoreText.enabled = false;
-        plusScoreText.GetComponentInChildren<ParticleSystem>().Stop();
         //load game data from playerprefs
         if (PlayerPrefs.HasKey("baseScore"))
         {
@@ -144,17 +122,17 @@ public class GameManager : MonoBehaviour
         {
             currentScore = 0;   
         }
-        targetScoreText.text = targetScore.ToString();
+        scoreText.text = currentScore + "/" + targetScore;
         timeBar.value = timeRemaining;
         timeBar.maxValue = timeRemaining;
-        levelText.text = currentLevel.ToString();
+        levelText.text = "level " + currentLevel;
     }
     
     public void PauseGame()
     {
         isPause = !isPause;
 
-        if (isPause == true)
+        if (isPause)
         {
             // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/resume");
             pausePanel.gameObject.SetActive(true);
