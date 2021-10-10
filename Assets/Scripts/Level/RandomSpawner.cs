@@ -62,15 +62,8 @@ public class RandomSpawner : MonoBehaviour
     private void Init()
     {
         // TODO: auto update level
-        // TODO: read json error in IOS
         spawnerData = new SpawnerData();
         string json = Utils.ReadDataFromFile("SpawnerData.json");
         spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).spawnerDataList[level];
-        // spawnerData.innerRadius = 180;
-        // spawnerData.outerRadius = 250;
-        // spawnerData.collisionCheckRadius = 5;
-        // spawnerData.propsSum = 10;
-        // spawnerData.valuableSum = 5;
-        // spawnerData.valuelessSum = 30;
     }
 }
