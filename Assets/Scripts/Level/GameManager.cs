@@ -102,13 +102,12 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("total"))
         {
             newTotal = PlayerPrefs.GetInt("total") + value;
-            PlayerPrefs.SetInt("total", newTotal);
         }
         else
         {
             newTotal = value;
-            PlayerPrefs.SetInt("total", newTotal);
         }
+        PlayerPrefs.SetInt("total", newTotal);
         currentScore += value;
     }
 
