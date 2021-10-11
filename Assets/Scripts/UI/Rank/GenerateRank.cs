@@ -42,10 +42,10 @@ public class GenerateRank : MonoBehaviour
 		//if file does not exist
         if (content == "")
         {
+	        
 			Records recordList = new Records();
 			recordList.list.Add(record);
          	json = JsonUtility.ToJson(recordList);
-			Utils.WriteJSON("Rank.json", json);
         }
         else
         {
@@ -61,9 +61,9 @@ public class GenerateRank : MonoBehaviour
 				recvJSON.list.RemoveAt(recvJSON.list.Count - 1);
 			}
 			json = JsonUtility.ToJson(recvJSON);
-			Utils.WriteJSON("Rank.json", json);
         }
-		//delete the temp variables stored
+        Utils.WriteJSON("Rank.json", json);
+        //delete the temp variables stored
 		PlayerPrefs.DeleteAll();
 		SceneManager.LoadScene("ScoreRank");
     }

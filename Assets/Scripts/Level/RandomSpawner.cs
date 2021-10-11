@@ -71,6 +71,7 @@ public class RandomSpawner : MonoBehaviour
 
     private void Init(int level)
     {
+		Debug.Log(level);
         // TODO: auto update level
         spawnerData = new SpawnerData();
         //read file from device first
