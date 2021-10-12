@@ -3,7 +3,14 @@ guid: bf4e530f12a8d4a8bbab1ff864f923ab
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bombBtText: {instanceID: 0}
+  - timeExtensionBtText: {instanceID: 0}
+  - powerWaterBtText: {instanceID: 0}
+  - bonusBtText: {instanceID: 0}
+  - extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
+  - addScoreAudio: {instanceID: 0}
+  - powerWaterAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
