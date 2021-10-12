@@ -1786,8 +1786,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
-  addScoreAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
-  powerWaterAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+  addScoreAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+  powerWaterAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   unableBtnLists:
     TimeExtensionBtn: {fileID: 21300000, guid: 8d5babfcea6bd4ca3bce7d5e4361d88c, type: 3}
     BombBtn: {fileID: 21300000, guid: 4acfa064d755f4999a7a6036b9a5d036, type: 3}
@@ -5447,6 +5447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCross: {fileID: 1855744317}
   isShoot: 0
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0
