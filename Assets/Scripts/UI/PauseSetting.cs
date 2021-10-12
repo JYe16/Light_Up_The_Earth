@@ -4,52 +4,59 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class StartPage : MonoBehaviour
+public class PauseSetting : MonoBehaviour
 {
-    public Button settingButton;
+    public Text pauseScoreText;
+    public GameObject pausePanel;
+    public Button pauseBtn;
     public GameObject settingPanel;
-    public Button infoButton;
-    public GameObject infoPanel;
-    public Button infoPanelCloseBtn;
-    public Button settingPanelCloseBtn;
+    public Button settingBtn;
+    public Button resumeBtn;
     public Button soundBtn;
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
-    public AudioClip gameLaunchMusic;
+    public Button settingPanelCloseBtn;
+    public Button exitBtn;
     // Start is called before the first frame update
     void Start()
     {
-        //add onClick functions to all buttons
-        settingButton.onClick.AddListener(settingOnClick);
-        infoButton.onClick.AddListener(infoOnClick);
-        //set info panel to invisible at start
-        infoPanel.gameObject.SetActive(false);
-        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
-        //set setting panel to invisible at start
+        pausePanel.gameObject.SetActive(false);
         settingPanel.gameObject.SetActive(false);
+        pauseBtn.onClick.AddListener(pauseBtnOnClick);
+        resumeBtn.onClick.AddListener(resumeGame);
+        settingBtn.onClick.AddListener(showSettings);
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
-        //play launch music
-        AudioSource.PlayClipAtPoint(gameLaunchMusic, Camera.main.transform.position);
+        exitBtn.onClick.AddListener(endGame);
     }
     
-    void settingOnClick()
+    void pauseBtnOnClick()
+    {
+        //pause the time
+        Time.timeScale = 0.0f;
+        pausePanel.gameObject.SetActive(true);
+    }
+
+    void endGame()
+    {
+        PlayerPrefs.DeleteAll();
+        SceneManager.LoadScene("StartPage");
+    }
+
+    void resumeGame()
+    {
+        //time resumes
+        Time.timeScale = 1.0f;
+        pausePanel.gameObject.SetActive(false);
+    }
+
+    void showSettings()
     {
         settingPanel.gameObject.SetActive(true);
     }
-
-    void infoOnClick()
-    {
-        infoPanel.gameObject.SetActive(true);
-    }
-
-    void infoPanelClose()
-    {
-        infoPanel.gameObject.SetActive(false);
-    }
-
+    
     void settingPanelClose()
     {
         settingPanel.gameObject.SetActive(false);
@@ -78,10 +85,10 @@ public class StartPage : MonoBehaviour
             musicOffImg.gameObject.SetActive(true);
         }
     }
-    
+
     // Update is called once per frame
     void Update()
     {
-        
+        pauseScoreText.text = GameManager.gm.currentScore.ToString();
     }
 }
