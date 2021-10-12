@@ -98,7 +98,7 @@ public class ShopSystem : MonoBehaviour
 
     public void UpdateScore()
     {
-        score = PlayerPrefs.HasKey("total") ? PlayerPrefs.GetInt("total") : 0;
+        score = PlayerPrefs.HasKey("baseScore") ? PlayerPrefs.GetInt("baseScore") : 0;
         totalScore.text = "total :  " + score;
     }
 
@@ -126,6 +126,7 @@ public class ShopSystem : MonoBehaviour
     
     public void OnClickPlus()
     {
+        if (propsInfoMap.ElementAt(curIndex).Value.buyStep == 99) return;
         countText.text = (++propsInfoMap.ElementAt(curIndex).Value.buyStep).ToString();
     }
     
