@@ -12,6 +12,11 @@ public class PropsButtons : MonoBehaviour
         public Sprite BonusBtn;
         public Sprite PowerWaterBtn;
     }
+    
+    //audio files for extend time, add score and power water
+    public AudioClip extendTimeAudio;
+    public AudioClip addScoreAudio;
+    public AudioClip powerWaterAudio;
 
     public UnableBtnSprites unableBtnLists;
     public void OnClikeTimeExtension(Image curImage)
@@ -19,6 +24,11 @@ public class PropsButtons : MonoBehaviour
         if (PropsManager.manager.propsCounter[Gloable.PropsType.TIME_INCREASE] > 0)
         {
             PropsManager.manager.IncreaseTime(false);
+            //play sound effect
+            if (extendTimeAudio != null)
+            {
+                AudioSource.PlayClipAtPoint(extendTimeAudio, Camera.main.transform.position);
+            }
             if (PropsManager.manager.propsCounter[Gloable.PropsType.TIME_INCREASE] <= 0)
             {
                 curImage.sprite = unableBtnLists.TimeExtensionBtn;
@@ -45,6 +55,11 @@ public class PropsButtons : MonoBehaviour
         if ( PropsManager.manager.propsCounter[Gloable.PropsType.SCORE_INCREASE] > 0)
         {
             PropsManager.manager.IncreaseScore(false);
+            //play sound effect
+            if (addScoreAudio != null)
+            {
+                AudioSource.PlayClipAtPoint(addScoreAudio, Camera.main.transform.position);
+            }
             if (PropsManager.manager.propsCounter[Gloable.PropsType.SCORE_INCREASE] <= 0)
             {
                 curImage.sprite = unableBtnLists.BonusBtn;
@@ -59,6 +74,11 @@ public class PropsButtons : MonoBehaviour
         if (canClick)
         {
             PropsManager.manager.FastMove(GameManager.gm.currentGoal);
+            //play sound effect
+            if (powerWaterAudio != null)
+            {
+                AudioSource.PlayClipAtPoint(powerWaterAudio, Camera.main.transform.position);
+            }
             if (PropsManager.manager.propsCounter[Gloable.PropsType.POWER_WATER] <= 0 || !GameManager.gm.currentGoal)
             {
                 curImage.sprite = unableBtnLists.PowerWaterBtn;
