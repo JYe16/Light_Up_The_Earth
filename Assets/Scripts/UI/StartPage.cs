@@ -16,7 +16,6 @@ public class StartPage : MonoBehaviour
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
-    public AudioClip gameLaunchMusic;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,8 +30,9 @@ public class StartPage : MonoBehaviour
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
-        //play launch music
-        AudioSource.PlayClipAtPoint(gameLaunchMusic, Camera.main.transform.position);
+
+        PlayerPrefs.SetInt("sound", 1);
+        PlayerPrefs.SetInt("music", 1);
     }
     
     void settingOnClick()
@@ -65,6 +65,11 @@ public class StartPage : MonoBehaviour
         {
             soundOffImg.gameObject.SetActive(true);
         }
+
+        if (PlayerPrefs.GetInt("sound")==1)
+            PlayerPrefs.SetInt("sound", 0);
+        else
+            PlayerPrefs.SetInt("sound", 1);
     }
 
     void musicBtnOnClick()
@@ -77,6 +82,12 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+
+
+        if (PlayerPrefs.GetInt("music")==1)
+            PlayerPrefs.SetInt("music", 0);
+        else
+            PlayerPrefs.SetInt("music", 1);
     }
     
     // Update is called once per frame
