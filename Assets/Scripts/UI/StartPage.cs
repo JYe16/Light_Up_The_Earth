@@ -16,12 +16,17 @@ public class StartPage : MonoBehaviour
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
+	public GameObject gameLaunchMusic;
+	public Button startBtn;
+	//for background music playing
+	public static bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
         //add onClick functions to all buttons
         settingButton.onClick.AddListener(settingOnClick);
         infoButton.onClick.AddListener(infoOnClick);
+		startBtn.onClick.AddListener(NewGameOnClick);
         //set info panel to invisible at start
         infoPanel.gameObject.SetActive(false);
         infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
@@ -30,9 +35,14 @@ public class StartPage : MonoBehaviour
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
-
+		//set playerprefs for sound&music settings
         PlayerPrefs.SetInt("sound", 1);
         PlayerPrefs.SetInt("music", 1);
+		if(!isPlaying)
+		{
+			DontDestroyOnLoad(gameLaunchMusic.gameObject);
+			isPlaying = true;
+		}
     }
     
     void settingOnClick()
@@ -88,6 +98,12 @@ public class StartPage : MonoBehaviour
             PlayerPrefs.SetInt("music", 0);
         else
             PlayerPrefs.SetInt("music", 1);
+    }
+
+	public void NewGameOnClick()
+    {
+		Destroy(gameLaunchMusic.gameObject);
+        SceneManager.LoadScene("Level_00_Scene");
     }
     
     // Update is called once per frame

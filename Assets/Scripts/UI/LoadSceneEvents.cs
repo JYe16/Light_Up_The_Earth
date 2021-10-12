@@ -28,18 +28,9 @@ public class LoadSceneEvents : MonoBehaviour
                 SceneManager.LoadScene("Level_00_Scene");
         }
         
-        public void NewGameOnClick()
-        {
-                SceneManager.LoadScene("Level_00_Scene");
-        }
-        
         public void GameOverOnClick()
         {
                 SceneManager.LoadScene("EnterName");
         }
-
-
-
-
 
 }
