@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -135,7 +135,6 @@ GameObject:
   - component: {fileID: 42841851}
   - component: {fileID: 42841850}
   - component: {fileID: 42841849}
-  - component: {fileID: 42841848}
   m_Layer: 5
   m_Name: SettingBtn
   m_TagString: Untagged
@@ -162,20 +161,6 @@ RectTransform:
   m_AnchoredPosition: {x: 361, y: 238}
   m_SizeDelta: {x: 210, y: 210}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &42841848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42841846}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb0126bd2e95814595e70ef69cc06a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingButton: {fileID: 42841849}
-  settingPanel: {fileID: 130553801}
 --- !u!114 &42841849
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -344,7 +329,6 @@ GameObject:
   - component: {fileID: 130553802}
   - component: {fileID: 130553804}
   - component: {fileID: 130553803}
-  - component: {fileID: 130553805}
   m_Layer: 5
   m_Name: SettingPanel
   m_TagString: Untagged
@@ -416,18 +400,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130553801}
   m_CullTransparentMesh: 1
---- !u!114 &130553805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130553801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789839105a9319b4eb64fd1def346b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &164701952
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,19 +482,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 164701955}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 130553805}
-        m_TargetAssemblyTypeName: SettingPanel, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &164701955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -802,7 +762,6 @@ GameObject:
   - component: {fileID: 422920142}
   - component: {fileID: 422920141}
   - component: {fileID: 422920140}
-  - component: {fileID: 422920143}
   m_Layer: 5
   m_Name: InfoBtn
   m_TagString: Untagged
@@ -911,20 +870,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 422920138}
   m_CullTransparentMesh: 1
---- !u!114 &422920143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 422920138}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdce355b1417c52478582cfd8733fe08, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  infoButton: {fileID: 422920140}
-  infoPanel: {fileID: 942044416}
 --- !u!1 &739559913
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,7 +1000,6 @@ GameObject:
   - component: {fileID: 751658222}
   - component: {fileID: 751658221}
   - component: {fileID: 751658220}
-  - component: {fileID: 751658223}
   m_Layer: 5
   m_Name: SoundBtn
   m_TagString: Untagged
@@ -1164,20 +1108,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 751658218}
   m_CullTransparentMesh: 1
---- !u!114 &751658223
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 751658218}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a51cff1759fd6c4eb44c0996255d988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 751658220}
-  img: {fileID: 748184112}
 --- !u!1 &806304885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1436,7 +1366,6 @@ GameObject:
   - component: {fileID: 942044417}
   - component: {fileID: 942044419}
   - component: {fileID: 942044418}
-  - component: {fileID: 942044420}
   m_Layer: 5
   m_Name: InfoPanel
   m_TagString: Untagged
@@ -1505,18 +1434,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942044416}
   m_CullTransparentMesh: 1
---- !u!114 &942044420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 942044416}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47227a1cea6c3774190bf88e88acd012, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &956872525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1736,6 +1653,7 @@ GameObject:
   - component: {fileID: 1038790103}
   - component: {fileID: 1038790102}
   - component: {fileID: 1038790101}
+  - component: {fileID: 1038790104}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1831,6 +1749,29 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1038790104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038790099}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4090e706e93714e3c8dbd37f730b88de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingButton: {fileID: 42841849}
+  settingPanel: {fileID: 130553801}
+  infoButton: {fileID: 422920140}
+  infoPanel: {fileID: 942044416}
+  infoPanelCloseBtn: {fileID: 1631626236}
+  settingPanelCloseBtn: {fileID: 164701954}
+  soundBtn: {fileID: 751658220}
+  musicBtn: {fileID: 1291732254}
+  soundOffImg: {fileID: 748184112}
+  musicOffImg: {fileID: 1662666337}
+  gameLaunchMusic: {fileID: 8300000, guid: 13f2635e3d2654fc79ec197f5b4b92eb, type: 3}
 --- !u!1 &1065469388
 GameObject:
   m_ObjectHideFlags: 0
@@ -2051,7 +1992,6 @@ GameObject:
   - component: {fileID: 1291732256}
   - component: {fileID: 1291732255}
   - component: {fileID: 1291732254}
-  - component: {fileID: 1291732257}
   m_Layer: 5
   m_Name: MusicBtn
   m_TagString: Untagged
@@ -2160,20 +2100,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1291732252}
   m_CullTransparentMesh: 1
---- !u!114 &1291732257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1291732252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a51cff1759fd6c4eb44c0996255d988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 1291732254}
-  img: {fileID: 1662666337}
 --- !u!1 &1631626234
 GameObject:
   m_ObjectHideFlags: 0
@@ -2255,19 +2181,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1631626237}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 942044420}
-        m_TargetAssemblyTypeName: InfoPanel, Assembly-CSharp
-        m_MethodName: CloseInfo
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1631626237
 MonoBehaviour:
   m_ObjectHideFlags: 0
