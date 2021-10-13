@@ -103,7 +103,7 @@ public class StartPage : MonoBehaviour
 	public void NewGameOnClick()
     {
 		Destroy(gameLaunchMusic.gameObject);
-        SceneManager.LoadScene("Level_00_Scene");
+        SceneManager.LoadScene("Tutorial");
     }
     
     // Update is called once per frame

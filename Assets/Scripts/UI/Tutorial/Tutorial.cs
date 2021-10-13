@@ -39,12 +39,12 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         //by default, show skip button and next step button  
-        skipButton.onClick.AddListener(start);
+        skipButton.onClick.AddListener(start_game);
         nextStep.onClick.AddListener(showNextStep);
-        startGame.onClick.AddListener(start);
+        startGame.onClick.AddListener(start_game);
     }
 
-    void start()
+    void start_game()
     {
         SceneManager.LoadScene("Level_00_Scene");
     }
