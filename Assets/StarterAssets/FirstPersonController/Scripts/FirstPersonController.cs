@@ -98,8 +98,8 @@ namespace StarterAssets
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold/10)
 			{
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime;
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/4;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/4;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
