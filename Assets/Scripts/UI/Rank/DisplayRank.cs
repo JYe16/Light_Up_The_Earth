@@ -14,11 +14,14 @@ public class DisplayRank : MonoBehaviour
     void Start()
     {
        	string content = Utils.ReadDataFromFile("Rank.json");
-		Records recvJSON = JsonUtility.FromJson<Records>(content);
-		for(int i = 0; i < recvJSON.list.Count; i++)
-		{
-			rank += recvJSON.list[i].name + "\t\t\t\t\t\t" + recvJSON.list[i].score + "\n";
-		}
+        if (content != "")
+        {
+            Records recvJSON = JsonUtility.FromJson<Records>(content);
+            for(int i = 0; i < recvJSON.list.Count; i++)
+            {
+                rank += recvJSON.list[i].name + "\t\t\t\t\t\t" + recvJSON.list[i].score + "\n";
+            }
+        }
     }
 
     // Update is called once per frame

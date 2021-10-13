@@ -795,7 +795,6 @@ MonoBehaviour:
   propsPrefabList:
   - {fileID: 4634720436632843782, guid: 92ea265839af74af6a3419b4b69182a7, type: 3}
   platformTransform: {fileID: 7926790865455924939}
-  level: 0
 --- !u!4 &304932427
 Transform:
   m_ObjectHideFlags: 0
@@ -1173,7 +1172,6 @@ GameObject:
   - component: {fileID: 723226127}
   - component: {fileID: 723226126}
   - component: {fileID: 723226125}
-  - component: {fileID: 723226128}
   m_Layer: 5
   m_Name: PauseSetting
   m_TagString: Untagged
@@ -1282,20 +1280,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 723226123}
   m_CullTransparentMesh: 1
---- !u!114 &723226128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 723226123}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2cb0126bd2e95814595e70ef69cc06a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settingButton: {fileID: 723226125}
-  settingPanel: {fileID: 1232448392}
 --- !u!1 &753178803
 GameObject:
   m_ObjectHideFlags: 0
@@ -1383,7 +1367,6 @@ GameObject:
   - component: {fileID: 774066225}
   - component: {fileID: 774066224}
   - component: {fileID: 774066223}
-  - component: {fileID: 774066222}
   m_Layer: 5
   m_Name: SoundBtn
   m_TagString: Untagged
@@ -1410,20 +1393,6 @@ RectTransform:
   m_AnchoredPosition: {x: -90, y: 40}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &774066222
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 774066220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a51cff1759fd6c4eb44c0996255d988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 774066223}
-  img: {fileID: 1433611693}
 --- !u!114 &774066223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1753,19 +1722,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 894682222}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1495845378}
-        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: exitLevel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &894682222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2015,6 +1972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938e789c6a8344dcb62ed6394a815ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
+  addScoreAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+  powerWaterAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   unableBtnLists:
     TimeExtensionBtn: {fileID: 21300000, guid: 8d5babfcea6bd4ca3bce7d5e4361d88c, type: 3}
     BombBtn: {fileID: 21300000, guid: 4acfa064d755f4999a7a6036b9a5d036, type: 3}
@@ -2056,7 +2016,7 @@ GameObject:
   - component: {fileID: 955635808}
   - component: {fileID: 955635807}
   m_Layer: 5
-  m_Name: Text
+  m_Name: pauseScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2652,19 +2612,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1167671357}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1232448394}
-        m_TargetAssemblyTypeName: SettingPanel, Assembly-CSharp
-        m_MethodName: Close
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1167671357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2751,14 +2699,13 @@ GameObject:
   - component: {fileID: 1232448393}
   - component: {fileID: 1232448396}
   - component: {fileID: 1232448395}
-  - component: {fileID: 1232448394}
   m_Layer: 5
   m_Name: SettingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1232448393
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2785,18 +2732,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -324.80005, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1232448394
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1232448392}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 789839105a9319b4eb64fd1def346b6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1232448395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3105,19 +3040,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1332950488}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1495845378}
-        m_TargetAssemblyTypeName: PausePanel, Assembly-CSharp
-        m_MethodName: ShowPausePanel
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1332950488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3872,7 +3795,6 @@ GameObject:
   - component: {fileID: 1495845377}
   - component: {fileID: 1495845380}
   - component: {fileID: 1495845379}
-  - component: {fileID: 1495845378}
   m_Layer: 5
   m_Name: Pause Panel
   m_TagString: Untagged
@@ -3906,19 +3828,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1495845378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495845376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf6854f2ec2f05f4c80da8fea4f8f8af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scoreText: {fileID: 955635807}
 --- !u!114 &1495845379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3987,8 +3896,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBar: {fileID: 191239406}
-  targetScore: 10
-  timeRemaining: 80
+  timeRemaining: 60
   currentGoal: {fileID: 0}
   currentLevel: 0
   gameState: 0
@@ -4023,6 +3931,7 @@ GameObject:
   - component: {fileID: 1563320948}
   - component: {fileID: 1563320947}
   - component: {fileID: 1563320946}
+  - component: {fileID: 1563320950}
   m_Layer: 5
   m_Name: GUI Canvas
   m_TagString: Untagged
@@ -4114,6 +4023,30 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1563320950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563320945}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef9e884803c884ce59c19d8ef9608bcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseScoreText: {fileID: 955635807}
+  pausePanel: {fileID: 1495845376}
+  pauseBtn: {fileID: 74715027}
+  settingPanel: {fileID: 1232448392}
+  settingBtn: {fileID: 723226125}
+  resumeBtn: {fileID: 1332950487}
+  soundBtn: {fileID: 774066223}
+  musicBtn: {fileID: 1886981129}
+  soundOffImg: {fileID: 1433611693}
+  musicOffImg: {fileID: 1007742794}
+  settingPanelCloseBtn: {fileID: 1167671356}
+  exitBtn: {fileID: 894682221}
 --- !u!1 &1622031624
 GameObject:
   m_ObjectHideFlags: 0
@@ -4825,7 +4758,6 @@ GameObject:
   - component: {fileID: 1886981131}
   - component: {fileID: 1886981130}
   - component: {fileID: 1886981129}
-  - component: {fileID: 1886981128}
   m_Layer: 5
   m_Name: MusicBtn
   m_TagString: Untagged
@@ -4852,20 +4784,6 @@ RectTransform:
   m_AnchoredPosition: {x: 75, y: 40}
   m_SizeDelta: {x: 350, y: 350}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1886981128
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1886981126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a51cff1759fd6c4eb44c0996255d988, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  button: {fileID: 1886981129}
-  img: {fileID: 1007742794}
 --- !u!114 &1886981129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6339,6 +6257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCross: {fileID: 1855744317}
   isShoot: 0
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0

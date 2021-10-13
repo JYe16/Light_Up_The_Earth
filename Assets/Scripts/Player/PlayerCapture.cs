@@ -14,6 +14,8 @@ public class PlayerCapture : MonoBehaviour
     private FirstPersonController playerController;
     public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
+    //add sound file for shooting
+    public AudioClip shootAudio;
 
     void Start()
     {
@@ -42,6 +44,10 @@ public class PlayerCapture : MonoBehaviour
     public void Shoot()
     {
         isShoot = true;
+        if (shootAudio != null)
+        {
+            AudioSource.PlayClipAtPoint(shootAudio, Camera.main.transform.position);
+        }
     }
 
     void CaptureGoals()

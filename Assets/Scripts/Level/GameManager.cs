@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     static public GameManager gm;
     
     public Slider timeBar;
-    public int targetScore;
+    private int targetScore;
     public float timeRemaining;
     [HideInInspector] public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
@@ -36,10 +36,19 @@ public class GameManager : MonoBehaviour
             gm = GetComponent<GameManager>();
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
-        currentLevel = 1;
+        if (PlayerPrefs.HasKey("level"))
+        {
+            currentLevel = PlayerPrefs.GetInt("level") + 1;
+            targetScore = 30 + (10 * (currentLevel - 1));
+        }
+        else
+        {
+            currentLevel = 1;
+            targetScore = 30;
+        }
+        PlayerPrefs.SetInt("level", currentLevel);
         initUI();
         gm.gameState = GameState.Playing;
-        
         isPause = false;
         pauseBtn.onClick.AddListener(PauseGame);
         pausePanel.gameObject.SetActive(false);
@@ -93,13 +102,12 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("total"))
         {
             newTotal = PlayerPrefs.GetInt("total") + value;
-            PlayerPrefs.SetInt("total", newTotal);
         }
         else
         {
             newTotal = value;
-            PlayerPrefs.SetInt("total", newTotal);
         }
+        PlayerPrefs.SetInt("total", newTotal);
         currentScore += value;
     }
 
