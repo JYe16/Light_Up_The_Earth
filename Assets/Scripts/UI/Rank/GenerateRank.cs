@@ -64,7 +64,9 @@ public class GenerateRank : MonoBehaviour
         }
         Utils.WriteJSON("Rank.json", json);
         //delete the temp variables stored
-		PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("level");
+        PlayerPrefs.DeleteKey("baseScore");
+        PlayerPrefs.DeleteKey("total");
 		SceneManager.LoadScene("ScoreRank");
     }
 }

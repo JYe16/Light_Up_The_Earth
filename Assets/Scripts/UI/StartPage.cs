@@ -92,8 +92,6 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
-
-
         if (PlayerPrefs.GetInt("music")==1)
             PlayerPrefs.SetInt("music", 0);
         else
@@ -102,6 +100,9 @@ public class StartPage : MonoBehaviour
 
 	public void NewGameOnClick()
     {
+		PlayerPrefs.DeleteKey("level");
+		PlayerPrefs.DeleteKey("baseScore");
+		PlayerPrefs.DeleteKey("total");
 		Destroy(gameLaunchMusic.gameObject);
         SceneManager.LoadScene("Level_00_Scene");
     }
