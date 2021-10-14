@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿
+   
+using UnityEngine;
+using UnityEngine.EventSystems;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -16,13 +19,11 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed = 100.0f;
-		[Tooltip("Sprint speed of the character in m/s")]
-		public float SprintSpeed = 30.0f;
+		public float MoveSpeed =40.0f;
+		
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 60.0f;
-		[Tooltip("Acceleration and deceleration")]
-		public float SpeedChangeRate = 60.0f;
+		public float RotationSpeed = 20.0f;
+		
 	
 	
 		[Header("Player Grounded")]
@@ -55,7 +56,7 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 
-		private const float _threshold = 0.01f;
+		private const float _threshold = 2f;
 
 		public bool canMove;
 
@@ -94,10 +95,11 @@ namespace StarterAssets
 	
 		private void CameraRotation()
 		{
-			
-		
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime*20;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime*20;
+			// if there is an input
+			if (_input.look.sqrMagnitude >= _threshold/10)
+			{
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/8;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/8;
 
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
@@ -107,13 +109,13 @@ namespace StarterAssets
 
 				// rotate the player left and right
 				transform.Rotate(Vector3.up * _rotationVelocity);
-			
+			}
 		}
 
 		private void Move()
 		{
 			
-			float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+			float targetSpeed =  MoveSpeed;
 
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
 
@@ -127,7 +129,7 @@ namespace StarterAssets
 			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
 			{
 				
-				_speed = Mathf.Lerp(currentHorizontalSpeed*10f, targetSpeed * inputMagnitude*10f, Time.deltaTime * SpeedChangeRate*10f);
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime);
 
 			
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;

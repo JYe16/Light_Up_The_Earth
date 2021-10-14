@@ -16,13 +16,17 @@ public class StartPage : MonoBehaviour
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
-    public AudioClip gameLaunchMusic;
+	public GameObject gameLaunchMusic;
+	public Button startBtn;
+	//for background music playing
+	public static bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
         //add onClick functions to all buttons
         settingButton.onClick.AddListener(settingOnClick);
         infoButton.onClick.AddListener(infoOnClick);
+		startBtn.onClick.AddListener(NewGameOnClick);
         //set info panel to invisible at start
         infoPanel.gameObject.SetActive(false);
         infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
@@ -31,8 +35,14 @@ public class StartPage : MonoBehaviour
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
-        //play launch music
-        AudioSource.PlayClipAtPoint(gameLaunchMusic, Camera.main.transform.position);
+		//set playerprefs for sound&music settings
+        PlayerPrefs.SetInt("sound", 1);
+        PlayerPrefs.SetInt("music", 1);
+		if(!isPlaying)
+		{
+			DontDestroyOnLoad(gameLaunchMusic.gameObject);
+			isPlaying = true;
+		}
     }
     
     void settingOnClick()
@@ -65,6 +75,11 @@ public class StartPage : MonoBehaviour
         {
             soundOffImg.gameObject.SetActive(true);
         }
+
+        if (PlayerPrefs.GetInt("sound")==1)
+            PlayerPrefs.SetInt("sound", 0);
+        else
+            PlayerPrefs.SetInt("sound", 1);
     }
 
     void musicBtnOnClick()
@@ -77,6 +92,18 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+
+
+        if (PlayerPrefs.GetInt("music")==1)
+            PlayerPrefs.SetInt("music", 0);
+        else
+            PlayerPrefs.SetInt("music", 1);
+    }
+
+	public void NewGameOnClick()
+    {
+		Destroy(gameLaunchMusic.gameObject);
+        SceneManager.LoadScene("Tutorial");
     }
     
     // Update is called once per frame
