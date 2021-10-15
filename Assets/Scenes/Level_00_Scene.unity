@@ -1972,9 +1972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 938e789c6a8344dcb62ed6394a815ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  extendTimeAudio: {fileID: 0}
-  addScoreAudio: {fileID: 0}
-  powerWaterAudio: {fileID: 0}
+  extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
+  addScoreAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+  powerWaterAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
   unableBtnLists:
     TimeExtensionBtn: {fileID: 21300000, guid: 8d5babfcea6bd4ca3bce7d5e4361d88c, type: 3}
     BombBtn: {fileID: 21300000, guid: 4acfa064d755f4999a7a6036b9a5d036, type: 3}
@@ -3905,6 +3905,11 @@ MonoBehaviour:
   currentScore: 0
   pauseBtn: {fileID: 74715027}
   pausePanel: {fileID: 1495845376}
+  skybox1: {fileID: 2100000, guid: 4521060b9e9354e92bdabc5c0cd06353, type: 2}
+  skybox2: {fileID: 2100000, guid: 75756ef388c8e4586ba1973410ec34b7, type: 2}
+  skybox3: {fileID: 2100000, guid: b6a3f8bca2c865243929bac258c89b96, type: 2}
+  skybox4: {fileID: 2100000, guid: 939e9a2214e37ec4e8eb4fe85d074704, type: 2}
+  skybox5: {fileID: 2100000, guid: 2d59d810ba900874295015e507e19f2e, type: 2}
 --- !u!4 &1547580588
 Transform:
   m_ObjectHideFlags: 0
