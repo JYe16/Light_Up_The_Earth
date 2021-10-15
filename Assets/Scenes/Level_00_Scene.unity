@@ -3905,6 +3905,11 @@ MonoBehaviour:
   currentScore: 0
   pauseBtn: {fileID: 74715027}
   pausePanel: {fileID: 1495845376}
+  skybox1: {fileID: 2100000, guid: 4521060b9e9354e92bdabc5c0cd06353, type: 2}
+  skybox2: {fileID: 2100000, guid: 75756ef388c8e4586ba1973410ec34b7, type: 2}
+  skybox3: {fileID: 2100000, guid: b6a3f8bca2c865243929bac258c89b96, type: 2}
+  skybox4: {fileID: 2100000, guid: 939e9a2214e37ec4e8eb4fe85d074704, type: 2}
+  skybox5: {fileID: 2100000, guid: 2d59d810ba900874295015e507e19f2e, type: 2}
 --- !u!4 &1547580588
 Transform:
   m_ObjectHideFlags: 0

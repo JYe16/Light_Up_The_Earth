@@ -100,9 +100,7 @@ public class StartPage : MonoBehaviour
 
 	public void NewGameOnClick()
     {
-		PlayerPrefs.DeleteKey("level");
-		PlayerPrefs.DeleteKey("baseScore");
-		PlayerPrefs.DeleteKey("total");
+        Utils.clearCache();
 		Destroy(gameLaunchMusic.gameObject);
         SceneManager.LoadScene("Level_00_Scene");
     }
