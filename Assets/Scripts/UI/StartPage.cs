@@ -104,7 +104,8 @@ public class StartPage : MonoBehaviour
 		PlayerPrefs.DeleteKey("baseScore");
 		PlayerPrefs.DeleteKey("total");
 		Destroy(gameLaunchMusic.gameObject);
-        SceneManager.LoadScene("Level_00_Scene");
+        // SceneManager.LoadScene("Tutorial");
+		SceneManager.LoadScene("Story_Plot");
     }
     
     // Update is called once per frame
