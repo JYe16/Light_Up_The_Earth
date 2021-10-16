@@ -3866,6 +3866,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495845376}
   m_CullTransparentMesh: 1
+--- !u!1 &1532365556 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3683883254729208914, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+  m_PrefabInstance: {fileID: 6221026527448623139}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1547580586
 GameObject:
   m_ObjectHideFlags: 0
@@ -3905,11 +3910,16 @@ MonoBehaviour:
   currentScore: 0
   pauseBtn: {fileID: 74715027}
   pausePanel: {fileID: 1495845376}
+  platform: {fileID: 1532365556}
   skybox1: {fileID: 2100000, guid: 4521060b9e9354e92bdabc5c0cd06353, type: 2}
   skybox2: {fileID: 2100000, guid: 75756ef388c8e4586ba1973410ec34b7, type: 2}
   skybox3: {fileID: 2100000, guid: b6a3f8bca2c865243929bac258c89b96, type: 2}
   skybox4: {fileID: 2100000, guid: 939e9a2214e37ec4e8eb4fe85d074704, type: 2}
   skybox5: {fileID: 2100000, guid: 2d59d810ba900874295015e507e19f2e, type: 2}
+  platform1: {fileID: 5711235773885862091, guid: 24913bd607afc4cc5b156f89aaf876a0, type: 3}
+  platform2: {fileID: 465279410366215030, guid: 163ebf49a45844399b3defbcc569510a, type: 3}
+  platform3: {fileID: 5457141150168327575, guid: 626496742ddbe40a7b3afaee0b0cb858, type: 3}
+  platform4: {fileID: 7203702066845708326, guid: 3a751d023b0b6469193695f8adba786a, type: 3}
 --- !u!4 &1547580588
 Transform:
   m_ObjectHideFlags: 0
@@ -6132,6 +6142,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1654009741}
     m_Modifications:
+    - target: {fileID: 1151729034931708237, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 5711235773885862091, guid: 24913bd607afc4cc5b156f89aaf876a0, type: 3}
     - target: {fileID: 2891086924247422343, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
       propertyPath: m_Enabled
       value: 1
