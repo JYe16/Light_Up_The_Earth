@@ -14,6 +14,7 @@ public static class Utils
     public static string ReadDataFromFile(string fileName)
     {
         string path = GetFilePath(fileName);
+        Debug.Log(path);
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -32,5 +33,13 @@ public static class Utils
     {
         fileName = GetFilePath(fileName);
         File.WriteAllText(fileName, json);
+    }
+
+	//clear all stored playerprefs
+    public static void clearCache()
+    {
+        PlayerPrefs.DeleteKey("level");
+        PlayerPrefs.DeleteKey("baseScore");
+        PlayerPrefs.DeleteKey("total");
     }
 }
