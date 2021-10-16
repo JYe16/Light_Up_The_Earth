@@ -6132,9 +6132,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1654009741}
     m_Modifications:
+    - target: {fileID: 2891086924247422343, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3683883254729208914, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
       propertyPath: m_Name
       value: Normal_Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683883254729208914, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4058896522078891752, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
       propertyPath: m_RootOrder
@@ -6262,7 +6270,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCross: {fileID: 1855744317}
   isShoot: 0
-  shootAudio: {fileID: 0}
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0

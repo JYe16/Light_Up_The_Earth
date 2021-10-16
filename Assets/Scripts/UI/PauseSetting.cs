@@ -74,6 +74,10 @@ public class PauseSetting : MonoBehaviour
         {
             soundOffImg.gameObject.SetActive(true);
         }
+		if (PlayerPrefs.GetInt("sound") == 1)
+            PlayerPrefs.SetInt("sound", 0);
+        else
+            PlayerPrefs.SetInt("sound", 1);
     }
 
     void musicBtnOnClick()
@@ -86,6 +90,14 @@ public class PauseSetting : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+		if (PlayerPrefs.GetInt("music") == 1)
+		{
+			PlayerPrefs.SetInt("music", 0);
+		}
+        else
+		{
+			PlayerPrefs.SetInt("music", 1);
+		}
     }
 
     // Update is called once per frame
