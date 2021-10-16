@@ -6132,9 +6132,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1654009741}
     m_Modifications:
+    - target: {fileID: 2891086924247422343, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3683883254729208914, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
       propertyPath: m_Name
       value: Normal_Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 3683883254729208914, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4058896522078891752, guid: 20c7ec6bab0a74eb69d3ae002a8671cb, type: 3}
       propertyPath: m_RootOrder

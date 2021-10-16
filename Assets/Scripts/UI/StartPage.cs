@@ -108,7 +108,6 @@ public class StartPage : MonoBehaviour
     {
         Utils.clearCache();
 		Destroy(gameLaunchMusic.gameObject);
-        // SceneManager.LoadScene("Tutorial");
 		SceneManager.LoadScene("Story_Plot");
     }
     
