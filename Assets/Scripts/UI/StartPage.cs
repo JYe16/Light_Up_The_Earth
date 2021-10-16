@@ -92,8 +92,6 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
-
-
         if (PlayerPrefs.GetInt("music")==1)
             PlayerPrefs.SetInt("music", 0);
         else
@@ -102,8 +100,10 @@ public class StartPage : MonoBehaviour
 
 	public void NewGameOnClick()
     {
+        Utils.clearCache();
 		Destroy(gameLaunchMusic.gameObject);
-        SceneManager.LoadScene("Tutorial");
+        // SceneManager.LoadScene("Tutorial");
+		SceneManager.LoadScene("Story_Plot");
     }
     
     // Update is called once per frame

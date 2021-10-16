@@ -25,13 +25,21 @@ public class GameManager : MonoBehaviour
     public int currentScore;
     public Button pauseBtn;
     public GameObject pausePanel;
-
     private bool isPause;
     private GameObject player;
+    //declare skyboxes
+    public Material skybox1;
+    public Material skybox2;
+    public Material skybox3;
+    public Material skybox4;
+    public Material skybox5;
 
     // Start is called before the first frame update
     void Start()
     {
+        Material[] skyboxes = {skybox1, skybox2, skybox3, skybox4, skybox5};
+        //generate a random number for selecting skybox
+        RenderSettings.skybox = skyboxes[Random.Range(0, 5)];
         if(gm == null) 
             gm = GetComponent<GameManager>();
         if (player == null)

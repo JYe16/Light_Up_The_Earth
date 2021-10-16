@@ -41,7 +41,9 @@ public class PauseSetting : MonoBehaviour
 
     void endGame()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("level");
+		PlayerPrefs.DeleteKey("baseScore");
+		PlayerPrefs.DeleteKey("total");
         SceneManager.LoadScene("StartPage");
     }
 
