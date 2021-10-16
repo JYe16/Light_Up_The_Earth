@@ -12,13 +12,17 @@ public class RandomSpawner : MonoBehaviour
     [System.Serializable]
     public class SpawnerData
     {
+		//物体生成内半径
         public float innerRadius;
+		//物体生成外半径
         public float outerRadius;
+		//防止物体重叠
         public float collisionCheckRadius;
+		//有价值物体总数
         public int valuableSum;
         public int valuelessSum;
+		//道具总数
         public int propsSum;
-		public int targetScore;
     }
 
     [System.Serializable]
@@ -88,8 +92,9 @@ public class RandomSpawner : MonoBehaviour
     //TODO: Write a method to generate level difficulty automatically
     public void generateSpawnData()
     {
+		//TODO: 函数
 		SpawnerOriginJson spawnData = new SpawnerOriginJson();
-		for(int i = 0; i < 100; i++)
+		for(int i = 0; i < 10; i++)
 		{
 			SpawnerData spawner = new SpawnerData();
         	spawner.valuelessSum = 30;
