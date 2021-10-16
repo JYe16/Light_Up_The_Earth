@@ -6262,7 +6262,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetCross: {fileID: 1855744317}
   isShoot: 0
-  shootAudio: {fileID: 0}
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0
