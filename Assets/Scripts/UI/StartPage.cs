@@ -76,7 +76,7 @@ public class StartPage : MonoBehaviour
             soundOffImg.gameObject.SetActive(true);
         }
 
-        if (PlayerPrefs.GetInt("sound")==1)
+        if (PlayerPrefs.GetInt("sound") == 1)
             PlayerPrefs.SetInt("sound", 0);
         else
             PlayerPrefs.SetInt("sound", 1);
@@ -92,10 +92,16 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
-        if (PlayerPrefs.GetInt("music")==1)
-            PlayerPrefs.SetInt("music", 0);
+        if (PlayerPrefs.GetInt("music") == 1)
+		{
+			PlayerPrefs.SetInt("music", 0);
+			gameLaunchMusic.gameObject.GetComponent<AudioSource>().Pause();
+		}
         else
-            PlayerPrefs.SetInt("music", 1);
+		{
+			PlayerPrefs.SetInt("music", 1);
+			gameLaunchMusic.gameObject.GetComponent<AudioSource>().UnPause();
+		}
     }
 
 	public void NewGameOnClick()
@@ -109,6 +115,6 @@ public class StartPage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

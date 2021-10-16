@@ -25,7 +25,7 @@ public class PropsButtons : MonoBehaviour
         {
             PropsManager.manager.IncreaseTime(false);
             //play sound effect
-            if (extendTimeAudio != null)
+            if (extendTimeAudio != null && PlayerPrefs.GetInt("sound") == 1)
             {
                 AudioSource.PlayClipAtPoint(extendTimeAudio, Camera.main.transform.position);
             }
@@ -56,7 +56,7 @@ public class PropsButtons : MonoBehaviour
         {
             PropsManager.manager.IncreaseScore(false);
             //play sound effect
-            if (addScoreAudio != null)
+            if (addScoreAudio != null && PlayerPrefs.GetInt("sound") == 1)
             {
                 AudioSource.PlayClipAtPoint(addScoreAudio, Camera.main.transform.position);
             }
@@ -75,7 +75,7 @@ public class PropsButtons : MonoBehaviour
         {
             PropsManager.manager.FastMove(GameManager.gm.currentGoal);
             //play sound effect
-            if (powerWaterAudio != null)
+            if (powerWaterAudio != null && PlayerPrefs.GetInt("sound") == 1)
             {
                 AudioSource.PlayClipAtPoint(powerWaterAudio, Camera.main.transform.position);
             }
