@@ -19,7 +19,7 @@ public class DisplayRank : MonoBehaviour
             Records recvJSON = JsonUtility.FromJson<Records>(content);
             for(int i = 0; i < recvJSON.list.Count; i++)
             {
-                rank += recvJSON.list[i].name + "\t\t\t\t\t\t" + recvJSON.list[i].score + "\n";
+                rank += recvJSON.list[i].name + "\t\t\t" + recvJSON.list[i].score + "\t\t\t" + recvJSON.list[i].level + "\n";
             }
         }
     }
