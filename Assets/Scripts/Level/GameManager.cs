@@ -47,7 +47,8 @@ public class GameManager : MonoBehaviour
         Mesh[] platforms = {platform1, platform2, platform3, platform4};
         //generate a random number for selecting skybox
         RenderSettings.skybox = skyboxes[Random.Range(0, 5)];
-        platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, 4)];
+        //TODO: get correct mesh files and then uncomment the next line
+        //platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, 4)];
         if(gm == null) 
             gm = GetComponent<GameManager>();
         if (player == null)
