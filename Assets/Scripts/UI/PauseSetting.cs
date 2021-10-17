@@ -57,6 +57,15 @@ public class PauseSetting : MonoBehaviour
     void showSettings()
     {
         settingPanel.gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt("sound") == 1)
+            soundOffImg.gameObject.SetActive(false);
+        else
+            soundOffImg.gameObject.SetActive(true);
+
+        if (PlayerPrefs.GetInt("music") == 1)
+            musicOffImg.gameObject.SetActive(false);
+        else
+            musicOffImg.gameObject.SetActive(true);
     }
     
     void settingPanelClose()
@@ -74,8 +83,10 @@ public class PauseSetting : MonoBehaviour
         {
             soundOffImg.gameObject.SetActive(true);
         }
-		if (PlayerPrefs.GetInt("sound") == 1)
+        if (PlayerPrefs.GetInt("sound") == 1)
+        {
             PlayerPrefs.SetInt("sound", 0);
+        }
         else
             PlayerPrefs.SetInt("sound", 1);
     }
