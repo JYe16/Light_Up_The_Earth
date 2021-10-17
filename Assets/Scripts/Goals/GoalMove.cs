@@ -53,7 +53,7 @@ public class GoalMove : MonoBehaviour
         Vector3 screenCenter = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width / 2, Screen.height / 2, 0));
         isHide = true;
         Destroy(Instantiate(explosion, screenCenter, Quaternion.identity), 3f);
-        if(destroyGoalAudio != null) 
+        if(destroyGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
             AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position);
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(1);
