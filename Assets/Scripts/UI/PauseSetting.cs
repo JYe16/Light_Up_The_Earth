@@ -41,7 +41,9 @@ public class PauseSetting : MonoBehaviour
 
     void endGame()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey("level");
+		PlayerPrefs.DeleteKey("baseScore");
+		PlayerPrefs.DeleteKey("total");
         SceneManager.LoadScene("StartPage");
     }
 
@@ -55,6 +57,15 @@ public class PauseSetting : MonoBehaviour
     void showSettings()
     {
         settingPanel.gameObject.SetActive(true);
+        if (PlayerPrefs.GetInt("sound") == 1)
+            soundOffImg.gameObject.SetActive(false);
+        else
+            soundOffImg.gameObject.SetActive(true);
+
+        if (PlayerPrefs.GetInt("music") == 1)
+            musicOffImg.gameObject.SetActive(false);
+        else
+            musicOffImg.gameObject.SetActive(true);
     }
     
     void settingPanelClose()
@@ -72,6 +83,12 @@ public class PauseSetting : MonoBehaviour
         {
             soundOffImg.gameObject.SetActive(true);
         }
+        if (PlayerPrefs.GetInt("sound") == 1)
+        {
+            PlayerPrefs.SetInt("sound", 0);
+        }
+        else
+            PlayerPrefs.SetInt("sound", 1);
     }
 
     void musicBtnOnClick()
@@ -84,6 +101,14 @@ public class PauseSetting : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+		if (PlayerPrefs.GetInt("music") == 1)
+		{
+			PlayerPrefs.SetInt("music", 0);
+		}
+        else
+		{
+			PlayerPrefs.SetInt("music", 1);
+		}
     }
 
     // Update is called once per frame

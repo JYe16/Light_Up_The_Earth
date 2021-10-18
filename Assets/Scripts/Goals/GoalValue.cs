@@ -26,7 +26,7 @@ public class GoalValue : MonoBehaviour
 
     public void CapturedEffect()
     {
-        if(captureGoalAudio != null) 
+        if(captureGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
             AudioSource.PlayClipAtPoint(captureGoalAudio, Camera.main.transform.position);
         if (GameManager.gm != null)
         {

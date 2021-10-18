@@ -34,4 +34,12 @@ public static class Utils
         fileName = GetFilePath(fileName);
         File.WriteAllText(fileName, json);
     }
+
+	//clear all stored playerprefs
+    public static void clearCache()
+    {
+        PlayerPrefs.DeleteKey("level");
+        PlayerPrefs.DeleteKey("baseScore");
+        PlayerPrefs.DeleteKey("total");
+    }
 }
