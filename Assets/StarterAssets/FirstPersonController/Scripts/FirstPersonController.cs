@@ -22,7 +22,7 @@ namespace StarterAssets
 		public float MoveSpeed =30.0f;
 		
 		[Tooltip("Rotation speed of the character")]
-		public float RotationSpeed = 20.0f;
+		public float RotationSpeed = 10.0f;
 		
 	
 		[Header("Player Grounded")]
@@ -92,8 +92,8 @@ namespace StarterAssets
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold/10)
 			{
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/10;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/10;
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/15;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/15;
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 				// Update Cinemachine camera target pitch

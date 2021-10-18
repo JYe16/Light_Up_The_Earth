@@ -6568,7 +6568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 30
-  RotationSpeed: 20
+  RotationSpeed: 10
   Grounded: 1
   GroundedOffset: -0.14
   GroundedRadius: 0.5
