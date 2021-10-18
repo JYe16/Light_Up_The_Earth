@@ -98,7 +98,7 @@ public class RandomSpawner : MonoBehaviour
 		{
 			SpawnerData spawner = new SpawnerData();
         	spawner.valuelessSum = 30;
-       		spawner.valuableSum = 5;
+       		spawner.valuableSum = 8;
         	spawner.propsSum = 10;
         	spawner.collisionCheckRadius = 5.0f;
         	spawner.outerRadius = 250.0f;
@@ -108,5 +108,4 @@ public class RandomSpawner : MonoBehaviour
         string content = JsonUtility.ToJson(spawnData);
         Utils.WriteJSON("SpawnerData.json", content);
     }
-
 }

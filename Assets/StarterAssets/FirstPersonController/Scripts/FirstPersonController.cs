@@ -19,12 +19,11 @@ namespace StarterAssets
 	{
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
-		public float MoveSpeed =40.0f;
+		public float MoveSpeed =30.0f;
 		
 		[Tooltip("Rotation speed of the character")]
 		public float RotationSpeed = 20.0f;
 		
-	
 	
 		[Header("Player Grounded")]
 		[Tooltip("If the character is grounded or not. Not part of the CharacterController built in grounded check")]
@@ -55,11 +54,9 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
-
-		private const float _threshold = 2f;
-
+		private const float _threshold = 2f; 
 		public bool canMove;
-
+		
 		private void Awake()
 		{
 			// get a reference to our main camera
@@ -73,16 +70,13 @@ namespace StarterAssets
 		{
 			_controller = GetComponent<CharacterController>();
 			_input = GetComponent<StarterAssetsInputs>();
-
 			canMove = true;
 		}
 
 		private void Update()
 		{
-			
 			if (canMove)
 			{
-				
 				Move();
 			}
 		}
@@ -98,15 +92,12 @@ namespace StarterAssets
 			// if there is an input
 			if (_input.look.sqrMagnitude >= _threshold/10)
 			{
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/8;
-				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/8;
-
+				_cinemachineTargetPitch += _input.look.y * RotationSpeed * Time.deltaTime/10;
+				_rotationVelocity = _input.look.x * RotationSpeed * Time.deltaTime/10;
 				// clamp our pitch rotation
 				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
-
 				// Update Cinemachine camera target pitch
 				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
-
 				// rotate the player left and right
 				transform.Rotate(Vector3.up * _rotationVelocity);
 			}
@@ -114,42 +105,25 @@ namespace StarterAssets
 
 		private void Move()
 		{
-			
 			float targetSpeed =  MoveSpeed;
-
 			if (_input.move == Vector2.zero) targetSpeed = 0.0f;
-
-			
 			float currentHorizontalSpeed = new Vector3(_controller.velocity.x, 0.0f, _controller.velocity.z).magnitude;
-
 			float speedOffset = 0.1f;
 			float inputMagnitude = _input.analogMovement ? _input.move.magnitude : 1f;
-
-			
 			if (currentHorizontalSpeed < targetSpeed - speedOffset || currentHorizontalSpeed > targetSpeed + speedOffset)
 			{
-				
-				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime);
-
-			
+				_speed = Mathf.Lerp(currentHorizontalSpeed, targetSpeed * inputMagnitude, Time.deltaTime); 
 				_speed = Mathf.Round(_speed * 1000f) / 1000f;
 			}
 			else
 			{
 				_speed = targetSpeed;
 			}
-
-		
 			Vector3 inputDirection = new Vector3(_input.move.x, 0.0f, _input.move.y).normalized;
-
-		
 			if (_input.move != Vector2.zero)
-			{
-				
+			{ 
 				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
 			}
-
-			
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
 
@@ -157,8 +131,8 @@ namespace StarterAssets
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{
-			if (lfAngle < -360f) lfAngle += 360f;
-			if (lfAngle > 360f) lfAngle -= 360f;
+			if (lfAngle < -180f) lfAngle += 180f;
+			if (lfAngle > 180f) lfAngle -= 180f;
 			return Mathf.Clamp(lfAngle, lfMin, lfMax);
 		}
 
@@ -166,10 +140,8 @@ namespace StarterAssets
 		{
 			Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
 			Color transparentRed = new Color(1.0f, 0.0f, 0.0f, 0.35f);
-
 			if (Grounded) Gizmos.color = transparentGreen;
 			else Gizmos.color = transparentRed;
-
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}

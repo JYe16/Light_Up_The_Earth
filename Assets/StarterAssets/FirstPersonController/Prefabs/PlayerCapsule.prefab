@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 40
+  MoveSpeed: 30
   RotationSpeed: 20
   Grounded: 1
   GroundedOffset: -0.14
