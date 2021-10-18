@@ -10,7 +10,7 @@ public class StartPage : MonoBehaviour
     public GameObject settingPanel;
     public Button infoButton;
     public GameObject infoPanel;
-    public Button infoPanelCloseBtn;
+    //public Button infoPanelCloseBtn;
     public Button settingPanelCloseBtn;
     public Button soundBtn;
     public Button musicBtn;
@@ -21,18 +21,17 @@ public class StartPage : MonoBehaviour
 	//for background music playing
 	public static bool isPlaying = false;
     // Start is called before the first frame update
+    
+
     void Start()
     {
         //add onClick functions to all buttons
-        settingButton.onClick.AddListener(settingOnClick);
-        infoButton.onClick.AddListener(infoOnClick);
 		startBtn.onClick.AddListener(NewGameOnClick);
         //set info panel to invisible at start
-        infoPanel.gameObject.SetActive(false);
-        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
+        infoPanel.gameObject.SetActive(true);
         //set setting panel to invisible at start
-        settingPanel.gameObject.SetActive(false);
-        settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+        settingPanel.gameObject.SetActive(true);
+        //settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
 		//set playerprefs for sound&music settings
@@ -50,20 +49,16 @@ public class StartPage : MonoBehaviour
         settingPanel.gameObject.SetActive(true);
     }
 
-    void infoOnClick()
+    /*void infoOnClick()
     {
         infoPanel.gameObject.SetActive(true);
     }
 
-    void infoPanelClose()
-    {
-        infoPanel.gameObject.SetActive(false);
-    }
 
     void settingPanelClose()
     {
         settingPanel.gameObject.SetActive(false);
-    }
+    }*/
 
     void soundBtnOnClick()
     {
