@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -204,19 +204,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 42841850}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 130553805}
-        m_TargetAssemblyTypeName: PanelFader, Assembly-CSharp
-        m_MethodName: Fade
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &42841850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -342,14 +330,13 @@ GameObject:
   - component: {fileID: 130553804}
   - component: {fileID: 130553803}
   - component: {fileID: 130553806}
-  - component: {fileID: 130553805}
   m_Layer: 5
   m_Name: SettingPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &130553802
 RectTransform:
   m_ObjectHideFlags: 0
@@ -414,19 +401,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130553801}
   m_CullTransparentMesh: 1
---- !u!114 &130553805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130553801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1719f581740f634b948b88fd178a8e1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Duration: 0.4
 --- !u!225 &130553806
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -1793,7 +1767,6 @@ MonoBehaviour:
   settingPanel: {fileID: 130553801}
   infoButton: {fileID: 422920140}
   infoPanel: {fileID: 942044416}
-  infoPanelCloseBtn: {fileID: 1631626236}
   settingPanelCloseBtn: {fileID: 164701954}
   soundBtn: {fileID: 751658220}
   musicBtn: {fileID: 1291732254}
@@ -1801,6 +1774,8 @@ MonoBehaviour:
   musicOffImg: {fileID: 1662666337}
   gameLaunchMusic: {fileID: 1883190611}
   startBtn: {fileID: 956872527}
+  Duration: 0.4
+  cur: 0
 --- !u!1 &1065469388
 GameObject:
   m_ObjectHideFlags: 0
