@@ -20,18 +20,20 @@ public class StartPage : MonoBehaviour
 	public Button startBtn;
 	//for background music playing
 	public static bool isPlaying = false;
+    //variables for fading function
+    public float Duration = 0.4f;
+    public int cur = 0;
     // Start is called before the first frame update
-    
-
     void Start()
     {
         //add onClick functions to all buttons
 		startBtn.onClick.AddListener(NewGameOnClick);
         //set info panel to invisible at start
-        infoPanel.gameObject.SetActive(true);
+        infoPanel.gameObject.SetActive(false);
         //set setting panel to invisible at start
-        settingPanel.gameObject.SetActive(true);
-        //settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+        settingPanel.gameObject.SetActive(false);
+        settingButton.onClick.AddListener(settingOnClick);
+        settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
 		//set playerprefs for sound&music settings
@@ -47,9 +49,10 @@ public class StartPage : MonoBehaviour
     void settingOnClick()
     {
         settingPanel.gameObject.SetActive(true);
+        Fade(settingPanel, true);
     }
 
-    /*void infoOnClick()
+    void infoOnClick()
     {
         infoPanel.gameObject.SetActive(true);
     }
@@ -57,8 +60,9 @@ public class StartPage : MonoBehaviour
 
     void settingPanelClose()
     {
+        Fade(settingPanel, false);
         settingPanel.gameObject.SetActive(false);
-    }*/
+    }
 
     void soundBtnOnClick()
     {
@@ -104,6 +108,23 @@ public class StartPage : MonoBehaviour
         Utils.clearCache();
 		Destroy(gameLaunchMusic.gameObject);
 		SceneManager.LoadScene("Story_Plot");
+    }
+    
+    public void Fade(GameObject Panel, bool isActive)
+    {
+        var canvGroup = Panel.GetComponent<CanvasGroup>();          
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, isActive ? 1 : 0));
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+            yield return null;
+        }
     }
     
     // Update is called once per frame
