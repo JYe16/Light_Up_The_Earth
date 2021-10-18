@@ -28,11 +28,11 @@ public class DisplayRank : MonoBehaviour
             {
                 // rank += recvJSON.list[i].name + "\t\t\t" + recvJSON.list[i].score + "\t\t\t" + recvJSON.list[i].level + "\n";
                 // rankName = recvJSON.list[i].name + "\n";
-                rankName = ((recvJSON.list[i].name).Length <= 8)
+                rankName += ((recvJSON.list[i].name).Length <= 8)
                     ? (recvJSON.list[i].name + "\n")
                     : ((recvJSON.list[i].name).Substring(0, 8) + "\n");
-                rankScore = recvJSON.list[i].score + "\n";
-                rankLevel = recvJSON.list[i].level + "\n";
+                rankScore += recvJSON.list[i].score + "\n";
+                rankLevel += recvJSON.list[i].level + "\n";
             }
         }
     }
