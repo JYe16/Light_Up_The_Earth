@@ -41,5 +41,9 @@ public static class Utils
         PlayerPrefs.DeleteKey("level");
         PlayerPrefs.DeleteKey("baseScore");
         PlayerPrefs.DeleteKey("total");
+        PlayerPrefs.DeleteKey("BOMB");
+        PlayerPrefs.DeleteKey("POWER_WATER");
+        PlayerPrefs.DeleteKey("TIME_INCREASE");
+        PlayerPrefs.DeleteKey("SCORE_INCREASE");
     }
 }
