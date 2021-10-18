@@ -107,8 +107,7 @@ public class StartPage : MonoBehaviour
 	public void NewGameOnClick()
     {
         Utils.clearCache();
-		Destroy(gameLaunchMusic.gameObject);
-		SceneManager.LoadScene("Story_Plot");
+        SceneManager.LoadScene("Story_Plot");
     }
     
     // Update is called once per frame
