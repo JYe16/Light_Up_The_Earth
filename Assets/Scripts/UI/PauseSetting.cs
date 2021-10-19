@@ -38,7 +38,9 @@ public class PauseSetting : MonoBehaviour
     
     void pauseBtnOnClick()
     {
-        StartCoroutine(PausePanelFadeIn());        
+        //StartCoroutine(PausePanelFadeIn());  
+        pausePanel.gameObject.SetActive(true);
+        Time.timeScale = 0.0f;//pause the time
     }
 
     IEnumerator PausePanelFadeIn()
