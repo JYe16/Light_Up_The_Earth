@@ -1928,7 +1928,6 @@ GameObject:
   m_Component:
   - component: {fileID: 945017526}
   - component: {fileID: 945017529}
-  - component: {fileID: 945017527}
   - component: {fileID: 945017528}
   m_Layer: 3
   m_Name: props_area
@@ -1960,26 +1959,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 60}
   m_SizeDelta: {x: 475, y: 140}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &945017527
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 945017525}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 938e789c6a8344dcb62ed6394a815ccb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
-  addScoreAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
-  powerWaterAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
-  unableBtnLists:
-    TimeExtensionBtn: {fileID: 21300000, guid: 8d5babfcea6bd4ca3bce7d5e4361d88c, type: 3}
-    BombBtn: {fileID: 21300000, guid: 4acfa064d755f4999a7a6036b9a5d036, type: 3}
-    BonusBtn: {fileID: 21300000, guid: a396b1476dc2e44a5af8733ff1ce3b31, type: 3}
-    PowerWaterBtn: {fileID: 21300000, guid: 995e4734ef5524dd696c3e7421cdd725, type: 3}
 --- !u!114 &945017528
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1992,10 +1971,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf4e530f12a8d4a8bbab1ff864f923ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bombBtText: {fileID: 1243038320}
-  timeExtensionBtText: {fileID: 1854441359}
-  powerWaterBtText: {fileID: 1395189120}
-  bonusBtText: {fileID: 2023607686}
+  bombBtn: {fileID: 1622031626}
+  timeExtensionBtn: {fileID: 1682247074}
+  powerWaterBtn: {fileID: 1385161945}
+  bonusBtn: {fileID: 1114375150}
+  unableBtnLists:
+    TimeExtensionBtn: {fileID: 21300000, guid: 8d5babfcea6bd4ca3bce7d5e4361d88c, type: 3}
+    BombBtn: {fileID: 21300000, guid: 4acfa064d755f4999a7a6036b9a5d036, type: 3}
+    BonusBtn: {fileID: 21300000, guid: a396b1476dc2e44a5af8733ff1ce3b31, type: 3}
+    PowerWaterBtn: {fileID: 21300000, guid: 995e4734ef5524dd696c3e7421cdd725, type: 3}
+  enableBtnLists:
+    TimeExtensionBtn: {fileID: 21300000, guid: 927e84c4bbf594f3eaaa853f276041ce, type: 3}
+    BombBtn: {fileID: 21300000, guid: c115a9acbcc92450aab26edc90171779, type: 3}
+    BonusBtn: {fileID: 21300000, guid: 131d4c91187fe4ec197c1bc7b7b93d64, type: 3}
+    PowerWaterBtn: {fileID: 21300000, guid: 18c69f889cb474b499d2e16137a096e7, type: 3}
+  extendTimeAudio: {fileID: 8300000, guid: 7f4aa26d5b55226409cda231ffaf869b, type: 3}
+  addScoreAudio: {fileID: 8300000, guid: 34f9cbd28a9740349b6cc2f5e280dda3, type: 3}
+  powerWaterAudio: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
 --- !u!222 &945017529
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2369,13 +2361,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 945017527}
-        m_TargetAssemblyTypeName: PropsButtons, Assembly-CSharp
+      - m_Target: {fileID: 945017528}
+        m_TargetAssemblyTypeName: PropsManager, Assembly-CSharp
         m_MethodName: OnClickBonus
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1114375151}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -3330,13 +3322,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 945017527}
-        m_TargetAssemblyTypeName: PropsButtons, Assembly-CSharp
+      - m_Target: {fileID: 945017528}
+        m_TargetAssemblyTypeName: PropsManager, Assembly-CSharp
         m_MethodName: OnClickPowerWater
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1385161946}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4145,13 +4137,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 945017527}
-        m_TargetAssemblyTypeName: PropsButtons, Assembly-CSharp
+      - m_Target: {fileID: 945017528}
+        m_TargetAssemblyTypeName: PropsManager, Assembly-CSharp
         m_MethodName: OnClickBomb
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1622031627}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -4310,13 +4302,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 945017527}
-        m_TargetAssemblyTypeName: PropsButtons, Assembly-CSharp
+      - m_Target: {fileID: 945017528}
+        m_TargetAssemblyTypeName: PropsManager, Assembly-CSharp
         m_MethodName: OnClikeTimeExtension
-        m_Mode: 2
+        m_Mode: 1
         m_Arguments:
-          m_ObjectArgument: {fileID: 1682247075}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.UI.Image, UnityEngine.UI
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
