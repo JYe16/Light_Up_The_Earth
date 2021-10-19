@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55919ac34a26952479f3fc91f777b2fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MoveSpeed: 30
+  MoveSpeed: 50
   RotationSpeed: 10
   Grounded: 1
   GroundedOffset: -0.14
@@ -294,6 +294,10 @@ PrefabInstance:
     - target: {fileID: 400006, guid: 9bf7a9cbc2d59084cbaf45c7d8890eee, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1462335641, guid: 9bf7a9cbc2d59084cbaf45c7d8890eee, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9bf7a9cbc2d59084cbaf45c7d8890eee, type: 3}
