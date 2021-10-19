@@ -19,6 +19,7 @@ public class PauseSetting : MonoBehaviour
     public Button settingPanelCloseBtn;
     public Button exitBtn;
     // Start is called before the first frame update
+    public float Duration = 0.4f;
     void Start()
     {
         pausePanel.gameObject.SetActive(false);
@@ -36,7 +37,9 @@ public class PauseSetting : MonoBehaviour
     {
         //pause the time
         Time.timeScale = 0.0f;
+
         pausePanel.gameObject.SetActive(true);
+        Fade(pausePanel, true);
     }
 
     void endGame()
@@ -109,6 +112,23 @@ public class PauseSetting : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("music", 1);
 		}
+    }
+
+    public void Fade(GameObject Panel, bool isActive)
+    {
+        var canvGroup = Panel.GetComponent<CanvasGroup>();
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, isActive ? 1 : 0));
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+            yield return null;
+        }
     }
 
     // Update is called once per frame

@@ -2699,6 +2699,7 @@ GameObject:
   - component: {fileID: 1232448393}
   - component: {fileID: 1232448396}
   - component: {fileID: 1232448395}
+  - component: {fileID: 1232448394}
   m_Layer: 5
   m_Name: SettingPanel
   m_TagString: Untagged
@@ -2732,6 +2733,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -324.80005, y: -150}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1232448394
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232448392}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1232448395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3795,6 +3808,7 @@ GameObject:
   - component: {fileID: 1495845377}
   - component: {fileID: 1495845380}
   - component: {fileID: 1495845379}
+  - component: {fileID: 1495845378}
   m_Layer: 5
   m_Name: Pause Panel
   m_TagString: Untagged
@@ -3828,6 +3842,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1495845378
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495845376}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &1495845379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4062,6 +4088,7 @@ MonoBehaviour:
   musicOffImg: {fileID: 1007742794}
   settingPanelCloseBtn: {fileID: 1167671356}
   exitBtn: {fileID: 894682221}
+  Duration: 0.4
 --- !u!1 &1622031624
 GameObject:
   m_ObjectHideFlags: 0

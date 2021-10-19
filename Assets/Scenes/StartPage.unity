@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657815, g: 0.49641192, b: 0.57481617, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1379,6 +1379,7 @@ GameObject:
   - component: {fileID: 942044417}
   - component: {fileID: 942044419}
   - component: {fileID: 942044418}
+  - component: {fileID: 942044420}
   m_Layer: 5
   m_Name: InfoPanel
   m_TagString: Untagged
@@ -1448,6 +1449,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942044416}
   m_CullTransparentMesh: 1
+--- !u!225 &942044420
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 942044416}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &956872525
 GameObject:
   m_ObjectHideFlags: 0
@@ -1767,6 +1780,7 @@ MonoBehaviour:
   settingPanel: {fileID: 130553801}
   infoButton: {fileID: 422920140}
   infoPanel: {fileID: 942044416}
+  infoPanelCloseBtn: {fileID: 1631626236}
   settingPanelCloseBtn: {fileID: 164701954}
   soundBtn: {fileID: 751658220}
   musicBtn: {fileID: 1291732254}

@@ -10,7 +10,7 @@ public class StartPage : MonoBehaviour
     public GameObject settingPanel;
     public Button infoButton;
     public GameObject infoPanel;
-    //public Button infoPanelCloseBtn;
+    public Button infoPanelCloseBtn;
     public Button settingPanelCloseBtn;
     public Button soundBtn;
     public Button musicBtn;
@@ -32,8 +32,13 @@ public class StartPage : MonoBehaviour
         infoPanel.gameObject.SetActive(false);
         //set setting panel to invisible at start
         settingPanel.gameObject.SetActive(false);
+
         settingButton.onClick.AddListener(settingOnClick);
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+
+        infoButton.onClick.AddListener(infoOnClick);
+        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
+
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
 		//set playerprefs for sound&music settings
@@ -55,13 +60,20 @@ public class StartPage : MonoBehaviour
     void infoOnClick()
     {
         infoPanel.gameObject.SetActive(true);
+        Fade(infoPanel, true);
     }
-
 
     void settingPanelClose()
     {
         Fade(settingPanel, false);
+        //Time.timeScale = 100f;
         settingPanel.gameObject.SetActive(false);
+    }
+
+    void infoPanelClose()
+    {
+        Fade(infoPanel, false);
+        infoPanel.gameObject.SetActive(false);
     }
 
     void soundBtnOnClick()
