@@ -7,7 +7,7 @@ public class RandomSpawner : MonoBehaviour
     public GameObject[] valuelessPrefabList;
     public GameObject[] valuablePrefabList;
     public GameObject[] propsPrefabList;
-    public Transform platformTransform;
+    [HideInInspector]public Transform platformTransform;
 
     [System.Serializable]
     public class SpawnerData

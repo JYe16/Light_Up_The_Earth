@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public Slider timeBar;
     private int targetScore;
     public float timeRemaining;
+    [HideInInspector]public int currentScore;
     [HideInInspector] public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
     public enum GameState
@@ -22,7 +23,6 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    public int currentScore;
     public Button pauseBtn;
     public GameObject pausePanel;
     private bool isPause;
@@ -40,7 +40,6 @@ public class GameManager : MonoBehaviour
     public Mesh platform3;
     public Mesh platform4;
 
-    // Start is called before the first frame update
     void Start()
     {
         Material[] skyboxes = {skybox1, skybox2, skybox3, skybox4, skybox5};
@@ -65,6 +64,8 @@ public class GameManager : MonoBehaviour
         }
         PlayerPrefs.SetInt("level", currentLevel);
         initUI();
+        // init spawner after PlayerPrefs set
+        InitSpawner();
         gm.gameState = GameState.Playing;
         isPause = false;
         pauseBtn.onClick.AddListener(PauseGame);
@@ -151,6 +152,13 @@ public class GameManager : MonoBehaviour
         timeBar.value = timeRemaining;
         timeBar.maxValue = timeRemaining;
         levelText.text = "level " + currentLevel;
+    }
+
+    private void InitSpawner()
+    {
+        RandomSpawner spawner = GetComponent<RandomSpawner>();
+        spawner.platformTransform = platform.transform;
+        spawner.enabled = true;
     }
     
     public void PauseGame()

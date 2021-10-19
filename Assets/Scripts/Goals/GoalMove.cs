@@ -6,10 +6,12 @@ using UnityEngine;
 
 public class GoalMove : MonoBehaviour
 {
+    [HideInInspector]public GameObject target;
+    [HideInInspector]public AudioClip destroyGoalAudio;
+    [HideInInspector]public GameObject explosion;
+    
     public float moveSpeed;
-    public GameObject target;
-    public GameObject explosion;
-    public AudioClip destroyGoalAudio;
+    
     private float distance;
     private GoalValue goalValue;
     private bool isHide = false;

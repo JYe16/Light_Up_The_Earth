@@ -24,15 +24,18 @@ public class StartPage : MonoBehaviour
     void Start()
     {
         //add onClick functions to all buttons
-        settingButton.onClick.AddListener(settingOnClick);
-        infoButton.onClick.AddListener(infoOnClick);
 		startBtn.onClick.AddListener(NewGameOnClick);
         //set info panel to invisible at start
         infoPanel.gameObject.SetActive(false);
-        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
         //set setting panel to invisible at start
         settingPanel.gameObject.SetActive(false);
+
+        settingButton.onClick.AddListener(settingOnClick);
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+
+        infoButton.onClick.AddListener(infoOnClick);
+        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
+
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
 		//set playerprefs for sound&music settings
@@ -49,22 +52,41 @@ public class StartPage : MonoBehaviour
     void settingOnClick()
     {
         settingPanel.gameObject.SetActive(true);
+        Fade(settingPanel, true);
+    }
+
+    void settingPanelClose()
+    {
+        StartCoroutine(SettingPanelAnimation());
+        //Time.timeScale = 100f;
+    }
+
+    IEnumerator SettingPanelAnimation()
+    {
+        Fade(settingPanel, false);
+        yield return new WaitForSeconds(0.5f);
+        settingPanel.gameObject.SetActive(false);
     }
 
     void infoOnClick()
     {
         infoPanel.gameObject.SetActive(true);
+        Fade(infoPanel, true);
     }
 
     void infoPanelClose()
     {
+        StartCoroutine(InfoPanelAnimation());
+    }
+
+    IEnumerator InfoPanelAnimation()
+    {
+        Fade(infoPanel, false);
+        yield return new WaitForSeconds(0.5f);
         infoPanel.gameObject.SetActive(false);
     }
 
-    void settingPanelClose()
-    {
-        settingPanel.gameObject.SetActive(false);
-    }
+
 
     void soundBtnOnClick()
     {
@@ -109,6 +131,23 @@ public class StartPage : MonoBehaviour
     {
         Utils.clearCache();
         SceneManager.LoadScene("Story_Plot");
+    }
+    
+    public void Fade(GameObject Panel, bool isActive)
+    {
+        var canvGroup = Panel.GetComponent<CanvasGroup>();          
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, isActive ? 1 : 0));
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+            yield return null;
+        }
     }
     
     // Update is called once per frame
