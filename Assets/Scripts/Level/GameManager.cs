@@ -55,7 +55,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("level"))
         {
             currentLevel = PlayerPrefs.GetInt("level") + 1;
-            targetScore = 30 + (30 * (currentLevel - 1));
+            //targetScore = 30 + (10 * (currentLevel - 1));
+            targetScore = 30 + (90 * (currentLevel - 1));
         }
         else
         {
