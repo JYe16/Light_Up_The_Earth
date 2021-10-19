@@ -9,7 +9,7 @@ public class PropsManager : MonoBehaviour
 {
     public static PropsManager manager;
     public Dictionary<Gloable.PropsType, int> propsCounter;
-
+    public GameObject explosion;
     public Button bombBtn;
     public Button timeExtensionBtn;
     public Button powerWaterBtn;
@@ -26,7 +26,7 @@ public class PropsManager : MonoBehaviour
     public BtnSprites unableBtnLists;
     public BtnSprites enableBtnLists;
     
-    //audio files for extend time, add score and power water
+    public AudioClip destroyGoalAudio;
     public AudioClip extendTimeAudio;
     public AudioClip addScoreAudio;
     public AudioClip powerWaterAudio;
@@ -165,7 +165,10 @@ public class PropsManager : MonoBehaviour
 
     public void DestoryGoal(GameObject goal)
     {
-        goal.GetComponent<GoalMove>().ExplosionAndHide();
+        GoalMove goalMove = goal.GetComponent<GoalMove>();
+        goalMove.explosion = explosion;
+        goalMove.destroyGoalAudio = destroyGoalAudio;
+        goalMove.ExplosionAndHide();
         propsCounter[Gloable.PropsType.BOMB]--;
     }
 
