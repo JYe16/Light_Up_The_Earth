@@ -7,7 +7,6 @@ using UnityEngine;
 public class PlayerCapture : MonoBehaviour
 {
     public Transform targetCross;
-    
     private GameObject player;
     private float timer;                // count intervals between two captures
     private LaserLine laserLine;
@@ -52,7 +51,8 @@ public class PlayerCapture : MonoBehaviour
 
     void CaptureGoals()
     {
-        Ray ray = Camera.main.ScreenPointToRay(new Vector3(Screen.width/2,Screen.height/2,0));
+        Vector2 middlePos = new Vector2(Screen.width / 2, Screen.height / 2);
+        Ray ray = Camera.main.ScreenPointToRay(middlePos);
         RaycastHit hitInfo;
         if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
         {
@@ -75,7 +75,7 @@ public class PlayerCapture : MonoBehaviour
     
     private Vector3 GetBoundaryPoint()
     {
-        Vector3 playerPos = player.transform.position;
-        return playerPos + (targetCross.position - playerPos).normalized * Gloable.MAX_CAPTURE_RADIUS;
+        Vector3 cameraPos = Camera.main.transform.position;
+        return cameraPos + (targetCross.position - cameraPos).normalized * Gloable.MAX_CAPTURE_RADIUS;
     }
 }
