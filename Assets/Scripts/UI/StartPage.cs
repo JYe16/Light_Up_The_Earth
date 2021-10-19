@@ -57,24 +57,38 @@ public class StartPage : MonoBehaviour
         Fade(settingPanel, true);
     }
 
+    void settingPanelClose()
+    {
+        StartCoroutine(SettingPanelAnimation());
+        //Time.timeScale = 100f;
+    }
+
+    IEnumerator SettingPanelAnimation()
+    {
+        Fade(settingPanel, false);
+        yield return new WaitForSeconds(0.5f);
+        settingPanel.gameObject.SetActive(false);
+    }
+
     void infoOnClick()
     {
         infoPanel.gameObject.SetActive(true);
         Fade(infoPanel, true);
     }
 
-    void settingPanelClose()
-    {
-        Fade(settingPanel, false);
-        //Time.timeScale = 100f;
-        settingPanel.gameObject.SetActive(false);
-    }
-
     void infoPanelClose()
     {
+        StartCoroutine(InfoPanelAnimation());
+    }
+
+    IEnumerator InfoPanelAnimation()
+    {
         Fade(infoPanel, false);
+        yield return new WaitForSeconds(0.5f);
         infoPanel.gameObject.SetActive(false);
     }
+
+
 
     void soundBtnOnClick()
     {
