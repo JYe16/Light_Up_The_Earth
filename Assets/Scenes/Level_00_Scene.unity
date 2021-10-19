@@ -3863,7 +3863,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBar: {fileID: 191239406}
-  timeRemaining: 60
+  timeRemaining: 90
   currentScore: 0
   currentGoal: {fileID: 0}
   currentLevel: 0
