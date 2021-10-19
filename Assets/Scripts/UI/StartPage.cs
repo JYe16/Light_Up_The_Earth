@@ -19,6 +19,7 @@ public class StartPage : MonoBehaviour
 	public GameObject gameLaunchMusic;
 	public Button startBtn;
 	//for background music playing
+	public float Duration = 0.4f;
 	public bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
