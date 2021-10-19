@@ -20,7 +20,7 @@ public class StartPage : MonoBehaviour
 	public Button startBtn;
 	//for background music playing
 	public float Duration = 0.4f;
-	public bool isPlaying = false;
+	public static bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,12 +40,29 @@ public class StartPage : MonoBehaviour
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
 		//set playerprefs for sound&music settings
-        PlayerPrefs.SetInt("sound", 1);
-        PlayerPrefs.SetInt("music", 1);
+		//if no playerprefs found
+		if(!PlayerPrefs.HasKey("sound") && !PlayerPrefs.HasKey("music"))
+		{
+			//default: on
+			PlayerPrefs.SetInt("sound", 1);
+        	PlayerPrefs.SetInt("music", 1);
+		}
+		else
+		{
+			//show the corresponding icon for music and sound
+			if(PlayerPrefs.GetInt("music") == 0)
+				musicOffImg.gameObject.SetActive(true);
+			if(PlayerPrefs.GetInt("sound") == 0)
+				soundOffImg.gameObject.SetActive(true);
+		}
+		//Debug.Log(PlayerPrefs.GetInt("music"));
 		if(!isPlaying)
 		{
 			DontDestroyOnLoad(gameLaunchMusic.gameObject);
-			gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
+			if(PlayerPrefs.GetInt("music") == 1)
+			{
+				gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
+			}
 			isPlaying = true;
 		}
     }
@@ -116,15 +133,16 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+		GameObject launchMusic = GameObject.Find("gameLaunchMusic");
         if (PlayerPrefs.GetInt("music") == 1)
 		{
 			PlayerPrefs.SetInt("music", 0);
-			gameLaunchMusic.gameObject.GetComponent<AudioSource>().Pause();
+			launchMusic.gameObject.GetComponent<AudioSource>().Pause();
 		}
         else
 		{
 			PlayerPrefs.SetInt("music", 1);
-			gameLaunchMusic.gameObject.GetComponent<AudioSource>().UnPause();
+			launchMusic.gameObject.GetComponent<AudioSource>().Play();
 		}
     }
 
