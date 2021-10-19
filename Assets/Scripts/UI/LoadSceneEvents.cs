@@ -32,5 +32,12 @@ public class LoadSceneEvents : MonoBehaviour
         {
                 SceneManager.LoadScene("EnterName");
         }
+        
+        /*
+        public void StoryPlotOnClick()
+        {
+                SceneManager.LoadScene("Story_Plot");
+        }
+        */
 
 }

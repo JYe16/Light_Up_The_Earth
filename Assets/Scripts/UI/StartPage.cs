@@ -132,8 +132,7 @@ public class StartPage : MonoBehaviour
 	public void NewGameOnClick()
     {
         Utils.clearCache();
-		Destroy(gameLaunchMusic.gameObject);
-		SceneManager.LoadScene("Story_Plot");
+        SceneManager.LoadScene("Story_Plot");
     }
     
     public void Fade(GameObject Panel, bool isActive)
