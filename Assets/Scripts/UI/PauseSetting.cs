@@ -19,14 +19,18 @@ public class PauseSetting : MonoBehaviour
     public Button settingPanelCloseBtn;
     public Button exitBtn;
     // Start is called before the first frame update
+    public float Duration = 0.4f;
     void Start()
     {
         pausePanel.gameObject.SetActive(false);
         settingPanel.gameObject.SetActive(false);
+
         pauseBtn.onClick.AddListener(pauseBtnOnClick);
         resumeBtn.onClick.AddListener(resumeGame);
+
         settingBtn.onClick.AddListener(showSettings);
         settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+
         soundBtn.onClick.AddListener(soundBtnOnClick);
         musicBtn.onClick.AddListener(musicBtnOnClick);
         exitBtn.onClick.AddListener(endGame);
@@ -34,10 +38,19 @@ public class PauseSetting : MonoBehaviour
     
     void pauseBtnOnClick()
     {
-        //pause the time
-        Time.timeScale = 0.0f;
-        pausePanel.gameObject.SetActive(true);
+        StartCoroutine(PausePanelFadeIn());        
     }
+
+    IEnumerator PausePanelFadeIn()
+    {
+        pausePanel.gameObject.SetActive(true);
+        Fade(pausePanel, true);
+        yield return new WaitForSeconds(0.5f);
+        Time.timeScale = 0.0f;//pause the time
+    }
+
+
+
 
     void endGame()
     {
@@ -109,6 +122,23 @@ public class PauseSetting : MonoBehaviour
 		{
 			PlayerPrefs.SetInt("music", 1);
 		}
+    }
+
+    public void Fade(GameObject Panel, bool isActive)
+    {
+        var canvGroup = Panel.GetComponent<CanvasGroup>();
+        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, isActive ? 1 : 0));
+    }
+
+    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
+    {
+        float counter = 0f;
+        while (counter < Duration)
+        {
+            counter += Time.deltaTime;
+            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
+            yield return null;
+        }
     }
 
     // Update is called once per frame

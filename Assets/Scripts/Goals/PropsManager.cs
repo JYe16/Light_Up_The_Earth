@@ -9,16 +9,74 @@ public class PropsManager : MonoBehaviour
 {
     public static PropsManager manager;
     public Dictionary<Gloable.PropsType, int> propsCounter;
-    public Text bombBtText;
-    public Text timeExtensionBtText;
-    public Text powerWaterBtText;
-    public Text bonusBtText;
+    public GameObject explosion;
+    public Button bombBtn;
+    public Button timeExtensionBtn;
+    public Button powerWaterBtn;
+    public Button bonusBtn;
+
+    [System.Serializable]
+    public class BtnSprites
+    {
+        public Sprite TimeExtensionBtn;
+        public Sprite BombBtn;
+        public Sprite BonusBtn;
+        public Sprite PowerWaterBtn;
+    }
+    public BtnSprites unableBtnLists;
+    public BtnSprites enableBtnLists;
+    
+    public AudioClip destroyGoalAudio;
+    public AudioClip extendTimeAudio;
+    public AudioClip addScoreAudio;
+    public AudioClip powerWaterAudio;
     
     private Gloable.PropsType curActiveProp;
+    
+    private Text bombBtText;
+    private Text timeExtensionBtText;
+    private Text powerWaterBtText;
+    private Text bonusBtText;
     
     private static int BOUNS_VALUE = 10;
     private static int BONUS_TIME = 5;
     private static int BONUS_SPEED = 2;
+    
+    public void OnClikeTimeExtension()
+    {
+        if (propsCounter[Gloable.PropsType.TIME_INCREASE] > 0)
+        {
+            IncreaseTime(false);
+        }
+    }
+
+    public void OnClickBomb()
+    {
+        int count = propsCounter[Gloable.PropsType.BOMB];
+        bool canClick = count > 0 && GameManager.gm.currentGoal;
+        if (canClick)
+        {
+            DestoryGoal(GameManager.gm.currentGoal);
+        }
+    }
+
+    public void OnClickBonus()
+    {
+        if (propsCounter[Gloable.PropsType.SCORE_INCREASE] > 0)
+        {
+            IncreaseScore(false);
+        }
+    }
+
+    public void OnClickPowerWater()
+    {
+        int count = propsCounter[Gloable.PropsType.POWER_WATER];
+        bool canClick = count > 0 && GameManager.gm.currentGoal;
+        if (canClick)
+        {
+            FastMove(GameManager.gm.currentGoal);
+        }
+    }
 
     void Start()
     {
@@ -29,6 +87,12 @@ public class PropsManager : MonoBehaviour
     private void Init()
     {
         propsCounter = new Dictionary<Gloable.PropsType, int>();
+        
+        bombBtText = bombBtn.GetComponentInChildren<Text>();
+        timeExtensionBtText = timeExtensionBtn.GetComponentInChildren<Text>();
+        powerWaterBtText = powerWaterBtn.GetComponentInChildren<Text>();
+        bonusBtText = bonusBtn.GetComponentInChildren<Text>();
+    
         propsCounter.Add(Gloable.PropsType.BOMB, InitCountByType(Gloable.PropsType.BOMB));
         propsCounter.Add(Gloable.PropsType.TIME_INCREASE, InitCountByType(Gloable.PropsType.TIME_INCREASE));
         propsCounter.Add(Gloable.PropsType.SCORE_INCREASE, InitCountByType(Gloable.PropsType.SCORE_INCREASE));
@@ -51,10 +115,24 @@ public class PropsManager : MonoBehaviour
     }
     void FixedUpdate()
     {
+        UpdateBtnUI();
+    }
+
+    private void UpdateBtnUI()
+    {
         bombBtText.text = propsCounter[Gloable.PropsType.BOMB].ToString();
         timeExtensionBtText.text = propsCounter[Gloable.PropsType.TIME_INCREASE].ToString();
         powerWaterBtText.text = propsCounter[Gloable.PropsType.POWER_WATER].ToString();
         bonusBtText.text = propsCounter[Gloable.PropsType.SCORE_INCREASE].ToString();
+        
+        timeExtensionBtn.GetComponent<Image>().sprite = 
+            (propsCounter[Gloable.PropsType.TIME_INCREASE] <= 0) ? unableBtnLists.TimeExtensionBtn : enableBtnLists.TimeExtensionBtn;
+        bombBtn.GetComponent<Image>().sprite =
+            (propsCounter[Gloable.PropsType.BOMB] <= 0 || !GameManager.gm.currentGoal) ? unableBtnLists.BombBtn : enableBtnLists.BombBtn;
+        bonusBtn.GetComponent<Image>().sprite = 
+            (propsCounter[Gloable.PropsType.SCORE_INCREASE] <= 0) ? unableBtnLists.BonusBtn : enableBtnLists.BonusBtn;
+        powerWaterBtn.GetComponent<Image>().sprite = 
+            (propsCounter[Gloable.PropsType.POWER_WATER] <= 0 || !GameManager.gm.currentGoal) ? unableBtnLists.PowerWaterBtn : enableBtnLists.PowerWaterBtn;
     }
 
     public void IncreaseScore(bool isAuto)
@@ -63,6 +141,11 @@ public class PropsManager : MonoBehaviour
         if (!isAuto)
         {
             propsCounter[Gloable.PropsType.SCORE_INCREASE]--;
+        }
+        //play sound effect
+        if (addScoreAudio != null && PlayerPrefs.GetInt("sound") == 1)
+        {
+            AudioSource.PlayClipAtPoint(addScoreAudio, Camera.main.transform.position);
         }
     }
 
@@ -73,11 +156,19 @@ public class PropsManager : MonoBehaviour
         {
             propsCounter[Gloable.PropsType.TIME_INCREASE]--;
         }
+        //play sound effect
+        if (extendTimeAudio != null && PlayerPrefs.GetInt("sound") == 1)
+        {
+            AudioSource.PlayClipAtPoint(extendTimeAudio, Camera.main.transform.position);
+        }
     }
 
     public void DestoryGoal(GameObject goal)
     {
-        goal.GetComponent<GoalMove>().ExplosionAndHide();
+        GoalMove goalMove = goal.GetComponent<GoalMove>();
+        goalMove.explosion = explosion;
+        goalMove.destroyGoalAudio = destroyGoalAudio;
+        goalMove.ExplosionAndHide();
         propsCounter[Gloable.PropsType.BOMB]--;
     }
 
@@ -85,6 +176,11 @@ public class PropsManager : MonoBehaviour
     {
         goal.GetComponent<GoalMove>().moveSpeed *= BONUS_SPEED;
         propsCounter[Gloable.PropsType.POWER_WATER]--;
+        //play sound effect
+        if (powerWaterAudio != null && PlayerPrefs.GetInt("sound") == 1)
+        {
+            AudioSource.PlayClipAtPoint(powerWaterAudio, Camera.main.transform.position);
+        }
     }
 
     public void UpdatePropsCounter(Gloable.PropsType type)
