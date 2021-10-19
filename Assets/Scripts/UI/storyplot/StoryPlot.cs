@@ -8,7 +8,6 @@ public class StoryPlot : MonoBehaviour
 {
     
     public Button skipButton;
-
     public Button startButton;
     public GameObject storyPic1;
     public GameObject storyPic2;
@@ -29,6 +28,8 @@ public class StoryPlot : MonoBehaviour
     
     void startTutorial()
     {
+        GameObject launchMusic = GameObject.Find("gameLaunchMusic");
+        Destroy(launchMusic.gameObject);
         SceneManager.LoadScene("Tutorial");
     }
 
