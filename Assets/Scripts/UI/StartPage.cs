@@ -19,10 +19,7 @@ public class StartPage : MonoBehaviour
 	public GameObject gameLaunchMusic;
 	public Button startBtn;
 	//for background music playing
-	public static bool isPlaying = false;
-    //variables for fading function
-    public float Duration = 0.4f;
-    public int cur = 0;
+	public bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +44,7 @@ public class StartPage : MonoBehaviour
 		if(!isPlaying)
 		{
 			DontDestroyOnLoad(gameLaunchMusic.gameObject);
+			gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
 			isPlaying = true;
 		}
     }
