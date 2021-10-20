@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<< HEAD:Assets/Plugins.meta
 guid: 4461318d25cf4481ea8addf27a60035e
 folderAsset: yes
+=======
+guid: 89060312d0f9880458f2416582abec3e
+>>>>>>> 25460955faae5f6449201189ab687723fc16ce24:Assets/Scripts/Public/Folder.DotSettings.user.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

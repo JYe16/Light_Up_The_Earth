@@ -56,9 +56,10 @@ public class PauseSetting : MonoBehaviour
 
     void endGame()
     {
-        PlayerPrefs.DeleteKey("level");
-		PlayerPrefs.DeleteKey("baseScore");
-		PlayerPrefs.DeleteKey("total");
+        Utils.clearCache();
+        GameObject playMusic = GameObject.Find("gamePlayMusic");
+        Destroy(playMusic.gameObject);
+        Tutorial.isPlaying = false;
         SceneManager.LoadScene("StartPage");
     }
 
@@ -116,14 +117,17 @@ public class PauseSetting : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
-		if (PlayerPrefs.GetInt("music") == 1)
-		{
-			PlayerPrefs.SetInt("music", 0);
-		}
+        GameObject playMusic = GameObject.Find("gamePlayMusic");
+        if (PlayerPrefs.GetInt("music") == 1)
+        {
+            PlayerPrefs.SetInt("music", 0);
+            playMusic.gameObject.GetComponent<AudioSource>().Pause();
+        }
         else
-		{
-			PlayerPrefs.SetInt("music", 1);
-		}
+        {
+            PlayerPrefs.SetInt("music", 1);
+            playMusic.gameObject.GetComponent<AudioSource>().Play();
+        }
     }
 
     public void Fade(GameObject Panel, bool isActive)
