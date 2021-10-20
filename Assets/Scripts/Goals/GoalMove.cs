@@ -56,7 +56,7 @@ public class GoalMove : MonoBehaviour
         isHide = true;
         Destroy(Instantiate(explosion, screenCenter, Quaternion.identity), 3f);
         if(destroyGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
-            AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position, 0.3f);
         gameObject.GetComponent<Renderer>().enabled = false;
         yield return new WaitForSeconds(1);
         moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;

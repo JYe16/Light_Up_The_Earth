@@ -13,7 +13,6 @@ public class StoryPlot : MonoBehaviour
     public GameObject storyPic2;
     public GameObject storyPic3;
 
-    
     // Start is called before the first frame update
     void Start()
     {

@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     public Mesh platform2;
     public Mesh platform3;
     public Mesh platform4;
+    public GameObject gamePlayMusic;
 
     void Start()
     {
@@ -71,6 +72,17 @@ public class GameManager : MonoBehaviour
         isPause = false;
         pauseBtn.onClick.AddListener(PauseGame);
         pausePanel.gameObject.SetActive(false);
+        //start playing music if no bgm is currently playing
+        Debug.Log(Tutorial.isPlaying);
+        if(Tutorial.isPlaying == false)
+        {
+            DontDestroyOnLoad(gamePlayMusic.gameObject);
+            if(PlayerPrefs.GetInt("music") == 1)
+            {
+                gamePlayMusic.gameObject.GetComponent<AudioSource>().Play();
+            }
+            Tutorial.isPlaying = true;
+        }
     }
 
     // Update is called once per frame
@@ -107,7 +119,9 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Pass_Level");
                 break;
             case GameState.GameOver:
-                //TODO: replace this scene with GameOver
+                GameObject playMusic = GameObject.Find("gamePlayMusic");
+                Destroy(playMusic.gameObject);
+                Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
         }
