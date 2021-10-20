@@ -83,7 +83,10 @@ namespace StarterAssets
 
 		private void LateUpdate()
 		{
-			CameraRotation();
+			if (canMove)
+			{
+				CameraRotation();
+			}
 		}
 
 	
@@ -126,9 +129,7 @@ namespace StarterAssets
 			}
 			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 		}
-
-
-
+		
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
 		{
 			if (lfAngle < -180f) lfAngle += 180f;
