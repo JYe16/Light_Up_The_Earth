@@ -27,7 +27,7 @@ public class GoalMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if ( goalValue.isCaptured || target == null) return;
+        if ( GameManager.gm.gameState == GameManager.GameState.Pausing || goalValue.isCaptured || target == null) return;
         distance = Vector3.Distance(transform.position, target.transform.position);
         float t = distance / moveSpeed;
         if (distance > minDistance)

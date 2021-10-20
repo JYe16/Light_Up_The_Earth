@@ -27,6 +27,7 @@ public class PlayerCapture : MonoBehaviour
 
     void LateUpdate()
     {
+        if (GameManager.gm.gameState == GameManager.GameState.Pausing) return;
         if (isShoot && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
