@@ -67,15 +67,15 @@ public class PlayerCapture : MonoBehaviour
                 return;
             }
         }
-        laserLine.boundaryPoint = GetBoundaryPoint();
+        laserLine.boundaryPoint = GetBoundaryPoint(ray.direction);
         laserLine.enabled = true;
         isShoot = false;
         playerController.changeMoveStatus(false);
     }
     
-    private Vector3 GetBoundaryPoint()
+    private Vector3 GetBoundaryPoint(Vector3 direction)
     {
-        Vector3 cameraPos = Camera.main.transform.position;
-        return cameraPos + (targetCross.position - cameraPos).normalized * Gloable.MAX_CAPTURE_RADIUS;
+        Vector3 initialPos = player.transform.position;
+        return initialPos + direction.normalized * Gloable.MAX_CAPTURE_RADIUS;
     }
 }

@@ -23,32 +23,20 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    public Button pauseBtn;
-    public GameObject pausePanel;
-    private bool isPause;
     private GameObject player;
     public GameObject platform;
     //declare skyboxes
-    public Material skybox1;
-    public Material skybox2;
-    public Material skybox3;
-    public Material skybox4;
-    public Material skybox5;
+    public Material[] skyboxes;
     //mesh materials
-    public Mesh platform1;
-    public Mesh platform2;
-    public Mesh platform3;
-    public Mesh platform4;
+    public Mesh[] platforms;
     public GameObject gamePlayMusic;
 
     void Start()
     {
-        Material[] skyboxes = {skybox1, skybox2, skybox3, skybox4, skybox5};
-        Mesh[] platforms = {platform1, platform2, platform3, platform4};
         //generate a random number for selecting skybox
-        RenderSettings.skybox = skyboxes[Random.Range(0, 5)];
+        RenderSettings.skybox = skyboxes[Random.Range(0, skyboxes.Length)];
         //TODO: get correct mesh files and then uncomment the next line
-        //platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, 4)];
+        // platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, platforms.Length)];
         if(gm == null) 
             gm = GetComponent<GameManager>();
         if (player == null)
@@ -69,9 +57,6 @@ public class GameManager : MonoBehaviour
         // init spawner after PlayerPrefs set
         InitSpawner();
         gm.gameState = GameState.Playing;
-        isPause = false;
-        pauseBtn.onClick.AddListener(PauseGame);
-        pausePanel.gameObject.SetActive(false);
         //start playing music if no bgm is currently playing
         Debug.Log(Tutorial.isPlaying);
         if(Tutorial.isPlaying == false)
@@ -174,23 +159,5 @@ public class GameManager : MonoBehaviour
         RandomSpawner spawner = GetComponent<RandomSpawner>();
         spawner.platformTransform = platform.transform;
         spawner.enabled = true;
-    }
-    
-    public void PauseGame()
-    {
-        isPause = !isPause;
-
-        if (isPause)
-        {
-            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/resume");
-            pausePanel.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/pause");
-            pausePanel.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
     }
 }
