@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     {
         Playing,
         GameOver,
-        Winning
+        Winning,
+        Pausing
     };
     public GameState gameState;
     public Text scoreText;
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     //mesh materials
     public Mesh[] platforms;
     public GameObject gamePlayMusic;
+
+    private bool isPause = false;
 
     void Start()
     {
@@ -53,7 +56,7 @@ public class GameManager : MonoBehaviour
             targetScore = 30;
         }
         PlayerPrefs.SetInt("level", currentLevel);
-        initUI();
+        InitUI();
         // init spawner after PlayerPrefs set
         InitSpawner();
         gm.gameState = GameState.Playing;
@@ -75,6 +78,9 @@ public class GameManager : MonoBehaviour
     {
         switch (gameState)
         {
+            case GameState.Pausing:
+                // pause game without time scale
+                break;
             case GameState.Playing:
                 //update score text
                 scoreText.text = currentScore + "/" + targetScore;
@@ -112,6 +118,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PauseGame(bool isPause)
+    {
+        gameState = isPause ? GameState.Pausing : GameState.Playing;
+    }
+    
     public void AddScore(int value)
     {
         //update the playerprefs also
@@ -137,7 +148,7 @@ public class GameManager : MonoBehaviour
         timeRemaining += bounsTime;
     }
 
-    private void initUI()
+    private void InitUI()
     {
         //load game data from playerprefs
         if (PlayerPrefs.HasKey("baseScore"))

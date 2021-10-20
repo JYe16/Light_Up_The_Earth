@@ -24,7 +24,10 @@ public class PauseSetting : MonoBehaviour
     {
         pausePanel.gameObject.SetActive(false);
         settingPanel.gameObject.SetActive(false);
+    }
 
+    private void AddBtnListeners()
+    {
         pauseBtn.onClick.AddListener(pauseBtnOnClick);
         resumeBtn.onClick.AddListener(resumeGame);
 
@@ -50,9 +53,6 @@ public class PauseSetting : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Time.timeScale = 0.0f;//pause the time
     }
-
-
-
 
     void endGame()
     {

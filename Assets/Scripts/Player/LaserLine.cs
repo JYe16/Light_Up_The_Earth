@@ -34,6 +34,7 @@ public class LaserLine : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.gm.gameState == GameManager.GameState.Pausing) return;
         if (!lineRenderer.enabled)
         {
             lineRenderer.enabled = true;
