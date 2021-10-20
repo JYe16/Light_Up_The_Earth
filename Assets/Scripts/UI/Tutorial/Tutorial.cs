@@ -31,10 +31,11 @@ public class Tutorial : MonoBehaviour
     public Canvas shootHighlight;
     public Canvas propsHighlight;
     public Canvas timerHighlight;
-
     public GameObject tutorialText;
 
     public int currentStep = 0;
+    public GameObject gamePlayMusic;
+    public static bool isPlaying = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,16 @@ public class Tutorial : MonoBehaviour
         skipButton.onClick.AddListener(start_game);
         nextStep.onClick.AddListener(showNextStep);
         startGame.onClick.AddListener(start_game);
+        //start playing background music
+        if(!isPlaying)
+        {
+            DontDestroyOnLoad(gamePlayMusic.gameObject);
+            if(PlayerPrefs.GetInt("music") == 1)
+            {
+                gamePlayMusic.gameObject.GetComponent<AudioSource>().Play();
+            }
+            isPlaying = true;
+        }
     }
 
     void start_game()
