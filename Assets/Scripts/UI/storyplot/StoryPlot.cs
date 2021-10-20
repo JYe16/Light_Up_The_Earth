@@ -30,6 +30,7 @@ public class StoryPlot : MonoBehaviour
     {
         GameObject launchMusic = GameObject.Find("gameLaunchMusic");
         Destroy(launchMusic.gameObject);
+		StartPage.isPlaying = false;
         SceneManager.LoadScene("Tutorial");
     }
 
