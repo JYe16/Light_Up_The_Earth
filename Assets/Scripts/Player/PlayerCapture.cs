@@ -45,7 +45,7 @@ public class PlayerCapture : MonoBehaviour
         isShoot = true;
         if (shootAudio != null  && PlayerPrefs.GetInt("sound") == 1)
         {
-            AudioSource.PlayClipAtPoint(shootAudio, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(shootAudio, Camera.main.transform.position, 0.3f);
         }
     }
 
