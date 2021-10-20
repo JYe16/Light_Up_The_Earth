@@ -6434,7 +6434,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d60f09e1984c88b449d4439a3ccf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetCross: {fileID: 1855744317}
+  wallsMask:
+    serializedVersion: 2
+    m_Bits: 192
   isShoot: 0
   shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!114 &6751388636255219129

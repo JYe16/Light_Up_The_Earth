@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6085324789225636174}
   - component: {fileID: 238210994093641873}
   - component: {fileID: 5660265239949932483}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Stone_2
   m_TagString: Goal
   m_Icon: {fileID: 0}
@@ -101,7 +101,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 116
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1594877515446429828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,10 +127,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0.4
   target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
-  explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
+  explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
+  moveSpeed: 0.4
 --- !u!114 &238210994093641873
 MonoBehaviour:
   m_ObjectHideFlags: 0
