@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     public Material[] skyboxes;
     //mesh materials
     public Mesh[] platforms;
+    public GameObject gamePlayMusic;
 
     void Start()
     {
@@ -56,6 +57,17 @@ public class GameManager : MonoBehaviour
         // init spawner after PlayerPrefs set
         InitSpawner();
         gm.gameState = GameState.Playing;
+        //start playing music if no bgm is currently playing
+        Debug.Log(Tutorial.isPlaying);
+        if(Tutorial.isPlaying == false)
+        {
+            DontDestroyOnLoad(gamePlayMusic.gameObject);
+            if(PlayerPrefs.GetInt("music") == 1)
+            {
+                gamePlayMusic.gameObject.GetComponent<AudioSource>().Play();
+            }
+            Tutorial.isPlaying = true;
+        }
     }
 
     // Update is called once per frame
@@ -92,7 +104,9 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Pass_Level");
                 break;
             case GameState.GameOver:
-                //TODO: replace this scene with GameOver
+                GameObject playMusic = GameObject.Find("gamePlayMusic");
+                Destroy(playMusic.gameObject);
+                Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
         }
