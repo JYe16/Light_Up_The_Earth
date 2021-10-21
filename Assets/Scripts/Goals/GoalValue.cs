@@ -37,7 +37,6 @@ public class GoalValue : MonoBehaviour
             }
             else
             {
-                Debug.Log("prop type"+ type);
                 // work immediately (time extension & score increase)
                 if (type == Gloable.PropsType.TIME_INCREASE)
                 {
