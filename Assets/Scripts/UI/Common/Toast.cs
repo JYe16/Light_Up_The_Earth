@@ -32,7 +32,7 @@ public class Toast : MonoBehaviour
         tipsText.text = tip;
         DisplayToast(true);
     }
-    
+
     public void HideToast()
     {
         tipsText.text = "";

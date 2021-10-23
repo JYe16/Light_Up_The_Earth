@@ -1,110 +1,108 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartPage : MonoBehaviour
 {
+	public GameObject infoToast;
+	public Button infoBtn;
+
+	public GameObject settingPanel;
     public Button settingButton;
-    public GameObject settingPanel;
-    public Button infoButton;
-    public GameObject infoPanel;
-    public Button infoPanelCloseBtn;
     public Button settingPanelCloseBtn;
     public Button soundBtn;
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
+    
 	public GameObject gameLaunchMusic;
 	public Button startBtn;
 	//for background music playing
-	public float Duration = 0.2f;
 	public static bool isPlaying = false;
-    // Start is called before the first frame update
+	
+	private CanvasGroup settingPanelCanvasGroup;
+	private GameObject settingPanelBody;
     void Start()
     {
-        //add onClick functions to all buttons
-		startBtn.onClick.AddListener(NewGameOnClick);
-        //set info panel to invisible at start
-        infoPanel.gameObject.SetActive(false);
-        //set setting panel to invisible at start
-        settingPanel.gameObject.SetActive(false);
+	    //add onClick functions to all buttons
+        AddEventListeners();
+        //set playerprefs for sound&music settings
+		SetMusicAndSount();
+		
+		settingPanelBody = settingPanel.transform.GetChild(0).gameObject;
+		settingPanelCanvasGroup = settingPanelBody.GetComponent<CanvasGroup>();
+    }
 
-        settingButton.onClick.AddListener(settingOnClick);
-        settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+    private void SetMusicAndSount()
+    {
+	    //if no playerprefs found
+	    if(!PlayerPrefs.HasKey("sound") && !PlayerPrefs.HasKey("music"))
+	    {
+		    //default: on
+		    PlayerPrefs.SetInt("sound", 1);
+		    PlayerPrefs.SetInt("music", 1);
+	    }
+	    else
+	    {
+		    //show the corresponding icon for music and sound
+		    if(PlayerPrefs.GetInt("music") == 0)
+			    musicOffImg.gameObject.SetActive(true);
+		    if(PlayerPrefs.GetInt("sound") == 0)
+			    soundOffImg.gameObject.SetActive(true);
+	    }
+	    //Debug.Log(PlayerPrefs.GetInt("music"));
+	    if(!isPlaying)
+	    {
+		    DontDestroyOnLoad(gameLaunchMusic.gameObject);
+		    if(PlayerPrefs.GetInt("music") == 1)
+		    {
+			    gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
+		    }
+		    isPlaying = true;
+	    }
+    }
 
-        infoButton.onClick.AddListener(infoOnClick);
-        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
+    private void AddEventListeners()
+    {
+	    startBtn.onClick.AddListener(NewGameOnClick);
 
-        soundBtn.onClick.AddListener(soundBtnOnClick);
-        musicBtn.onClick.AddListener(musicBtnOnClick);
-		//set playerprefs for sound&music settings
-		//if no playerprefs found
-		if(!PlayerPrefs.HasKey("sound") && !PlayerPrefs.HasKey("music"))
-		{
-			//default: on
-			PlayerPrefs.SetInt("sound", 1);
-        	PlayerPrefs.SetInt("music", 1);
-		}
-		else
-		{
-			//show the corresponding icon for music and sound
-			if(PlayerPrefs.GetInt("music") == 0)
-				musicOffImg.gameObject.SetActive(true);
-			if(PlayerPrefs.GetInt("sound") == 0)
-				soundOffImg.gameObject.SetActive(true);
-		}
-		//Debug.Log(PlayerPrefs.GetInt("music"));
-		if(!isPlaying)
-		{
-			DontDestroyOnLoad(gameLaunchMusic.gameObject);
-			if(PlayerPrefs.GetInt("music") == 1)
-			{
-				gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
-			}
-			isPlaying = true;
-		}
+	    settingButton.onClick.AddListener(settingOnClick);
+	    settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+
+	    soundBtn.onClick.AddListener(soundBtnOnClick);
+	    musicBtn.onClick.AddListener(musicBtnOnClick);
+	    
+	    infoBtn.onClick.AddListener(OpenInfoToast);
     }
     
     void settingOnClick()
     {
-        settingPanel.gameObject.SetActive(true);
-        Fade(settingPanel, true);
+	    settingPanel.SetActive(true);
+	    DisplayPanel(true);
     }
 
     void settingPanelClose()
     {
-        StartCoroutine(SettingPanelAnimation());
-        //Time.timeScale = 100f;
+        DisplayPanel(false);
+        settingPanel.SetActive(false);
     }
-
-    IEnumerator SettingPanelAnimation()
+    
+    private void DisplayPanel(bool show)
     {
-        Fade(settingPanel, false);
-        yield return new WaitForSeconds(0.5f);
-        settingPanel.gameObject.SetActive(false);
+	    settingPanelCanvasGroup.DOFade(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+	    settingPanelBody.transform.DOScale(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+	    settingPanelCanvasGroup.interactable = show;
+	    settingPanelCanvasGroup.blocksRaycasts = show;
     }
 
-    void infoOnClick()
+    void OpenInfoToast()
     {
-        infoPanel.gameObject.SetActive(true);
-        Fade(infoPanel, true);
+	    string context = "NINE A.M.\r\nShenqi Ye\tTianshu Wang\r\nZhankai Ye\tYingqi Liang\r\nXiaoxuan Sun";
+	    infoToast.GetComponent<Toast>().ShowToast(context);
     }
-
-    void infoPanelClose()
-    {
-        StartCoroutine(InfoPanelAnimation());
-    }
-
-    IEnumerator InfoPanelAnimation()
-    {
-        Fade(infoPanel, false);
-        yield return new WaitForSeconds(0.5f);
-        infoPanel.gameObject.SetActive(false);
-    }
-
-
 
     void soundBtnOnClick()
     {
@@ -150,28 +148,5 @@ public class StartPage : MonoBehaviour
     {
         Utils.clearCache();
         SceneManager.LoadScene("Story_Plot");
-    }
-    
-    public void Fade(GameObject Panel, bool isActive)
-    {
-        var canvGroup = Panel.GetComponent<CanvasGroup>();          
-        StartCoroutine(DoFade(canvGroup, canvGroup.alpha, isActive ? 1 : 0));
-    }
-
-    public IEnumerator DoFade(CanvasGroup canvGroup, float start, float end)
-    {
-        float counter = 0f;
-        while (counter < Duration)
-        {
-            counter += Time.deltaTime;
-            canvGroup.alpha = Mathf.Lerp(start, end, counter / Duration);
-            yield return null;
-        }
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

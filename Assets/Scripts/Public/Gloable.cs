@@ -6,6 +6,8 @@ public static class Gloable
 
         public static float LASER_LINE_MOVE_SPEED = 6.0f;
 
+        public static float POPUP_ANIMATION_DURATION = 0.2F;
+
         public enum PropsType
         {
                 BOMB = 0,
