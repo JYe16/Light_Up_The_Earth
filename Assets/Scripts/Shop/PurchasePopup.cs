@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,19 +12,21 @@ public class PurchasePopup : MonoBehaviour
     public Text totalText;
     [HideInInspector] public int totalMoney;
     [HideInInspector] public int score;
-    
+    private GameObject panelBody;
     private CanvasGroup canvasGroup;
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
+        panelBody = transform.GetChild(0).gameObject;
         DisplayPopup(false);
     }
 
     private void DisplayPopup(bool show)
     {
-        canvasGroup.alpha = show ? 1 : 0;
         canvasGroup.interactable = show;
         canvasGroup.blocksRaycasts = show;
+        canvasGroup.DOFade(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+        panelBody.transform.DOScale(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
     }
 
     public void OpenPopup()

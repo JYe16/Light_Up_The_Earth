@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class ShopSystem : MonoBehaviour
@@ -12,16 +13,17 @@ public class ShopSystem : MonoBehaviour
 
     public GameObject purchasePopup;
     public GameObject toast;
+    public Text costMoney;
     public Text propsInfo;
     public Text propsName;
     public Text countText;
-    public Text priceText;
-    public Text totalScore;
+    public Text totalMoney;
     public Image[] dotsList;
 
-    [HideInInspector]public Dictionary<Gloable.PropsType, PropInfo> propsInfoMap;
+    public Dictionary<Gloable.PropsType, PropInfo> propsInfoMap;
     private static float DOT_SCALE = 1.25f;
     private int score;
+    private int cost = 0;
     public class PropInfo
     {
         public string name;
@@ -38,6 +40,11 @@ public class ShopSystem : MonoBehaviour
             shopSystem = GetComponent<ShopSystem>();
         }
         Init();
+    }
+
+    private void Update()
+    {
+        costMoney.text = "cost :  " + cost;
     }
 
     private void Init()
@@ -72,7 +79,7 @@ public class ShopSystem : MonoBehaviour
             money = 15,
             buyStep = 0
         });
-        
+        costMoney.text = "cost :  " + cost;
         UpdateScore();
     }
 
@@ -85,7 +92,6 @@ public class ShopSystem : MonoBehaviour
         propsName.text = curPropInfo.name;
         propsInfo.text = curPropInfo.des;
         countText.text = curPropInfo.buyStep.ToString();
-        priceText.text = curPropInfo.money + " / 1";
         ScrollSelectedDot(oldIndex, curIndex);
     }
 
@@ -99,7 +105,7 @@ public class ShopSystem : MonoBehaviour
     public void UpdateScore()
     {
         score = PlayerPrefs.HasKey("baseScore") ? PlayerPrefs.GetInt("baseScore") : 0;
-        totalScore.text = "total :  " + score;
+        totalMoney.text = score.ToString();
     }
 
     public void ClearAfterCheck()
@@ -112,6 +118,7 @@ public class ShopSystem : MonoBehaviour
             prop.Value.buyStep = 0;
         }
         countText.text = "0";
+        cost = 0;
     }
 
     public void OnClickOverviewItem(int targetIndex)
@@ -128,27 +135,23 @@ public class ShopSystem : MonoBehaviour
     {
         if (propsInfoMap.ElementAt(curIndex).Value.buyStep == 99) return;
         countText.text = (++propsInfoMap.ElementAt(curIndex).Value.buyStep).ToString();
+        cost += propsInfoMap.ElementAt(curIndex).Value.money;
     }
     
     public void OnClickMinus()
     {
         if (propsInfoMap.ElementAt(curIndex).Value.buyStep == 0) return;
         countText.text = (--propsInfoMap.ElementAt(curIndex).Value.buyStep).ToString();
+        cost -= propsInfoMap.ElementAt(curIndex).Value.money;
     }
 
     public void OnClickCart()
     {
-        int totalMoney = 0;
-        foreach (var prop in propsInfoMap)
-        {
-            totalMoney += prop.Value.buyStep * prop.Value.money;
-        }
-
-        if (totalMoney > score)
+        if (cost > score)
         {
             toast.GetComponent<Toast>().ShowToast("oops!\r\nYou do not have enough score to buy them!");
         }
-        else if (totalMoney == 0)
+        else if (cost == 0)
         {
             toast.GetComponent<Toast>().ShowToast("You pick out nothing!");
         }
@@ -156,7 +159,7 @@ public class ShopSystem : MonoBehaviour
         {
             PurchasePopup popup = purchasePopup.GetComponent<PurchasePopup>();
             popup.score = score;
-            popup.totalMoney = totalMoney;
+            popup.totalMoney = cost;
             popup.OpenPopup();
         }
     }

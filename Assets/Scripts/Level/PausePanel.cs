@@ -10,29 +10,26 @@ public class PausePanel : MonoBehaviour
     public Text pauseScoreText;
     public GameObject pausePanel;
     public GameObject settingPanel;
+    public GameObject panelMask;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
 
     private CanvasGroup pausePanelCanvasGroup;
     private CanvasGroup settingPanelCanvasGroup;
-    private GameObject pausePanelBody;
-    private GameObject settingPanelBody;
-    private static float ANIMATION_DURATION = 0.2F;
 
     private void Awake()
     {
-        pausePanelBody = pausePanel.GetComponentsInChildren<Transform>()[0].gameObject;
-        settingPanelBody = settingPanel.GetComponentsInChildren<Transform>()[0].gameObject;
-        
-        settingPanelCanvasGroup = settingPanel.GetComponent<CanvasGroup>();
         pausePanelCanvasGroup = pausePanel.GetComponent<CanvasGroup>();
+        settingPanelCanvasGroup = settingPanel.GetComponent<CanvasGroup>();
     }
 
     public void OpenPausePanel()
     {
         pauseScoreText.text = GameManager.gm.currentScore.ToString();
         GameManager.gm.PauseGame(true);
-        DisplayPanel(pausePanelCanvasGroup, pausePanelBody, pausePanel);
+        panelMask.SetActive(true);
+        settingPanel.SetActive(false);
+        DisplayPanel(pausePanel, pausePanelCanvasGroup);
     }
 
     public void OnClickExitBtn()
@@ -46,14 +43,23 @@ public class PausePanel : MonoBehaviour
 
     public void ClosePausePanel()
     {
-        GameManager.gm.PauseGame(false);
-        StartCoroutine(Fadeout(pausePanelCanvasGroup, pausePanelBody, pausePanel));
+        DOTween.Sequence()
+            .Append(pausePanelCanvasGroup.DOFade(0, Gloable.POPUP_ANIMATION_DURATION))
+            .Append(pausePanel.transform.DOScale(0, Gloable.POPUP_ANIMATION_DURATION))
+            .OnComplete(() =>
+            {
+                panelMask.SetActive(false);
+                GameManager.gm.PauseGame(false);
+            })
+            .SetRecyclable()
+            .Play();
     }
 
     public void OpenSettingPanel()
     {
         pausePanel.SetActive(false);
-        DisplayPanel(settingPanelCanvasGroup, settingPanelBody, settingPanel);
+        settingPanel.SetActive(true);
+        DisplayPanel(settingPanel, settingPanelCanvasGroup);
         if (PlayerPrefs.GetInt("sound") == 1)
             soundOffImg.gameObject.SetActive(false);
         else
@@ -67,7 +73,8 @@ public class PausePanel : MonoBehaviour
 
     public void CloseSettingPanel()
     {
-        StartCoroutine(Fadeout(settingPanelCanvasGroup, settingPanelBody, settingPanel));
+        settingPanelCanvasGroup.alpha = 0;
+        settingPanel.SetActive(false);
         pausePanel.SetActive(true);
     }
 
@@ -113,19 +120,10 @@ public class PausePanel : MonoBehaviour
     }
 
     // open panel
-    private void DisplayPanel(CanvasGroup canvasGroup, GameObject panelBody, GameObject panel)
+    private void DisplayPanel(GameObject panel, CanvasGroup canvasGroup)
     {
         panel.SetActive(true);
-        canvasGroup.DOFade(1, ANIMATION_DURATION);
-        panelBody.transform.DOScale(1, ANIMATION_DURATION);
-    }
-
-    // close panel
-    IEnumerator Fadeout(CanvasGroup canvasGroup, GameObject panelBody, GameObject panel)
-    {
-        canvasGroup.DOFade(0, ANIMATION_DURATION);
-        panelBody.transform.DOScale( 0, ANIMATION_DURATION);
-        yield return new WaitForSeconds(ANIMATION_DURATION);
-        panel.SetActive(false);
+        canvasGroup.DOFade(1, Gloable.POPUP_ANIMATION_DURATION);
+        panel.transform.DOScale(1, Gloable.POPUP_ANIMATION_DURATION);
     }
 }
