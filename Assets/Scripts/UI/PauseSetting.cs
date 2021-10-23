@@ -40,7 +40,7 @@ public class PauseSetting : MonoBehaviour
     {
         //StartCoroutine(PausePanelFadeIn());  
         pausePanel.gameObject.SetActive(true);
-        Time.timeScale = 0.1f;//pause the time
+        Time.timeScale = 0.0f;//pause the time
     }
 
     IEnumerator PausePanelFadeIn()
