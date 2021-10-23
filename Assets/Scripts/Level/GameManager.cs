@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -143,8 +144,12 @@ public class GameManager : MonoBehaviour
     public void AddRemainingTime(int bounsTime)
     {
         GameObject handle = GameObject.FindGameObjectWithTag("TimeHandle");
-        if(handle != null)
-            handle.GetComponent<SmoothScale>().enabled = true;
+        if (handle != null)
+        {
+            Vector3 maxScale = handle.transform.localScale * 1.5f;
+            handle.transform.DOScale(maxScale, 0.5f);
+            handle.transform.DOScale(Vector3.one, 0.5f);
+        }
         timeRemaining += bounsTime;
     }
 
