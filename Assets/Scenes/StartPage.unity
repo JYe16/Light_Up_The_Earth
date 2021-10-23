@@ -361,7 +361,6 @@ GameObject:
   - component: {fileID: 130553802}
   - component: {fileID: 130553804}
   - component: {fileID: 130553803}
-  - component: {fileID: 130553805}
   m_Layer: 5
   m_Name: SettingPanel
   m_TagString: Untagged
@@ -427,18 +426,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 130553801}
   m_CullTransparentMesh: 1
---- !u!114 &130553805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130553801}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77386abe4929043b4a842d4f3fbd4255, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &198865749 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7227024678400349169, guid: 764a4fabd4d514e03a679422e6f75779, type: 3}
