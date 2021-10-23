@@ -10,7 +10,6 @@ public class Toast : MonoBehaviour
     private Text tipsText;
     private GameObject context;
     private CanvasGroup canvasGroup;
-    private static float ANIMATION_DURATION = 0.2f;
     void Start()
     {
         context = gameObject.transform.GetChild(0).gameObject;
@@ -23,8 +22,8 @@ public class Toast : MonoBehaviour
     {
         canvasGroup.interactable = show;
         canvasGroup.blocksRaycasts = show;
-        canvasGroup.DOFade(show ? 1 : 0, ANIMATION_DURATION);
-        context.transform.DOScale(show ? 1 : 0, ANIMATION_DURATION);
+        canvasGroup.DOFade(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+        context.transform.DOScale(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
     }
 
     public void ShowToast(string tip)

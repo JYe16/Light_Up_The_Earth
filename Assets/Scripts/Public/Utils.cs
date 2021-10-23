@@ -23,10 +23,7 @@ public static class Utils
                 return json;
             }
         }
-        else
-        {
-            return "";
-        }
+        return "";
     }
 
     public static void WriteJSON(string fileName, string json)

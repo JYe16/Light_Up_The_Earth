@@ -16,7 +16,6 @@ public class PausePanel : MonoBehaviour
 
     private CanvasGroup pausePanelCanvasGroup;
     private CanvasGroup settingPanelCanvasGroup;
-    private static float ANIMATION_DURATION = 0.2F;
 
     private void Awake()
     {
@@ -45,8 +44,8 @@ public class PausePanel : MonoBehaviour
     public void ClosePausePanel()
     {
         DOTween.Sequence()
-            .Append(pausePanelCanvasGroup.DOFade(0, ANIMATION_DURATION))
-            .Append(pausePanel.transform.DOScale(0, ANIMATION_DURATION))
+            .Append(pausePanelCanvasGroup.DOFade(0, Gloable.POPUP_ANIMATION_DURATION))
+            .Append(pausePanel.transform.DOScale(0, Gloable.POPUP_ANIMATION_DURATION))
             .OnComplete(() =>
             {
                 panelMask.SetActive(false);
@@ -124,7 +123,7 @@ public class PausePanel : MonoBehaviour
     private void DisplayPanel(GameObject panel, CanvasGroup canvasGroup)
     {
         panel.SetActive(true);
-        canvasGroup.DOFade(1, ANIMATION_DURATION);
-        panel.transform.DOScale(1, ANIMATION_DURATION);
+        canvasGroup.DOFade(1, Gloable.POPUP_ANIMATION_DURATION);
+        panel.transform.DOScale(1, Gloable.POPUP_ANIMATION_DURATION);
     }
 }
