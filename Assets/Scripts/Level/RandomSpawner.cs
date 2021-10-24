@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class RandomSpawner : MonoBehaviour
 {
@@ -51,8 +53,13 @@ public class RandomSpawner : MonoBehaviour
     {
         for (int i = 0; i < count; i++)
         {
-            GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
-            float objHeight = prefab.GetComponent<MeshRenderer>().bounds.size.y / 2;
+	        GameObject prefab = prefabs[Random.Range(0, prefabs.Length)];
+	        GameObject originGoal = prefab;
+	        if (prefab.transform.childCount > 1)
+	        {
+		        originGoal = prefab.transform.GetChild(0).gameObject;
+	        }
+	        float objHeight = originGoal.GetComponent<MeshRenderer>().bounds.size.y / 2;
             Vector3 randomPos = RingAreaPos(spawnerData.innerRadius, spawnerData.outerRadius, transform.position,
                 objHeight);
             Instantiate(prefab, randomPos, Quaternion.identity);
@@ -69,14 +76,11 @@ public class RandomSpawner : MonoBehaviour
             position = position.normalized * (innerRadius + position.magnitude);
         } while (position.y - objHeight < platformTransform.position.y + 25.0f &&
                  !Physics.CheckSphere(position, spawnerData.collisionCheckRadius));
-
         return position;
     }
 
     private void Init(int level)
     {
-		Debug.Log(level);
-        // TODO: auto update level
         spawnerData = new SpawnerData();
         //read file from device first
         string json = Utils.ReadDataFromFile("SpawnerData.json");
@@ -92,7 +96,6 @@ public class RandomSpawner : MonoBehaviour
     //TODO: Write a method to generate level difficulty automatically
     public void generateSpawnData()
     {
-		//TODO: 函数
 		SpawnerOriginJson spawnData = new SpawnerOriginJson();
 		for(int i = 0; i < 10; i++)
 		{
