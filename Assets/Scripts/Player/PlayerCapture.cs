@@ -6,10 +6,10 @@ using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
-    public LayerMask wallsMask;
+    public LayerMask goalMask;
     private GameObject player;
     private float timer;                // count intervals between two captures
-    private LaserLine laserLine;
+    // private LaserLine laserLine;
     private FirstPersonController playerController;
     public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
@@ -22,7 +22,6 @@ public class PlayerCapture : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         timer = 0.0f;
         playerController = player.GetComponentInParent<FirstPersonController>();
-        laserLine = player.GetComponentInChildren<LaserLine>();
     }
 
     void LateUpdate()
@@ -55,28 +54,20 @@ public class PlayerCapture : MonoBehaviour
         Vector2 middlePos = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(middlePos);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS, wallsMask))
+        if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS, goalMask))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
                 GameObject goal =  hitInfo.collider.gameObject;
                 GameManager.gm.currentGoal = goal;
-                laserLine.target = goal;
-                laserLine.goalMove = goal.GetComponent<GoalMove>();
-                laserLine.enabled = true;
-                playerController.changeMoveStatus(false);
-                return;
             }
         }
-        laserLine.boundaryPoint = GetBoundaryPoint(ray.direction);
-        laserLine.enabled = true;
-        isShoot = false;
-        playerController.changeMoveStatus(false);
+        gameObject.SendMessage("ShootingLaser");
+        ChangeMoveStatus(false);
     }
-    
-    private Vector3 GetBoundaryPoint(Vector3 direction)
+
+    public void ChangeMoveStatus(bool status)
     {
-        Vector3 initialPos = player.transform.position;
-        return initialPos + direction.normalized * Gloable.MAX_CAPTURE_RADIUS;
+        playerController.changeMoveStatus(status);
     }
 }

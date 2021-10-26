@@ -158,19 +158,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2439257883254694350}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
   fracturedPieces: {fileID: 8330757941385152937}
   originalGoal: {fileID: 5468204732710111307}
   force: 96
   radius: 30
-  moveSpeed: 0.45
+  moveSpeed: 45
 --- !u!114 &1850232339122358660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +353,6 @@ GameObject:
   - component: {fileID: 6058497233795335862}
   - component: {fileID: 3250745829506479316}
   - component: {fileID: 1181722976460334240}
-  - component: {fileID: 2668994878565977146}
   m_Layer: 7
   m_Name: complete
   m_TagString: Untagged
@@ -425,31 +423,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2668994878565977146
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5468204732710111307}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5711ac80149b2e449032315bef115b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InsideMaterial: {fileID: 2100000, guid: ffba55a382ccb409983875d7afe85836, type: 2}
-  FractureTemplate: {fileID: 100000, guid: bb85f1155c6bfa044bd2c250028a85b8, type: 3}
-  PiecesParent: {fileID: 2437648489277315234}
-  NumFracturePieces: 7
-  NumIterations: 1
-  NumGenerations: 1
-  FractureRadius: 0
-  UVScale: 1
-  DistributeMass: 1
-  GeneratedPieces: {fileID: 8330757941385152937}
-  EntireMeshBounds:
-    m_Center: {x: -0.052649677, y: -0.13459796, z: 0.52809393}
-    m_Extent: {x: 1.1301544, y: 1.1503747, z: 1.1650802}
 --- !u!1 &5575715840085747635
 GameObject:
   m_ObjectHideFlags: 0

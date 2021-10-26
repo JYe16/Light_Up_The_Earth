@@ -73,19 +73,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 184772}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   destroyGoalAudio: {fileID: 0}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
   fracturedPieces: {fileID: 1312776094667935241}
   originalGoal: {fileID: 3211047257583361892}
   force: 123
   radius: 7
-  moveSpeed: 0.8
+  moveSpeed: 24
 --- !u!65 &5650461277055809149
 BoxCollider:
   m_ObjectHideFlags: 0
