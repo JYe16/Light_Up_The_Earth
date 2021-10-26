@@ -88,7 +88,7 @@ public class GoalMove : MonoBehaviour
             if (body != null)
             {
                 body.AddExplosionForce(force, center, radius);
-                Destroy(rootTrans.GetChild(i), destroyPiecesDuration);
+                Destroy(rootTrans.GetChild(i).gameObject, destroyPiecesDuration);
             }
         }
         // change speed to lase line speed after explosion

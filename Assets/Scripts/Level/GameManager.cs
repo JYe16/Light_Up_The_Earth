@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     public Slider timeBar;
     public float timeRemaining;
     [HideInInspector]public int currentScore;
-    public GameObject currentGoal;
+    [HideInInspector]public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
     public enum GameState
     {
