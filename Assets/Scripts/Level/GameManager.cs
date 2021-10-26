@@ -111,7 +111,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 GameObject playMusic = GameObject.Find("gamePlayMusic");
-                Destroy(playMusic.gameObject);
+                //use dofade
+                AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
+                playMusicSource.DOFade(0, 2);
+                //Destroy(playMusic.gameObject);
                 Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
