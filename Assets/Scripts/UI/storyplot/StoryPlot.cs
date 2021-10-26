@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class StoryPlot : MonoBehaviour
 {
@@ -28,7 +29,9 @@ public class StoryPlot : MonoBehaviour
     void startTutorial()
     {
         GameObject launchMusic = GameObject.Find("gameLaunchMusic");
-        Destroy(launchMusic.gameObject);
+		AudioSource launchMusicSource = launchMusic.GetComponent<AudioSource>();
+        launchMusicSource.DOFade(0, 2);
+        //Destroy(launchMusic.gameObject);
 		StartPage.isPlaying = false;
         SceneManager.LoadScene("Tutorial");
     }

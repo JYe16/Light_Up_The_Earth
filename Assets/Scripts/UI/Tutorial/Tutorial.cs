@@ -53,6 +53,9 @@ public class Tutorial : MonoBehaviour
             }
             isPlaying = true;
         }
+        //destroy the launchMusic
+        //GameObject launchMusic = GameObject.Find("gameLaunchMusic");
+        //Destroy(launchMusic.gameObject);
     }
 
     void start_game()
