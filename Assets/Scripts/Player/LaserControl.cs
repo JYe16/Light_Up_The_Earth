@@ -7,31 +7,44 @@ using UnityEngine;
 
 public class LaserControl : MonoBehaviour
 {
-    public bool isShoot;
+    public bool backWithGoal = false;
     public GameObject laserBeamPrefab;
     public Transform shootPosition;
-
     public GameObject laserBeam;
     private GameObject curGoal;
-    private LineRenderer _lineRenderer;
-    private Vector3 statrtPos, endPos;
+    private LineRenderer lineRenderer;
+    private Vector3 startPos, endPos;
+    private static float MIN_DISTORY_DISTANCE = 180.0f;
     void Start()
     {
         laserBeam = Instantiate(laserBeamPrefab, shootPosition);
-        _lineRenderer = laserBeam.GetComponent<LineRenderer>();
-        statrtPos = shootPosition.transform.position;
-        _lineRenderer.SetPosition(0, statrtPos);
+        lineRenderer = laserBeam.GetComponent<LineRenderer>();
         DisableLaserBeam();
     }
 
+    private void Update()
+    {
+        if (backWithGoal && GameManager.gm.currentGoal != null)
+        {
+            lineRenderer.SetPosition(1, GameManager.gm.currentGoal.gameObject.transform.position);
+        }
+    }
+
+    public void ChangeBackStatus(bool backStatus)
+    {
+        backWithGoal = backStatus;
+    }
+    
     public void ShootingLaser()
     {
         EnableLaserBeam();
+        startPos = shootPosition.transform.position;
+        lineRenderer.SetPosition(0, startPos);
         // launch laser
         curGoal = GameManager.gm.currentGoal;
         endPos = curGoal == null ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4) : curGoal.transform.position;
-        _lineRenderer.SetPosition(1, endPos);
-        laserBeam.transform.position = statrtPos;
+        lineRenderer.SetPosition(1, endPos);
+        laserBeam.transform.position = startPos;
         // return laser
         StartCoroutine(ReturnLaser(!curGoal));
     }
@@ -41,21 +54,27 @@ public class LaserControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (withNothing)
         {
-            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 4;
-            DOTween.To(() => _lineRenderer.GetPosition(1), newVal =>
-            {
-                _lineRenderer.SetPosition(1, newVal);
-            }, shootPosition.position, duration).OnComplete(HideLaserEnableMove);
+            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 6;
+            DragBack(duration);
         }
         else
         {
-            Vector3 distroyPos = GetBoundaryPosition(shootPosition.position, 180);
+            float distance = Vector3.Distance(shootPosition.position, curGoal.transform.position);
+            Vector3 distroyPos = distance > MIN_DISTORY_DISTANCE ? GetBoundaryPosition(shootPosition.position, MIN_DISTORY_DISTANCE) : curGoal.transform.position;
             curGoal.GetComponent<GoalMove>().ReturnGoal(distroyPos, this);
-            _lineRenderer.SetPosition(1, curGoal.transform.position);
+            lineRenderer.SetPosition(1, curGoal.transform.position);
         }
     }
 
-    private Vector3 GetBoundaryPosition(Vector3 initialPos, int distance)
+    private void DragBack(float duration)
+    {
+        DOTween.To(() => lineRenderer.GetPosition(1), newVal =>
+        {
+            lineRenderer.SetPosition(1, newVal);
+        }, shootPosition.position, duration).OnComplete(HideLaserEnableMove);
+    }
+
+    private Vector3 GetBoundaryPosition(Vector3 initialPos, float distance)
     {
         Vector2 middlePos = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(middlePos);
@@ -64,13 +83,11 @@ public class LaserControl : MonoBehaviour
 
     private void DisableLaserBeam()
     {
-        isShoot = false;
         laserBeam.SetActive(false);
     }
 
     private void EnableLaserBeam()
     {
-        isShoot = true;
         laserBeam.SetActive(true);
     }
 

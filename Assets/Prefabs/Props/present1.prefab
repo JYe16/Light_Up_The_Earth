@@ -84,7 +84,7 @@ MonoBehaviour:
   originalGoal: {fileID: 5241997601105364044}
   force: 80
   radius: 12
-  moveSpeed: 11
+  moveSpeed: 20
 --- !u!65 &3180141625081179101
 BoxCollider:
   m_ObjectHideFlags: 0

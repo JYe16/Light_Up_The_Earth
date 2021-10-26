@@ -68,7 +68,7 @@ MonoBehaviour:
   originalGoal: {fileID: 7538657620842936219}
   force: 120
   radius: 18
-  moveSpeed: 10
+  moveSpeed: 18
 --- !u!114 &6396430067168181922
 MonoBehaviour:
   m_ObjectHideFlags: 0

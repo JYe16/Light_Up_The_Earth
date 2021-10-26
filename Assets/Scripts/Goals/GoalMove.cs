@@ -15,7 +15,8 @@ public class GoalMove : MonoBehaviour
     public float force;
     public float radius;
     public float moveSpeed;
-    
+
+    private bool hideCompleteModel = false;
     private float distance;
     private GoalValue goalValue;
     private float destroyPiecesDuration = 5.0f;
@@ -34,16 +35,18 @@ public class GoalMove : MonoBehaviour
         }
         this.laserControl = laserControl;
         distance = Vector3.Distance(transform.position, distroyPos);
+        laserControl.ChangeBackStatus(true);
         gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
         {
-            ReturnGoal();
+            laserControl.ChangeBackStatus(false);
+            AfterReturn();
         });
     }
 
-    private void ReturnGoal(bool isHide = false)
+    private void AfterReturn()
     {
         goalValue.isCaptured = true;
-        if(!isHide) goalValue.CapturedEffect();
+        if(!hideCompleteModel) goalValue.CapturedEffect();
         // hide laser line
         laserControl.HideLaserEnableMove();
         DestroyGoal();
@@ -60,6 +63,7 @@ public class GoalMove : MonoBehaviour
     public void ExplosionAndHide()
     {
         originalGoal.GetComponent<Renderer>().enabled = false;
+        hideCompleteModel = true;
         Explode();
     }
 
@@ -89,6 +93,5 @@ public class GoalMove : MonoBehaviour
         }
         // change speed to lase line speed after explosion
         moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
-        ReturnGoal(true);
     }
 }

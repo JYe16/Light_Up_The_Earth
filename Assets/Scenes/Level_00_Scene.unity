@@ -5580,7 +5580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d60f09e1984c88b449d4439a3ccf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserBeam: {fileID: 0}
+  goalMask:
+    serializedVersion: 2
+    m_Bits: 128
   isShoot: 0
   shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!114 &6751388636255219129
@@ -5630,9 +5632,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 997b656a1166546f5be7907ad9e1a08b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isShoot: 0
+  backWithGoal: 0
   laserBeamPrefab: {fileID: 5062702054342478765, guid: 160592c16b35442b68c6062360d29f97, type: 3}
   shootPosition: {fileID: 1433787969325446565}
+  laserBeam: {fileID: 0}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0

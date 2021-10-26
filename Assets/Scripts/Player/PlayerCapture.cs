@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
+    public LayerMask goalMask;
     private GameObject player;
     private float timer;                // count intervals between two captures
     // private LaserLine laserLine;
@@ -53,7 +54,7 @@ public class PlayerCapture : MonoBehaviour
         Vector2 middlePos = new Vector2(Screen.width / 2, Screen.height / 2);
         Ray ray = Camera.main.ScreenPointToRay(middlePos);
         RaycastHit hitInfo;
-        if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS))
+        if (Physics.Raycast(ray, out hitInfo, Gloable.MAX_CAPTURE_RADIUS, goalMask))
         {
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {

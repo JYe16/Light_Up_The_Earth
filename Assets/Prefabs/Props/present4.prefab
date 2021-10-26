@@ -57,7 +57,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 114390}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
@@ -68,7 +68,7 @@ MonoBehaviour:
   originalGoal: {fileID: 1182019936853386071}
   force: 70
   radius: 30
-  moveSpeed: 19
+  moveSpeed: 25
 --- !u!114 &3213272010365767535
 MonoBehaviour:
   m_ObjectHideFlags: 0
