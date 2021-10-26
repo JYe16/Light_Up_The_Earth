@@ -125,7 +125,6 @@ GameObject:
   - component: {fileID: 1456535361631467225}
   - component: {fileID: 1983558752812453700}
   - component: {fileID: 5542813636861749856}
-  - component: {fileID: 5930183562431705477}
   m_Layer: 7
   m_Name: complete
   m_TagString: Untagged
@@ -196,31 +195,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &5930183562431705477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 434677243292651691}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5711ac80149b2e449032315bef115b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InsideMaterial: {fileID: 2100000, guid: fafc27bf79f10424f8ab4fdcb85ef79b, type: 2}
-  FractureTemplate: {fileID: 100000, guid: bb85f1155c6bfa044bd2c250028a85b8, type: 3}
-  PiecesParent: {fileID: 2895765333067440601}
-  NumFracturePieces: 8
-  NumIterations: 1
-  NumGenerations: 1
-  FractureRadius: 0
-  UVScale: 1
-  DistributeMass: 1
-  GeneratedPieces: {fileID: 5884589311612908611}
-  EntireMeshBounds:
-    m_Center: {x: -0.0055656256, y: 0.02346941, z: 0.013663684}
-    m_Extent: {x: 0.025728315, y: 0.02592006, z: 0.018654143}
 --- !u!1 &1059708096450452897
 GameObject:
   m_ObjectHideFlags: 0
@@ -379,19 +353,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2891991860764727477}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1383604005172335372, guid: 92bef5ab3696efe4e81b47284a28bc07, type: 3}
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
   fracturedPieces: {fileID: 5884589311612908611}
   originalGoal: {fileID: 434677243292651691}
   force: 110
   radius: 15
-  moveSpeed: 0.45
+  moveSpeed: 35
 --- !u!114 &1177356891866558719
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -88,8 +88,7 @@ namespace StarterAssets
 				CameraRotation();
 			}
 		}
-
-	
+		
 		private void CameraRotation()
 		{
 			// if there is an input
