@@ -51,11 +51,6 @@ public class GoalMove : MonoBehaviour
         }
     }
 
-    private void OnMouseDown()
-    {
-        ExplosionAndHide();
-    }
-
     private void DestroyGoal()
     {
         foreach (Transform child in transform) {
