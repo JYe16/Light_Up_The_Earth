@@ -7,9 +7,9 @@ using UnityEngine;
 
 public class GoalMove : MonoBehaviour
 {
-    [HideInInspector]public GameObject target;
     [HideInInspector]public AudioClip destroyGoalAudio;
     [HideInInspector]public GameObject explosion;
+    // params about fracture
     public GameObject fracturedPieces;
     public GameObject originalGoal;
     public float force;
@@ -18,42 +18,35 @@ public class GoalMove : MonoBehaviour
     
     private float distance;
     private GoalValue goalValue;
-    private bool isHide = false;
-    private RotateBySelf rotateEffect;
-    private float minDistance = 180.0f;
     private float destroyPiecesDuration = 5.0f;
-    
+    private LaserControl laserControl;
     void Start()
     {
         goalValue = GetComponent<GoalValue>();
-        rotateEffect = GetComponent<RotateBySelf>();
-        if (rotateEffect != null) rotateEffect.enabled = false;
     }
 
-    void FixedUpdate()
+    public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
     {
-        if ( GameManager.gm.gameState == GameManager.GameState.Pausing || goalValue.isCaptured || target == null) return;
-        distance = Vector3.Distance(transform.position, target.transform.position);
-        float t = distance / moveSpeed;
-        if (distance > minDistance)
+        if ( GameManager.gm.gameState == GameManager.GameState.Pausing || goalValue.isCaptured) return;
+        if (GetComponent<RotateBySelf>())
         {
-            Vector3 goalPosition = transform.position;
-            Vector3 spaceshipPosition = target.transform.position;
-            transform.position = Vector3.MoveTowards(goalPosition, Vector3.Lerp(goalPosition, spaceshipPosition, t), moveSpeed);
+            GetComponent<RotateBySelf>().enabled = false;
         }
-        else
+        this.laserControl = laserControl;
+        distance = Vector3.Distance(transform.position, distroyPos);
+        gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
         {
-            goalValue.isCaptured = true;
-            if(!isHide) goalValue.CapturedEffect();
-            // hide laser line
-            target.GetComponent<LaserLine>().enabled = false;
-            DestroyGoal();
-        }
+            ReturnGoal();
+        });
     }
 
-    private void OnMouseDown()
+    private void ReturnGoal(bool isHide = false)
     {
-        ExplosionAndHide();
+        goalValue.isCaptured = true;
+        if(!isHide) goalValue.CapturedEffect();
+        // hide laser line
+        laserControl.HideLaserEnableMove();
+        DestroyGoal();
     }
 
     private void DestroyGoal()
@@ -66,7 +59,6 @@ public class GoalMove : MonoBehaviour
 
     public void ExplosionAndHide()
     {
-        isHide = true;
         originalGoal.GetComponent<Renderer>().enabled = false;
         Explode();
     }
@@ -97,5 +89,6 @@ public class GoalMove : MonoBehaviour
         }
         // change speed to lase line speed after explosion
         moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+        ReturnGoal(true);
     }
 }

@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     static public GameManager gm;
     
     public Slider timeBar;
-    private int targetScore;
     public float timeRemaining;
     [HideInInspector]public int currentScore;
     [HideInInspector] public GameObject currentGoal;
@@ -25,15 +24,15 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    private GameObject player;
     public GameObject platform;
     //declare skyboxes
     public Material[] skyboxes;
     //mesh materials
     public Mesh[] platforms;
     public GameObject gamePlayMusic;
-
-    private bool isPause = false;
+    
+    private int targetScore;
+    private GameObject player;
 
     void Start()
     {

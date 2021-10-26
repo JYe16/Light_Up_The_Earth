@@ -78,14 +78,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 0}
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
   fracturedPieces: {fileID: 4038610748634798417}
   originalGoal: {fileID: 5787316867846776144}
   force: 100
   radius: 10
-  moveSpeed: 0.7
+  moveSpeed: 27
 --- !u!65 &9088024507767921255
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -388,7 +387,6 @@ GameObject:
   - component: {fileID: 5769645830563482205}
   - component: {fileID: 3567691677501572240}
   - component: {fileID: 8611540139749037491}
-  - component: {fileID: 2696207819909399658}
   m_Layer: 7
   m_Name: complete
   m_TagString: Untagged
@@ -459,31 +457,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &2696207819909399658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5787316867846776144}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5711ac80149b2e449032315bef115b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  InsideMaterial: {fileID: 2100000, guid: 7ddfd40d1496845b3984f41a2091882c, type: 2}
-  FractureTemplate: {fileID: 100000, guid: bb85f1155c6bfa044bd2c250028a85b8, type: 3}
-  PiecesParent: {fileID: 425800}
-  NumFracturePieces: 4
-  NumIterations: 1
-  NumGenerations: 1
-  FractureRadius: 0
-  UVScale: 1
-  DistributeMass: 1
-  GeneratedPieces: {fileID: 4038610748634798417}
-  EntireMeshBounds:
-    m_Center: {x: 0, y: 0.00010460103, z: 1.1641532e-10}
-    m_Extent: {x: 0.0020193383, y: 0.0025642035, z: 0.002014386}
 --- !u!1 &8139815302029494461
 GameObject:
   m_ObjectHideFlags: 0
