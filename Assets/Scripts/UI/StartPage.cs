@@ -30,13 +30,12 @@ public class StartPage : MonoBehaviour
 	    //add onClick functions to all buttons
         AddEventListeners();
         //set playerprefs for sound&music settings
-		SetMusicAndSount();
-		
+		SetMusicAndSound();
 		settingPanelBody = settingPanel.transform.GetChild(0).gameObject;
 		settingPanelCanvasGroup = settingPanelBody.GetComponent<CanvasGroup>();
     }
 
-    private void SetMusicAndSount()
+    private void SetMusicAndSound()
     {
 	    //if no playerprefs found
 	    if(!PlayerPrefs.HasKey("sound") && !PlayerPrefs.HasKey("music"))
