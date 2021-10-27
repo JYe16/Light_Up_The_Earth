@@ -30,7 +30,7 @@ public class PropsManager : MonoBehaviour
     public AudioClip extendTimeAudio;
     public AudioClip addScoreAudio;
     public AudioClip powerWaterAudio;
-    
+
     private Gloable.PropsType curActiveProp;
     
     private Text bombBtText;
@@ -82,8 +82,14 @@ public class PropsManager : MonoBehaviour
     {
         if(manager == null)  manager = GetComponent<PropsManager>();
         Init();
+        
     }
-    
+
+    private void OnDestroy()
+    {
+        UpdatePlayerPrefs();
+    }
+
     private void Init()
     {
         propsCounter = new Dictionary<Gloable.PropsType, int>();
@@ -102,17 +108,22 @@ public class PropsManager : MonoBehaviour
     private int InitCountByType(Gloable.PropsType type)
     {
         string key = type.ToString();
-        int res = 1;
-        if (PlayerPrefs.HasKey(key))
+        int res = PlayerPrefs.HasKey(key) ? PlayerPrefs.GetInt(key) : 1;
+        if (!PlayerPrefs.HasKey(key))
         {
-            res += PlayerPrefs.GetInt(key);
-        }
-        else
-        {
-            PlayerPrefs.SetInt(key, 0);
+            PlayerPrefs.SetInt(key, 1);
         }
         return res;
     }
+
+    private void UpdatePlayerPrefs()
+    {
+        foreach (var prop in propsCounter)
+        {
+            PlayerPrefs.SetInt(prop.Key.ToString(), prop.Value);
+        }
+    }
+    
     void FixedUpdate()
     {
         UpdateBtnUI();

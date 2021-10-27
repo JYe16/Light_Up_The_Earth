@@ -113,8 +113,8 @@ public class ShopSystem : MonoBehaviour
         foreach (var prop in propsInfoMap)
         {
             string key = prop.Key.ToString();
-            int curCount = PlayerPrefs.GetInt(key);
-            PlayerPrefs.SetInt(key, curCount + prop.Value.buyStep);
+            int curCount = PlayerPrefs.GetInt(key) + prop.Value.buyStep;
+            PlayerPrefs.SetInt(key, curCount);
             prop.Value.buyStep = 0;
         }
         countText.text = "0";
