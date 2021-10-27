@@ -30,9 +30,8 @@ public class StoryPlot : MonoBehaviour
     {
         GameObject launchMusic = GameObject.Find("gameLaunchMusic");
 		AudioSource launchMusicSource = launchMusic.GetComponent<AudioSource>();
-        launchMusicSource.DOFade(0, 2);
-        //Destroy(launchMusic.gameObject);
-		StartPage.isPlaying = false;
+        launchMusicSource.DOFade(0, 2).OnComplete(() => Destroy(launchMusic.gameObject));
+        StartPage.isPlaying = false;
         SceneManager.LoadScene("Tutorial");
     }
 

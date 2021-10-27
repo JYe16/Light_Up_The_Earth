@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
                 GameObject playMusic = GameObject.Find("gamePlayMusic");
                 //use dofade
                 AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
-                playMusicSource.DOFade(0, 2);
+                playMusicSource.DOFade(0, 2).OnComplete(() => Destroy(playMusic.gameObject));
                 //Destroy(playMusic.gameObject);
                 Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
