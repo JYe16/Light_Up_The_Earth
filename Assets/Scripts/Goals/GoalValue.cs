@@ -52,7 +52,6 @@ public class GoalValue : MonoBehaviour
                 }
             }
         }
-        Destroy(gameObject);
     }
     
     private void RandomSetProp()

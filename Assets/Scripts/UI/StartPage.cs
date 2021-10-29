@@ -1,68 +1,106 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StartPage : MonoBehaviour
 {
+	public GameObject infoToast;
+	public Button infoBtn;
+
+	public GameObject settingPanel;
     public Button settingButton;
-    public GameObject settingPanel;
-    public Button infoButton;
-    public GameObject infoPanel;
-    public Button infoPanelCloseBtn;
     public Button settingPanelCloseBtn;
     public Button soundBtn;
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
+    
 	public GameObject gameLaunchMusic;
 	public Button startBtn;
 	//for background music playing
 	public static bool isPlaying = false;
-    // Start is called before the first frame update
+	
+	private CanvasGroup settingPanelCanvasGroup;
+	private GameObject settingPanelBody;
     void Start()
     {
-        //add onClick functions to all buttons
-        settingButton.onClick.AddListener(settingOnClick);
-        infoButton.onClick.AddListener(infoOnClick);
-		startBtn.onClick.AddListener(NewGameOnClick);
-        //set info panel to invisible at start
-        infoPanel.gameObject.SetActive(false);
-        infoPanelCloseBtn.onClick.AddListener(infoPanelClose);
-        //set setting panel to invisible at start
-        settingPanel.gameObject.SetActive(false);
-        settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
-        soundBtn.onClick.AddListener(soundBtnOnClick);
-        musicBtn.onClick.AddListener(musicBtnOnClick);
-		//set playerprefs for sound&music settings
-        PlayerPrefs.SetInt("sound", 1);
-        PlayerPrefs.SetInt("music", 1);
-		if(!isPlaying)
-		{
-			DontDestroyOnLoad(gameLaunchMusic.gameObject);
-			isPlaying = true;
-		}
+	    //add onClick functions to all buttons
+        AddEventListeners();
+        //set playerprefs for sound&music settings
+		SetMusicAndSound();
+		settingPanelBody = settingPanel.transform.GetChild(0).gameObject;
+		settingPanelCanvasGroup = settingPanelBody.GetComponent<CanvasGroup>();
+    }
+
+    private void SetMusicAndSound()
+    {
+	    //if no playerprefs found
+	    if(!PlayerPrefs.HasKey("sound") && !PlayerPrefs.HasKey("music"))
+	    {
+		    //default: on
+		    PlayerPrefs.SetInt("sound", 1);
+		    PlayerPrefs.SetInt("music", 1);
+	    }
+	    else
+	    {
+		    //show the corresponding icon for music and sound
+		    if(PlayerPrefs.GetInt("music") == 0)
+			    musicOffImg.gameObject.SetActive(true);
+		    if(PlayerPrefs.GetInt("sound") == 0)
+			    soundOffImg.gameObject.SetActive(true);
+	    }
+	    //Debug.Log(PlayerPrefs.GetInt("music"));
+	    if(!isPlaying)
+	    {
+		    DontDestroyOnLoad(gameLaunchMusic.gameObject);
+		    if(PlayerPrefs.GetInt("music") == 1)
+		    {
+			    gameLaunchMusic.gameObject.GetComponent<AudioSource>().Play();
+		    }
+		    isPlaying = true;
+	    }
+    }
+
+    private void AddEventListeners()
+    {
+	    startBtn.onClick.AddListener(NewGameOnClick);
+
+	    settingButton.onClick.AddListener(settingOnClick);
+	    settingPanelCloseBtn.onClick.AddListener(settingPanelClose);
+
+	    soundBtn.onClick.AddListener(soundBtnOnClick);
+	    musicBtn.onClick.AddListener(musicBtnOnClick);
+	    
+	    infoBtn.onClick.AddListener(OpenInfoToast);
     }
     
     void settingOnClick()
     {
-        settingPanel.gameObject.SetActive(true);
-    }
-
-    void infoOnClick()
-    {
-        infoPanel.gameObject.SetActive(true);
-    }
-
-    void infoPanelClose()
-    {
-        infoPanel.gameObject.SetActive(false);
+	    settingPanel.SetActive(true);
+	    DisplayPanel(true);
     }
 
     void settingPanelClose()
     {
-        settingPanel.gameObject.SetActive(false);
+        DisplayPanel(false);
+        settingPanel.SetActive(false);
+    }
+    
+    private void DisplayPanel(bool show)
+    {
+	    settingPanelCanvasGroup.DOFade(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+	    settingPanelBody.transform.DOScale(show ? 1 : 0, Gloable.POPUP_ANIMATION_DURATION);
+	    settingPanelCanvasGroup.interactable = show;
+	    settingPanelCanvasGroup.blocksRaycasts = show;
+    }
+
+    void OpenInfoToast()
+    {
+	    string context = "NINE A.M.\r\nShenqi Ye\tTianshu Wang\r\nZhankai Ye\tYingqi Liang\r\nXiaoxuan Sun";
+	    infoToast.GetComponent<Toast>().ShowToast(context);
     }
 
     void soundBtnOnClick()
@@ -92,15 +130,16 @@ public class StartPage : MonoBehaviour
         {
             musicOffImg.gameObject.SetActive(true);
         }
+		GameObject launchMusic = GameObject.Find("gameLaunchMusic");
         if (PlayerPrefs.GetInt("music") == 1)
 		{
 			PlayerPrefs.SetInt("music", 0);
-			gameLaunchMusic.gameObject.GetComponent<AudioSource>().Pause();
+			launchMusic.gameObject.GetComponent<AudioSource>().Pause();
 		}
         else
 		{
 			PlayerPrefs.SetInt("music", 1);
-			gameLaunchMusic.gameObject.GetComponent<AudioSource>().UnPause();
+			launchMusic.gameObject.GetComponent<AudioSource>().Play();
 		}
     }
 
@@ -108,11 +147,5 @@ public class StartPage : MonoBehaviour
     {
         Utils.clearCache();
         SceneManager.LoadScene("Story_Plot");
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 }

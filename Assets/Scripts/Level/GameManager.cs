@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -9,46 +10,36 @@ public class GameManager : MonoBehaviour
     static public GameManager gm;
     
     public Slider timeBar;
-    private int targetScore;
     public float timeRemaining;
-    [HideInInspector] public GameObject currentGoal;
+    [HideInInspector]public int currentScore;
+    [HideInInspector]public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
     public enum GameState
     {
         Playing,
         GameOver,
-        Winning
+        Winning,
+        Pausing
     };
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    public int currentScore;
-    public Button pauseBtn;
-    public GameObject pausePanel;
-    private bool isPause;
-    private GameObject player;
     public GameObject platform;
     //declare skyboxes
-    public Material skybox1;
-    public Material skybox2;
-    public Material skybox3;
-    public Material skybox4;
-    public Material skybox5;
+    public Material[] skyboxes;
     //mesh materials
-    public Mesh platform1;
-    public Mesh platform2;
-    public Mesh platform3;
-    public Mesh platform4;
+    public Mesh[] platforms;
+    public GameObject gamePlayMusic;
+    
+    private int targetScore;
+    private GameObject player;
 
-    // Start is called before the first frame update
     void Start()
     {
-        Material[] skyboxes = {skybox1, skybox2, skybox3, skybox4, skybox5};
-        Mesh[] platforms = {platform1, platform2, platform3, platform4};
         //generate a random number for selecting skybox
-        RenderSettings.skybox = skyboxes[Random.Range(0, 5)];
+        RenderSettings.skybox = skyboxes[Random.Range(0, skyboxes.Length)];
         //TODO: get correct mesh files and then uncomment the next line
-        //platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, 4)];
+        // platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, platforms.Length)];
         if(gm == null) 
             gm = GetComponent<GameManager>();
         if (player == null)
@@ -56,7 +47,8 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("level"))
         {
             currentLevel = PlayerPrefs.GetInt("level") + 1;
-            targetScore = 30 + (10 * (currentLevel - 1));
+            //targetScore = 30 + (10 * (currentLevel - 1));
+            targetScore = 30 + (90 * (currentLevel - 1));
         }
         else
         {
@@ -64,11 +56,20 @@ public class GameManager : MonoBehaviour
             targetScore = 30;
         }
         PlayerPrefs.SetInt("level", currentLevel);
-        initUI();
+        InitUI();
+        // init spawner after PlayerPrefs set
+        InitSpawner();
         gm.gameState = GameState.Playing;
-        isPause = false;
-        pauseBtn.onClick.AddListener(PauseGame);
-        pausePanel.gameObject.SetActive(false);
+        //start playing music if no bgm is currently playing
+        if(Tutorial.isPlaying == false)
+        {
+            DontDestroyOnLoad(gamePlayMusic.gameObject);
+            if(PlayerPrefs.GetInt("music") == 1)
+            {
+                gamePlayMusic.gameObject.GetComponent<AudioSource>().Play();
+            }
+            Tutorial.isPlaying = true;
+        }
     }
 
     // Update is called once per frame
@@ -76,6 +77,9 @@ public class GameManager : MonoBehaviour
     {
         switch (gameState)
         {
+            case GameState.Pausing:
+                // pause game without time scale
+                break;
             case GameState.Playing:
                 //update score text
                 scoreText.text = currentScore + "/" + targetScore;
@@ -105,12 +109,22 @@ public class GameManager : MonoBehaviour
                 SceneManager.LoadScene("Pass_Level");
                 break;
             case GameState.GameOver:
-                //TODO: replace this scene with GameOver
+                GameObject playMusic = GameObject.Find("gamePlayMusic");
+                //use dofade
+                AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
+                playMusicSource.DOFade(0, 2).OnComplete(() => Destroy(playMusic.gameObject));
+                //Destroy(playMusic.gameObject);
+                Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
         }
     }
 
+    public void PauseGame(bool isPause)
+    {
+        gameState = isPause ? GameState.Pausing : GameState.Playing;
+    }
+    
     public void AddScore(int value)
     {
         //update the playerprefs also
@@ -131,12 +145,16 @@ public class GameManager : MonoBehaviour
     public void AddRemainingTime(int bounsTime)
     {
         GameObject handle = GameObject.FindGameObjectWithTag("TimeHandle");
-        if(handle != null)
-            handle.GetComponent<SmoothScale>().enabled = true;
+        if (handle != null)
+        {
+            Vector3 maxScale = handle.transform.localScale * 1.5f;
+            handle.transform.DOScale(maxScale, 0.5f);
+            handle.transform.DOScale(Vector3.one, 0.5f);
+        }
         timeRemaining += bounsTime;
     }
 
-    private void initUI()
+    private void InitUI()
     {
         //load game data from playerprefs
         if (PlayerPrefs.HasKey("baseScore"))
@@ -152,22 +170,11 @@ public class GameManager : MonoBehaviour
         timeBar.maxValue = timeRemaining;
         levelText.text = "level " + currentLevel;
     }
-    
-    public void PauseGame()
-    {
-        isPause = !isPause;
 
-        if (isPause)
-        {
-            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/resume");
-            pausePanel.gameObject.SetActive(true);
-            Time.timeScale = 0;
-        }
-        else
-        {
-            // PauseButton.image.sprite = Resources.Load<Sprite>("Sprites/pause");
-            pausePanel.gameObject.SetActive(false);
-            Time.timeScale = 1;
-        }
+    private void InitSpawner()
+    {
+        RandomSpawner spawner = GetComponent<RandomSpawner>();
+        spawner.platformTransform = platform.transform;
+        spawner.enabled = true;
     }
 }

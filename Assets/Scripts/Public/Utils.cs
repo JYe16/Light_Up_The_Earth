@@ -14,7 +14,6 @@ public static class Utils
     public static string ReadDataFromFile(string fileName)
     {
         string path = GetFilePath(fileName);
-        Debug.Log(path);
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -23,10 +22,7 @@ public static class Utils
                 return json;
             }
         }
-        else
-        {
-            return "";
-        }
+        return "";
     }
 
     public static void WriteJSON(string fileName, string json)
