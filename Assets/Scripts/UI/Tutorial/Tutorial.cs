@@ -60,7 +60,8 @@ public class Tutorial : MonoBehaviour
 
     void start_game()
     {
-        SceneManager.LoadScene("Level_00_Scene");
+        // SceneManager.LoadScene("Level_00_Scene");
+        SceneManager.LoadScene("LoadingPage");
     }
 
     void showNextStep()

@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StartPage.unity
     guid: bccf0cff77b57224abadfad6bc30f579
   - enabled: 1
+    path: Assets/Scenes/Story_Plot.unity
+    guid: 0beab0d4d001ed94eaa2439cae01d171
+  - enabled: 1
+    path: Assets/Scenes/Tutorial.unity
+    guid: 3a5d3db0681429249b099e8636ef9f22
+  - enabled: 1
+    path: Assets/Scenes/LoadingPage.unity
+    guid: 85ec27b2d2679a144916ec022469cada
+  - enabled: 1
     path: Assets/Scenes/EnterName.unity
     guid: a18f61002bcbb2b4e9ef8131868bf554
   - enabled: 1
@@ -18,9 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/GameOver.unity
     guid: 198f3065197ae4298b39b3fa68b0ec88
   - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 3a5d3db0681429249b099e8636ef9f22
-  - enabled: 1
     path: Assets/Scenes/Pass_Level.unity
     guid: 4f93d5771d9144607b76423a62329d3a
   - enabled: 1
@@ -29,8 +35,5 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_00_Scene.unity
     guid: 24d9f7e513ce54bb1a8263ec51dc07e7
-  - enabled: 1
-    path: Assets/Scenes/Story_Plot.unity
-    guid: 0beab0d4d001ed94eaa2439cae01d171
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c532c2d6de07e40a9847d373cdb42eb4, type: 2}
