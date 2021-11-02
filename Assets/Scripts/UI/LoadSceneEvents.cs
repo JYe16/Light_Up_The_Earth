@@ -25,7 +25,8 @@ public class LoadSceneEvents : MonoBehaviour
         
         public void PlayAgainOnClick()
         {
-                SceneManager.LoadScene("Level_00_Scene");
+                // SceneManager.LoadScene("Level_00_Scene");
+                SceneManager.LoadScene("LoadingPage");
         }
         
         public void GameOverOnClick()
