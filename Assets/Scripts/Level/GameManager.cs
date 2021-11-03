@@ -10,10 +10,9 @@ public class GameManager : MonoBehaviour
     static public GameManager gm;
     
     public Slider timeBar;
-    private int targetScore;
     public float timeRemaining;
     [HideInInspector]public int currentScore;
-    [HideInInspector] public GameObject currentGoal;
+    [HideInInspector]public GameObject currentGoal;
     [HideInInspector] public int currentLevel;
     public enum GameState
     {
@@ -25,15 +24,15 @@ public class GameManager : MonoBehaviour
     public GameState gameState;
     public Text scoreText;
     public Text levelText;
-    private GameObject player;
     public GameObject platform;
     //declare skyboxes
     public Material[] skyboxes;
     //mesh materials
     public Mesh[] platforms;
     public GameObject gamePlayMusic;
-
-    private bool isPause = false;
+    
+    private int targetScore;
+    private GameObject player;
 
     void Start()
     {
@@ -62,7 +61,6 @@ public class GameManager : MonoBehaviour
         InitSpawner();
         gm.gameState = GameState.Playing;
         //start playing music if no bgm is currently playing
-        Debug.Log(Tutorial.isPlaying);
         if(Tutorial.isPlaying == false)
         {
             DontDestroyOnLoad(gamePlayMusic.gameObject);
@@ -112,7 +110,10 @@ public class GameManager : MonoBehaviour
                 break;
             case GameState.GameOver:
                 GameObject playMusic = GameObject.Find("gamePlayMusic");
-                Destroy(playMusic.gameObject);
+                //use dofade
+                AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
+                playMusicSource.DOFade(0, 2).OnComplete(() => Destroy(playMusic.gameObject));
+                //Destroy(playMusic.gameObject);
                 Tutorial.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
