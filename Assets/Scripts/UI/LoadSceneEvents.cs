@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 public class LoadSceneEvents : MonoBehaviour
 {
@@ -25,7 +26,13 @@ public class LoadSceneEvents : MonoBehaviour
         
         public void PlayAgainOnClick()
         {
-                // SceneManager.LoadScene("Level_00_Scene");
+                GameObject launchMusic = GameObject.Find("gameLaunchMusic");
+                if (launchMusic != null)
+                {
+                        AudioSource launchMusicSource = launchMusic.GetComponent<AudioSource>();
+                        launchMusicSource.DOFade(0, 2).OnComplete(() => Destroy(launchMusic.gameObject));
+                        StartPage.isPlaying = false;
+                }
                 SceneManager.LoadScene("LoadingPage");
         }
         
