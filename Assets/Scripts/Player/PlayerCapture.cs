@@ -9,12 +9,12 @@ public class PlayerCapture : MonoBehaviour
     public LayerMask goalMask;
     private GameObject player;
     private float timer;                // count intervals between two captures
-    // private LaserLine laserLine;
     private FirstPersonController playerController;
-    public bool isShoot = false;
+    [HideInInspector]public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
     //add sound file for shooting
     public AudioClip shootAudio;
+    public bool isTutorial = false;
 
     void Start()
     {
@@ -26,7 +26,10 @@ public class PlayerCapture : MonoBehaviour
 
     void LateUpdate()
     {
-        if (GameManager.gm.gameState == GameManager.GameState.Pausing) return;
+        bool isPause = isTutorial
+            ? SimpleGameManager.gm.pauseGame
+            : GameManager.gm.gameState == GameManager.GameState.Pausing;
+        if (isPause) return;
         if (isShoot && timer > TIME_BETWEEN_CAPTURE)
         {
             timer = 0.0f;
@@ -59,7 +62,14 @@ public class PlayerCapture : MonoBehaviour
             if (hitInfo.collider.gameObject.tag.Equals("Goal"))
             {
                 GameObject goal =  hitInfo.collider.gameObject;
-                GameManager.gm.currentGoal = goal;
+                if (SimpleGameManager.gm != null)
+                {
+                    SimpleGameManager.gm.currentGoal = goal;
+                }
+                else
+                {
+                    GameManager.gm.currentGoal = goal;
+                }
             }
         }
         gameObject.SendMessage("ShootingLaser");

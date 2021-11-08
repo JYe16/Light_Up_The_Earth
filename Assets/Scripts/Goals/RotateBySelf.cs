@@ -10,6 +10,6 @@ public class RotateBySelf : MonoBehaviour
     void Update ()
     {
         if (GameManager.gm.gameState == GameManager.GameState.Pausing) return;
-        this.transform.RotateAround(this.transform.position, this.transform.up, Time.deltaTime * speed);
+        transform.RotateAround(this.transform.position, this.transform.up, Time.deltaTime * speed);
     }
 }

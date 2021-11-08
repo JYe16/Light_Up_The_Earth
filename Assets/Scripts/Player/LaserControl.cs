@@ -11,10 +11,11 @@ public class LaserControl : MonoBehaviour
     public GameObject laserBeamPrefab;
     public Transform shootPosition;
     public GameObject laserBeam;
+    public bool isTutorial = false;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
     private Vector3 startPos, endPos;
-    private static float MIN_DISTORY_DISTANCE = 180.0f;
+    private static float MIN_DISTORY_DISTANCE = 500.0f;
     void Start()
     {
         laserBeam = Instantiate(laserBeamPrefab, shootPosition);
@@ -24,9 +25,13 @@ public class LaserControl : MonoBehaviour
 
     private void Update()
     {
-        if (backWithGoal && GameManager.gm.currentGoal != null)
+        bool existCurGoal = isTutorial ? SimpleGameManager.gm.currentGoal != null : GameManager.gm.currentGoal != null;
+        if (backWithGoal && existCurGoal)
         {
-            lineRenderer.SetPosition(1, GameManager.gm.currentGoal.gameObject.transform.position);
+            Vector3 endPos = isTutorial
+                ? SimpleGameManager.gm.currentGoal.transform.position
+                : GameManager.gm.currentGoal.transform.position;
+            lineRenderer.SetPosition(1, endPos);
         }
     }
 
@@ -41,7 +46,7 @@ public class LaserControl : MonoBehaviour
         startPos = shootPosition.transform.position;
         lineRenderer.SetPosition(0, startPos);
         // launch laser
-        curGoal = GameManager.gm.currentGoal;
+        curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
         endPos = curGoal == null ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4) : curGoal.transform.position;
         lineRenderer.SetPosition(1, endPos);
         laserBeam.transform.position = startPos;
