@@ -85,7 +85,6 @@ public class LoadManager : MonoBehaviour
         
         if (curProgressValue == 100)
         {
-
             if (operation.progress >= 0.9f)
             {
                 slider.value = 1;

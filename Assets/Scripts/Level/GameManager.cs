@@ -61,14 +61,14 @@ public class GameManager : MonoBehaviour
         InitSpawner();
         gm.gameState = GameState.Playing;
         //start playing music if no bgm is currently playing
-        if(Tutorial.isPlaying == false)
+        if(TutorialManager.isPlaying == false)
         {
             DontDestroyOnLoad(gamePlayMusic.gameObject);
             if(PlayerPrefs.GetInt("music") == 1)
             {
                 gamePlayMusic.gameObject.GetComponent<AudioSource>().Play();
             }
-            Tutorial.isPlaying = true;
+            TutorialManager.isPlaying = true;
         }
     }
 
