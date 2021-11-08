@@ -15,7 +15,7 @@ public class LaserControl : MonoBehaviour
     private GameObject curGoal;
     private LineRenderer lineRenderer;
     private Vector3 startPos, endPos;
-    private static float MIN_DISTORY_DISTANCE = 180.0f;
+    private static float MIN_DISTORY_DISTANCE = 500.0f;
     void Start()
     {
         laserBeam = Instantiate(laserBeamPrefab, shootPosition);

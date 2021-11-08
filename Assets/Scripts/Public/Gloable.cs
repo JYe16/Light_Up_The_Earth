@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 public static class Gloable
 {
-        public static int MAX_CAPTURE_RADIUS = 1000;
+        public static int MAX_CAPTURE_RADIUS = 5000;
 
         public static float LASER_LINE_MOVE_SPEED = 20.0f;
 
