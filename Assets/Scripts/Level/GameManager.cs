@@ -114,7 +114,7 @@ public class GameManager : MonoBehaviour
                 AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
                 playMusicSource.DOFade(0, 2).OnComplete(() => Destroy(playMusic.gameObject));
                 //Destroy(playMusic.gameObject);
-                Tutorial.isPlaying = false;
+                TutorialManager.isPlaying = false;
                 SceneManager.LoadScene("GameOver");
                 break;
         }

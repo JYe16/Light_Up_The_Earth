@@ -37,7 +37,7 @@ public class PausePanel : MonoBehaviour
         Utils.clearCache();
         GameObject playMusic = GameObject.Find("gamePlayMusic");
         Destroy(playMusic.gameObject);
-        Tutorial.isPlaying = false;
+        TutorialManager.isPlaying = false;
         SceneManager.LoadScene("StartPage");
     }
 
