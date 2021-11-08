@@ -52,6 +52,27 @@ public class GoalValue : MonoBehaviour
                 }
             }
         }
+        // for tutorial level
+        if (SimpleGameManager.gm != null)
+        {
+            if(!isProps)
+            {
+                SimpleGameManager.gm.AddScore();
+                SimpleGameManager.gm.currentGoal = null;
+            }
+            else
+            {
+                // work immediately (time extension & score increase)
+                if (type == Gloable.PropsType.TIME_INCREASE)
+                {
+                    SimpleGameManager.gm.AddRemainingTime();
+                }
+                else if (type == Gloable.PropsType.SCORE_INCREASE)
+                {
+                    SimpleGameManager.gm.AddScore();
+                }
+            }
+        }
     }
     
     private void RandomSetProp()

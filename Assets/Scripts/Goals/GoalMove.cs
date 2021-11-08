@@ -15,7 +15,8 @@ public class GoalMove : MonoBehaviour
     public float force;
     public float radius;
     public float moveSpeed;
-
+    public bool isTutorial = false;
+    
     private bool hideCompleteModel = false;
     private float distance;
     private GoalValue goalValue;
@@ -28,7 +29,10 @@ public class GoalMove : MonoBehaviour
 
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
     {
-        if ( GameManager.gm.gameState == GameManager.GameState.Pausing || goalValue.isCaptured) return;
+        bool isPause = isTutorial
+            ? SimpleGameManager.gm.pauseGame
+            : GameManager.gm.gameState == GameManager.GameState.Pausing;
+        if (isPause || goalValue.isCaptured) return;
         if (GetComponent<RotateBySelf>())
         {
             GetComponent<RotateBySelf>().enabled = false;

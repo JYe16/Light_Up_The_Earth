@@ -29,10 +29,13 @@ public class StoryPlot : MonoBehaviour
     void startTutorial()
     {
         GameObject launchMusic = GameObject.Find("gameLaunchMusic");
-		AudioSource launchMusicSource = launchMusic.GetComponent<AudioSource>();
-        launchMusicSource.DOFade(0, 2).OnComplete(() => Destroy(launchMusic.gameObject));
+        if (launchMusic != null)
+        {
+            AudioSource launchMusicSource = launchMusic.GetComponent<AudioSource>();
+            launchMusicSource.DOFade(0, 2).OnComplete(() => Destroy(launchMusic.gameObject));
+        }
         StartPage.isPlaying = false;
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Tutorial_Level");
     }
 
     void showPic2()
@@ -47,11 +50,5 @@ public class StoryPlot : MonoBehaviour
         skipButton.gameObject.SetActive(false);
         storyPic3.gameObject.SetActive(true);
         startButton.gameObject.SetActive(true);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }
