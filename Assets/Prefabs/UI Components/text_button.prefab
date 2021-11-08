@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2333340074267113084}
   - component: {fileID: 2333340074267113085}
   m_Layer: 5
-  m_Name: skip_btn
+  m_Name: text_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

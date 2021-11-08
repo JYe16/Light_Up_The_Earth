@@ -13,7 +13,7 @@ public class LoadSceneEvents : MonoBehaviour
         {
                 SceneManager.LoadScene("ScoreRank");
         }
-        
+
         public void ContinueOnClick()
         {
                 SceneManager.LoadScene("Level_00_Scene");
@@ -40,12 +40,4 @@ public class LoadSceneEvents : MonoBehaviour
         {
                 SceneManager.LoadScene("EnterName");
         }
-        
-        /*
-        public void StoryPlotOnClick()
-        {
-                SceneManager.LoadScene("Story_Plot");
-        }
-        */
-
 }
