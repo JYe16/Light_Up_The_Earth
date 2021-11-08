@@ -103,7 +103,7 @@ public class RandomSpawner : MonoBehaviour
         	spawner.valuelessSum = 30;
        		spawner.valuableSum = 8;
         	spawner.propsSum = 10;
-        	spawner.collisionCheckRadius = 5.0f;
+        	spawner.collisionCheckRadius = 100.0f;
         	spawner.outerRadius = 550.0f;
         	spawner.innerRadius = 250.0f;
         	spawnData.list.Add(spawner);	

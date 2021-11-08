@@ -339,7 +339,7 @@ Transform:
   m_GameObject: {fileID: 2891991860764727477}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 600, y: 600, z: 600}
+  m_LocalScale: {x: 1200, y: 1200, z: 1200}
   m_Children:
   - {fileID: 1456535361631467225}
   - {fileID: 2523608650281174146}
@@ -365,6 +365,7 @@ MonoBehaviour:
   force: 110
   radius: 15
   moveSpeed: 35
+  isTutorial: 0
 --- !u!114 &1177356891866558719
 MonoBehaviour:
   m_ObjectHideFlags: 0
