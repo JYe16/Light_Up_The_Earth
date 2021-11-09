@@ -99,7 +99,7 @@ public class StartPage : MonoBehaviour
 
     void OpenInfoToast()
     {
-	    string context = "NINE A.M.\r\nShenqi Ye\tTianshu Wang\r\nZhankai Ye\tYingqi Liang\r\nXiaoxuan Sun";
+	    string context = "NINE A.M.\r\nShenqi Ye\tTianshu Wang\r\nZhankai Ye\tYingqi Liang\r\nXiaoxuan Sun\nSpecial Thanks: Rui-Han Xia";
 	    infoToast.GetComponent<Toast>().ShowToast(context);
     }
 
