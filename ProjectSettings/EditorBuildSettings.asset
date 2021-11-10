@@ -11,9 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Story_Plot.unity
     guid: 0beab0d4d001ed94eaa2439cae01d171
-  - enabled: 1
-    path: Assets/Scenes/Tutorial.unity
-    guid: 3a5d3db0681429249b099e8636ef9f22
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/LoadingPage.unity
     guid: 85ec27b2d2679a144916ec022469cada
