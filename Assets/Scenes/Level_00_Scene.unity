@@ -6297,7 +6297,6 @@ MonoBehaviour:
     m_Bits: 128
   isShoot: 0
   shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
-  isTutorial: 0
 --- !u!114 &6751388636255219129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6349,7 +6348,6 @@ MonoBehaviour:
   laserBeamPrefab: {fileID: 5062702054342478765, guid: 160592c16b35442b68c6062360d29f97, type: 3}
   shootPosition: {fileID: 1433787969325446565}
   laserBeam: {fileID: 0}
-  isTutorial: 0
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0
@@ -6795,8 +6793,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 901182334643ba1438a25accc6bd0c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+
   playerInput: {fileID: 8616685848858191186}
---- !u!114 &8934069600973522243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
