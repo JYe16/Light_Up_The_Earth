@@ -11,6 +11,15 @@ namespace UI.Common
 		private string curText = "";
 		private static float TIME_DELAY = 0.1f;
 
+		private void Update()
+		{
+			if (Input.GetMouseButtonDown(0))
+			{
+				StopAllCoroutines();
+				GetComponent<Text>().text = fullText;
+				SendMessageUpwards("TypeFinish", SendMessageOptions.DontRequireReceiver);
+			}
+		}
 
 		public void StartType(string text)
 		{
