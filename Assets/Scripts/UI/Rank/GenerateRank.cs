@@ -15,12 +15,6 @@ public class GenerateRank : MonoBehaviour
         SubmitBut.onClick.AddListener(generateJSON);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     void generateJSON()
     {
 		string json = "";

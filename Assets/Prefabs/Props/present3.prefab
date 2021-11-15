@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 184772}
   m_LocalRotation: {x: 0, y: -0.9402881, z: 0, w: 0.3403795}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5000, y: 5000, z: 5000}
+  m_LocalScale: {x: 12000, y: 12000, z: 12000}
   m_Children:
   - {fileID: 3294214832419402648}
   - {fileID: 7657600914236981743}
@@ -85,6 +85,7 @@ MonoBehaviour:
   force: 123
   radius: 7
   moveSpeed: 24
+  isTutorial: 0
 --- !u!65 &5650461277055809149
 BoxCollider:
   m_ObjectHideFlags: 0
