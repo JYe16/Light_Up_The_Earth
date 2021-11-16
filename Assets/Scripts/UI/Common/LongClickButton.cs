@@ -14,7 +14,7 @@ namespace Player
 
 		public UnityEvent onLongClick;
 		public float requiredHoldTime;
-		public bool isActive = false;
+		[HideInInspector]public bool isActive = false;
 		
 		public void OnPointerDown(PointerEventData eventData)
 		{
