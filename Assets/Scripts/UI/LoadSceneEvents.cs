@@ -21,11 +21,26 @@ public class LoadSceneEvents : MonoBehaviour
         
         public void MainMenuOnClick()
         {
+                GameObject overMusic = GameObject.Find("gameOverMusic");
+                if (overMusic != null)
+                {
+                        AudioSource overMusicSource = overMusic.GetComponent<AudioSource>();
+                        overMusicSource.DOFade(0, 2).OnComplete(() => Destroy(overMusic.gameObject));
+                        StartPage.isPlaying = false;
+                }
                 SceneManager.LoadScene("StartPage");
         }
         
         public void PlayAgainOnClick()
         {
+                GameObject overMusic = GameObject.Find("gameOverMusic");
+                if (overMusic != null)
+                {
+                        AudioSource overMusicSource = overMusic.GetComponent<AudioSource>();
+                        overMusicSource.DOFade(0, 2).OnComplete(() => Destroy(overMusic.gameObject));
+                        StartPage.isPlaying = false;
+                }
+                
                 GameObject launchMusic = GameObject.Find("gameLaunchMusic");
                 if (launchMusic != null)
                 {
