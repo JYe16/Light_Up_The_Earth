@@ -742,9 +742,10 @@ GameObject:
   - component: {fileID: 258153655}
   - component: {fileID: 258153654}
   - component: {fileID: 258153653}
+  - component: {fileID: 258153656}
   m_Layer: 5
   m_Name: shoot_handle
-  m_TagString: Untagged
+  m_TagString: Shoot Button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -865,6 +866,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 258153651}
   m_CullTransparentMesh: 1
+--- !u!114 &258153656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 258153651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ea8d58d3ad94619b18a7ac8d8e06573, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fillImage: {fileID: 753178805}
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6751388636255219128}
+        m_TargetAssemblyTypeName: PlayerCapture, Assembly-CSharp
+        m_MethodName: SpeedUpGoal
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  requiredHoldTime: 2
+  isActive: 0
 --- !u!1 &314815887
 GameObject:
   m_ObjectHideFlags: 0
@@ -1546,14 +1577,14 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5b56d9fa0e8bd6e409ed188db38a692c, type: 3}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 84487d73ca4b791498332d8f6858417f, type: 3}
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0
   m_FillClockwise: 1
-  m_FillOrigin: 0
+  m_FillOrigin: 2
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
 --- !u!222 &753178806
@@ -6879,12 +6910,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d60f09e1984c88b449d4439a3ccf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
+  isTutorial: 0
   goalMask:
     serializedVersion: 2
     m_Bits: 128
+  shootBtn: {fileID: 258153656}
   isShoot: 0
-  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
-  isTutorial: 0
 --- !u!114 &6751388636255219129
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -1,26 +1,30 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Player;
 using StarterAssets;
 using UnityEngine;
 
 public class PlayerCapture : MonoBehaviour
 {
+    //add sound file for shooting
+    public AudioClip shootAudio;
+    public bool isTutorial = false;
     public LayerMask goalMask;
+    public LongClickButton shootBtn;
+    
     private GameObject player;
     private float timer;                // count intervals between two captures
     private FirstPersonController playerController;
     [HideInInspector]public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
-    //add sound file for shooting
-    public AudioClip shootAudio;
-    public bool isTutorial = false;
-
+    
     void Start()
     {
         if (player == null)
             player = GameObject.FindGameObjectWithTag("Player");
         timer = 0.0f;
+        shootBtn = GetComponentInChildren<LongClickButton>();
         playerController = player.GetComponentInParent<FirstPersonController>();
     }
 
@@ -70,6 +74,7 @@ public class PlayerCapture : MonoBehaviour
                 {
                     GameManager.gm.currentGoal = goal;
                 }
+                goal.GetComponent<GoalMove>().shootBtn = shootBtn;
             }
         }
         gameObject.SendMessage("ShootingLaser");
@@ -79,5 +84,12 @@ public class PlayerCapture : MonoBehaviour
     public void ChangeMoveStatus(bool status)
     {
         playerController.changeMoveStatus(status);
+    }
+
+    public void SpeedUpGoal()
+    {
+        GameObject goal = SimpleGameManager.gm != null ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
+        GoalMove _goalMove = goal.GetComponent<GoalMove>();
+        _goalMove.SpeedUp(_goalMove.moveSpeed + 10);
     }
 }
