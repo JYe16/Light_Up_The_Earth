@@ -49,22 +49,13 @@ public class LaserControl : MonoBehaviour
         lineRenderer.SetPosition(0, startPos);
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
-        
-            // Console.WriteLine("this is the blackhole");
-            // endPos = curGoal.transform.position; 
-            // lineRenderer.SetPosition(1, endPos);
-            // laserBeam.transform.position = startPos;
-            // StartCoroutine(ReturnLaser(!curGoal));
-            
-       
-            endPos = curGoal == null
+        endPos = curGoal == null
                 ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
                 : curGoal.transform.position;
             lineRenderer.SetPosition(1, endPos);
             laserBeam.transform.position = startPos;
             // return laser
             StartCoroutine(ReturnLaser(!curGoal));
-            
         
 
        

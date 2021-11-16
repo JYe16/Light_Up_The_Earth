@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
 //using TreeEditor;
 using UnityEngine;
 
@@ -10,7 +11,7 @@ public class GoalMove : MonoBehaviour
     [HideInInspector]public AudioClip destroyGoalAudio;
     [HideInInspector]public GameObject explosion;
     // params about fracture
-    public GameObject fracturedPieces;
+    [CanBeNull]public GameObject fracturedPieces;
     public GameObject originalGoal;
     public float force;
     public float radius;
@@ -48,6 +49,7 @@ public class GoalMove : MonoBehaviour
         
         //激光的状态发生了改变
         laserControl.ChangeBackStatus(true);
+       
         gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
         {
             laserControl.ChangeBackStatus(false);
