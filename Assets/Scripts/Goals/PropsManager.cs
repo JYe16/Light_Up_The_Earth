@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PropsManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PropsManager : MonoBehaviour
     private Text powerWaterBtText;
     private Text bonusBtText;
     
-    private static int BOUNS_VALUE = 10;
+    private int BOUNS_VALUE = 10;
     private static int BONUS_TIME = 5;
     private static int BONUS_SPEED = 2;
     
@@ -56,7 +57,7 @@ public class PropsManager : MonoBehaviour
         bool canClick = count > 0 && GameManager.gm.currentGoal;
         if (canClick)
         {
-            DestoryGoal(GameManager.gm.currentGoal);
+            DestroyGoal(GameManager.gm.currentGoal);
         }
     }
 
@@ -82,7 +83,6 @@ public class PropsManager : MonoBehaviour
     {
         if(manager == null)  manager = GetComponent<PropsManager>();
         Init();
-        
     }
 
     private void OnDestroy()
@@ -92,6 +92,8 @@ public class PropsManager : MonoBehaviour
 
     private void Init()
     {
+        BOUNS_VALUE = Random.Range(10, 50);
+        
         propsCounter = new Dictionary<Gloable.PropsType, int>();
         
         bombBtText = bombBtn.GetComponentInChildren<Text>();
@@ -174,7 +176,7 @@ public class PropsManager : MonoBehaviour
         }
     }
 
-    public void DestoryGoal(GameObject goal)
+    private void DestroyGoal(GameObject goal)
     {
         GoalMove goalMove = goal.GetComponent<GoalMove>();
         goalMove.explosion = explosion;
@@ -183,9 +185,10 @@ public class PropsManager : MonoBehaviour
         propsCounter[Gloable.PropsType.BOMB]--;
     }
 
-    public void FastMove(GameObject goal)
+    private void FastMove(GameObject goal)
     {
-        goal.GetComponent<GoalMove>().moveSpeed *= BONUS_SPEED;
+        GoalMove _goalMove = goal.GetComponent<GoalMove>();
+        _goalMove.SpeedUp(_goalMove.moveSpeed * BONUS_SPEED);
         propsCounter[Gloable.PropsType.POWER_WATER]--;
         //play sound effect
         if (powerWaterAudio != null && PlayerPrefs.GetInt("sound") == 1)

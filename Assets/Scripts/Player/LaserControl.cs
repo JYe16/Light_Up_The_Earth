@@ -59,15 +59,18 @@ public class LaserControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (withNothing)
         {
-            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 6;
+            float duration = Gloable.BACK_WITH_NOTHING_RADIUS / Gloable.LASER_LINE_MOVE_SPEED;
             DragBack(duration);
         }
         else
         {
-            float distance = Vector3.Distance(shootPosition.position, curGoal.transform.position);
-            Vector3 distroyPos = distance > MIN_DISTORY_DISTANCE ? GetBoundaryPosition(shootPosition.position, MIN_DISTORY_DISTANCE) : curGoal.transform.position;
-            curGoal.GetComponent<GoalMove>().ReturnGoal(distroyPos, this);
-            lineRenderer.SetPosition(1, curGoal.transform.position);
+            if (curGoal != null && curGoal.transform != null)
+            {
+                float distance = Vector3.Distance(shootPosition.position, curGoal.transform.position);
+                Vector3 distroyPos = distance > MIN_DISTORY_DISTANCE ? GetBoundaryPosition(shootPosition.position, MIN_DISTORY_DISTANCE) : curGoal.transform.position;
+                curGoal.GetComponent<GoalMove>().ReturnGoal(distroyPos, this);
+                lineRenderer.SetPosition(1, curGoal.transform.position);
+            }
         }
     }
 
