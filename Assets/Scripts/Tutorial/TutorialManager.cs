@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
 	public Canvas controlsCanvas;
 	public Canvas propsCanvas;
 	public Canvas infoCanvas;
-	public Canvas loadingBar;
+	public GameObject loadingBar;
 	
 	public GameObject controlsGuide;
 	public GameObject infoGuide;
@@ -106,7 +106,7 @@ public class TutorialManager : MonoBehaviour
 	
 	private void SkipTutorial()
 	{
-		loadingBar.gameObject.SetActive(true); 
+		loadingBar.SetActive(true); 
 	}
 
 	private void NextStep()
