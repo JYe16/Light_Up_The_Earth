@@ -12,6 +12,8 @@ public class LaserControl : MonoBehaviour
     public Transform shootPosition;
     public GameObject laserBeam;
     public bool isTutorial = false;
+    public bool blackhole=false;
+    public GameObject BlackHolePos;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
     private Vector3 startPos, endPos;
@@ -47,22 +49,37 @@ public class LaserControl : MonoBehaviour
         lineRenderer.SetPosition(0, startPos);
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
-        endPos = curGoal == null ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4) : curGoal.transform.position;
-        lineRenderer.SetPosition(1, endPos);
-        laserBeam.transform.position = startPos;
-        // return laser
-        StartCoroutine(ReturnLaser(!curGoal));
+        
+            // Console.WriteLine("this is the blackhole");
+            // endPos = curGoal.transform.position; 
+            // lineRenderer.SetPosition(1, endPos);
+            // laserBeam.transform.position = startPos;
+            // StartCoroutine(ReturnLaser(!curGoal));
+            
+       
+            endPos = curGoal == null
+                ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
+                : curGoal.transform.position;
+            lineRenderer.SetPosition(1, endPos);
+            laserBeam.transform.position = startPos;
+            // return laser
+            StartCoroutine(ReturnLaser(!curGoal));
+            
+        
+
+       
     }
 
+    //光束的返回
     IEnumerator ReturnLaser(bool withNothing)
     {
         yield return new WaitForSeconds(1);
         if (withNothing)
         {
-            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 6;
+            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 30;
             DragBack(duration);
         }
-        else
+        else 
         {
             float distance = Vector3.Distance(shootPosition.position, curGoal.transform.position);
             Vector3 distroyPos = distance > MIN_DISTORY_DISTANCE ? GetBoundaryPosition(shootPosition.position, MIN_DISTORY_DISTANCE) : curGoal.transform.position;
@@ -71,6 +88,9 @@ public class LaserControl : MonoBehaviour
         }
     }
 
+
+
+    //将物体从远处拖回来
     private void DragBack(float duration)
     {
         DOTween.To(() => lineRenderer.GetPosition(1), newVal =>
@@ -85,7 +105,7 @@ public class LaserControl : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(middlePos);
         return initialPos + ray.direction.normalized * distance;
     }
-
+    
     private void DisableLaserBeam()
     {
         laserBeam.SetActive(false);
