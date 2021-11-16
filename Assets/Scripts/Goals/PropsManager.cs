@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 public class PropsManager : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class PropsManager : MonoBehaviour
     private Text powerWaterBtText;
     private Text bonusBtText;
     
-    private static int BOUNS_VALUE = 10;
+    private int BOUNS_VALUE = 10;
     private static int BONUS_TIME = 5;
     private static int BONUS_SPEED = 2;
     
@@ -82,7 +83,6 @@ public class PropsManager : MonoBehaviour
     {
         if(manager == null)  manager = GetComponent<PropsManager>();
         Init();
-        
     }
 
     private void OnDestroy()
@@ -92,6 +92,8 @@ public class PropsManager : MonoBehaviour
 
     private void Init()
     {
+        BOUNS_VALUE = Random.Range(10, 50);
+        
         propsCounter = new Dictionary<Gloable.PropsType, int>();
         
         bombBtText = bombBtn.GetComponentInChildren<Text>();
