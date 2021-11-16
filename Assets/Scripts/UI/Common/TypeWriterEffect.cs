@@ -10,20 +10,23 @@ namespace UI.Common
 		private string fullText;
 		private string curText = "";
 		private static float TIME_DELAY = 0.1f;
+		private bool isStart = false;
 
 		private void Update()
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (isStart && Input.GetMouseButtonDown(0))
 			{
 				StopAllCoroutines();
 				GetComponent<Text>().text = fullText;
 				SendMessageUpwards("TypeFinish", SendMessageOptions.DontRequireReceiver);
+				isStart = false;
 			}
 		}
 
 		public void StartType(string text)
 		{
 			fullText = text;
+			isStart = true;
 			StartCoroutine(TypeText());
 		}
 
