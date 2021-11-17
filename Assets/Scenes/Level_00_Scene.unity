@@ -1297,6 +1297,7 @@ GameObject:
   - component: {fileID: 668481578}
   - component: {fileID: 668481582}
   - component: {fileID: 668481579}
+  - component: {fileID: 668481580}
   m_Layer: 7
   m_Name: biack_hole
   m_TagString: Goal
@@ -1414,6 +1415,19 @@ MonoBehaviour:
   AbsorbSpeed: 130
   isArrived: 0
   isBlackHole: 1
+--- !u!114 &668481580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668481573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f800996331924452a86d5c3fd184b9d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 40
 --- !u!114 &668481582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3122,7 +3136,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1203467839}
   m_LocalRotation: {x: 0, y: 0, z: 0.043619405, w: 0.9990483}
-  m_LocalPosition: {x: 0.1, y: -0.2, z: -0.1}
+  m_LocalPosition: {x: 0, y: -0.2, z: -0.1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 668481577}
