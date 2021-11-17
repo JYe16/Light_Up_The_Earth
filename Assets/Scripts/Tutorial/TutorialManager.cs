@@ -13,7 +13,7 @@ public class TutorialManager : MonoBehaviour
 	public Canvas controlsCanvas;
 	public Canvas propsCanvas;
 	public Canvas infoCanvas;
-	public Canvas loadingBar;
+	public GameObject loadingBar;
 	
 	public GameObject controlsGuide;
 	public GameObject infoGuide;
@@ -37,10 +37,12 @@ public class TutorialManager : MonoBehaviour
 
 	private bool canClickBlank = false;
 	public static bool isPlaying = false;
+	private bool isShowFullText = false;
+	private bool isPause = false;
 	
 	void Start()
 	{
-		centerText.GetComponent<TypeWriterEffect>().StartType(WELCOME_INTRO);
+		StartType(WELCOME_INTRO);
 
 		skipBtn.gameObject.SetActive(false);
 		skipBtn.onClick.AddListener(SkipTutorial);
@@ -63,13 +65,25 @@ public class TutorialManager : MonoBehaviour
 	
 	private void Update()
 	{
-		if (canClickBlank && Input.GetMouseButtonDown(0))
+		if (!isPause && isShowFullText && Input.GetMouseButtonDown(0))
 		{
-			NextStep();
+			if (canClickBlank)
+			{
+				NextStep();
+			}
+			else
+			{
+				BeforeNextStep();
+			}
 		}
 	}
 
 	public void TypeFinish()
+	{
+		isShowFullText = true;
+	}
+
+	private void BeforeNextStep()
 	{
 		switch (curStep) 
 		{
@@ -92,7 +106,7 @@ public class TutorialManager : MonoBehaviour
 	
 	private void SkipTutorial()
 	{
-		loadingBar.gameObject.SetActive(true); 
+		loadingBar.SetActive(true); 
 	}
 
 	private void NextStep()
@@ -103,27 +117,27 @@ public class TutorialManager : MonoBehaviour
 			case 0:
 				skipBtn.gameObject.SetActive(false);
 				goBtn.gameObject.SetActive(false);
-				centerText.GetComponent<TypeWriterEffect>().StartType(OPERATIONS_INTRO);
+				StartType(OPERATIONS_INTRO);
 				break;
 			case 1:
-				centerText.GetComponent<TypeWriterEffect>().ClearContent();
+				ClearContent();
 				ShowHighlights(controlsCanvas, controlsGuide);
 				canClickBlank = true;
 				break;
 			case 2:
 				HideHighlights(controlsCanvas, controlsGuide);
-				centerText.GetComponent<TypeWriterEffect>().StartType(INFO_INTRO);
+				StartType(INFO_INTRO);
 				ShowHighlights(infoCanvas, infoGuide);
 				break;
 			case 3:
 				HideHighlights(infoCanvas, infoGuide);
-				centerText.GetComponent<TypeWriterEffect>().StartType(EXPLORE_INTRO);
+				StartType(EXPLORE_INTRO);
 				break;
 			case 4:
 				HideMaskAndStart();
 				break;
 			case 5:
-				centerText.GetComponent<TypeWriterEffect>().ClearContent();
+				ClearContent();
 				PropsGuide();
 				break;
 			case 6:
@@ -133,10 +147,10 @@ public class TutorialManager : MonoBehaviour
 				PropsGuide();
 				break;
 			case 11:
-				centerText.GetComponent<TypeWriterEffect>().StartType(GOAL_GUIDE_2);
+				StartType(GOAL_GUIDE_2);
 				break;
 			case 12:
-				centerText.GetComponent<TypeWriterEffect>().StartType(FINISH_INTRO);
+				StartType(FINISH_INTRO);
 				break;
 			case 13: // end of tutorial
 				startBtn.gameObject.SetActive(true);
@@ -145,12 +159,24 @@ public class TutorialManager : MonoBehaviour
 		curStep++;
 	}
 
-	private void HideMaskAndStart()
+	private void StartType(string info)
+	{
+		isShowFullText = false;
+		centerText.GetComponent<TypeWriterEffect>().StartType(info);
+	}
+
+	private void ClearContent()
 	{
 		centerText.GetComponent<TypeWriterEffect>().ClearContent();
+	}
+
+	private void HideMaskAndStart()
+	{
+		ClearContent();
 		mask.DOFade(0, 0.4f).OnComplete(() =>
 		{
 			mask.enabled = false;
+			isPause = true;
 			ChangeOverrideSortings(false);
 			SimpleGameManager.gm.PauseGame(false);
 		});
@@ -181,7 +207,7 @@ public class TutorialManager : MonoBehaviour
 				break;
 			case 9:
 				HideHighlights(propsCanvas, propsGuides[3]);
-				centerText.GetComponent<TypeWriterEffect>().StartType(PROPS_USE_INTRO);
+				StartType(PROPS_USE_INTRO);
 				break;
 		}
 	}
@@ -191,8 +217,9 @@ public class TutorialManager : MonoBehaviour
 		mask.DOFade(0.8f, 0.4f).OnComplete(() =>
 		{
 			mask.enabled = true;
+			isPause = false;
 			ChangeOverrideSortings(true);
-			centerText.GetComponent<TypeWriterEffect>().StartType(PROPS_INTRO);
+			StartType(PROPS_INTRO);
 		});
 	}
 
@@ -201,8 +228,9 @@ public class TutorialManager : MonoBehaviour
 		mask.DOFade(0.8f, 0.4f).OnComplete(() =>
 		{
 			mask.enabled = true;
+			isPause = false;
 			ChangeOverrideSortings(true);
-			centerText.GetComponent<TypeWriterEffect>().StartType(GOAL_GUIDE_1);
+			StartType(GOAL_GUIDE_1);
 			curStep++;
 		});
 	}
