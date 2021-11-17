@@ -31,7 +31,7 @@ public class LoadSceneEvents : MonoBehaviour
                 SceneManager.LoadScene("StartPage");
         }
         
-        public void PlayAgainOnClick()
+        public void PlayAgainOnClick(GameObject loadingBar)
         {
                 GameObject overMusic = GameObject.Find("gameOverMusic");
                 if (overMusic != null)
@@ -48,7 +48,7 @@ public class LoadSceneEvents : MonoBehaviour
                         launchMusicSource.DOFade(0, 2).OnComplete(() => Destroy(launchMusic.gameObject));
                         StartPage.isPlaying = false;
                 }
-                SceneManager.LoadScene("LoadingPage");
+                loadingBar.SetActive(true); 
         }
         
         public void GameOverOnClick()
