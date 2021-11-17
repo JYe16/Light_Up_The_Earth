@@ -62,7 +62,6 @@ public class LaserControl : MonoBehaviour
             {
                 DisableLaserBeam();
                 curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
-               
             }
             else
             {
@@ -76,7 +75,7 @@ public class LaserControl : MonoBehaviour
         yield return new WaitForSeconds(1);
         if (withNothing)
         {
-            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 30;
+            float duration = Gloable.MAX_CAPTURE_RADIUS / Gloable.LASER_LINE_MOVE_SPEED / 60;
             DragBack(duration);
         }
         else 
