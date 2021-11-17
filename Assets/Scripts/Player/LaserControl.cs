@@ -12,8 +12,7 @@ public class LaserControl : MonoBehaviour
     public Transform shootPosition;
     public GameObject laserBeam;
     public bool isTutorial = false;
-    public bool blackhole=false;
-    public GameObject BlackHolePos;
+    
     private GameObject curGoal;
     private LineRenderer lineRenderer;
     private Vector3 startPos, endPos;
@@ -35,6 +34,10 @@ public class LaserControl : MonoBehaviour
                 : GameManager.gm.currentGoal.transform.position;
             lineRenderer.SetPosition(1, endPos);
         }
+        if (curGoal.GetComponent<BlackHoleMovement>().isArrived == true)
+        {
+            GameManager.gm.gameState = GameManager.GameState.GameOver;
+        }
     }
 
     public void ChangeBackStatus(bool backStatus)
@@ -55,10 +58,16 @@ public class LaserControl : MonoBehaviour
             lineRenderer.SetPosition(1, endPos);
             laserBeam.transform.position = startPos;
             // return laser
-            StartCoroutine(ReturnLaser(!curGoal));
-        
-
-       
+            if (curGoal.GetComponent<GoalValue>().isBlackHole)
+            {
+                DisableLaserBeam();
+                curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
+               
+            }
+            else
+            {
+                StartCoroutine(ReturnLaser(!curGoal));
+            }
     }
 
     //光束的返回

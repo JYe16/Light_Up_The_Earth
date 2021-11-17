@@ -10,7 +10,7 @@ public class GoalValue : MonoBehaviour
     public int value;   // earned score after capture this goal
     public AudioClip captureGoalAudio;
     public bool isProps = false;
-    
+    public bool isBlackHole =false;
     [HideInInspector]public bool isCaptured;
     private Gloable.PropsType type;
 

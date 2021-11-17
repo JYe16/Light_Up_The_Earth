@@ -1294,11 +1294,9 @@ GameObject:
   - component: {fileID: 668481576}
   - component: {fileID: 668481575}
   - component: {fileID: 668481574}
-  - component: {fileID: 668481579}
   - component: {fileID: 668481578}
-  - component: {fileID: 668481580}
-  - component: {fileID: 668481581}
   - component: {fileID: 668481582}
+  - component: {fileID: 668481579}
   m_Layer: 7
   m_Name: biack_hole
   m_TagString: Goal
@@ -1408,46 +1406,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 668481573}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f800996331924452a86d5c3fd184b9d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 40
---- !u!114 &668481580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668481573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyGoalAudio: {fileID: 0}
-  explosion: {fileID: 0}
-  fracturedPieces: {fileID: 0}
-  originalGoal: {fileID: 668481573}
-  force: 100
-  radius: 25
-  moveSpeed: 100
-  isTutorial: 0
---- !u!114 &668481581
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668481573}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0ee58be152064ebfb1d2ed48fd9cc27b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fracturedPieces: {fileID: 0}
-  originalGoal: {fileID: 8616685848858191198}
-  AbsorbSpeed: 20
-  isTutorial: 0
+  SpaceShip: {fileID: 8616685848858191198}
+  laserControl: {fileID: 0}
+  AbsorbSpeed: 130
+  isArrived: 0
+  isBlackHole: 1
 --- !u!114 &668481582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1463,6 +1429,7 @@ MonoBehaviour:
   value: 0
   captureGoalAudio: {fileID: 0}
   isProps: 0
+  isBlackHole: 1
   isCaptured: 0
 --- !u!1 &704502500
 GameObject:
@@ -5055,11 +5022,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.8600006
+      value: -2.7200012
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1099854
+      value: 4.1299744
       objectReference: {fileID: 0}
     - target: {fileID: 9005220659476430818, guid: 2d3a85ecde41a8246a79669975912b74, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5465,7 +5432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1879123022}
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 95, y: 1121, z: -98}
+  m_LocalPosition: {x: 92, y: 2154, z: -16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1142639665}
@@ -5756,11 +5723,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.8600006
+      value: -2.7200012
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.1099854
+      value: 4.1299744
       objectReference: {fileID: 0}
     - target: {fileID: 8762286023885395322, guid: 9c489a8547f4d9e4387da15a4ff82c81, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6429,7 +6396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4135013735425514501}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -13.09, y: -5.86, z: 18}
+  m_LocalPosition: {x: -13.09, y: -4.72, z: 21.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8997996946948079588}
@@ -6944,8 +6911,6 @@ MonoBehaviour:
   shootPosition: {fileID: 1433787969325446565}
   laserBeam: {fileID: 0}
   isTutorial: 0
-  blackhole: 0
-  BlackHolePos: {fileID: 668481573}
 --- !u!1 &7113428976713431642
 GameObject:
   m_ObjectHideFlags: 0
