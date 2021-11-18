@@ -14,7 +14,7 @@ EditorBuildSettings:
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/LoadingPage.unity
     guid: 85ec27b2d2679a144916ec022469cada
   - enabled: 1
