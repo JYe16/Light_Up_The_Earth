@@ -9,6 +9,7 @@ TagManager:
   - PlayerController
   - TimeHandle
   - CinemachineTarget
+  - Shoot Button
   layers:
   - Default
   - TransparentFX

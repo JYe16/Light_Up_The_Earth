@@ -2,6 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
+using Player;
 //using TreeEditor;
 using UnityEngine;
 
@@ -9,6 +12,7 @@ public class GoalMove : MonoBehaviour
 {
     [HideInInspector]public AudioClip destroyGoalAudio;
     [HideInInspector]public GameObject explosion;
+    [HideInInspector]public bool isReturn = false;
     // params about fracture
     public GameObject fracturedPieces;
     public GameObject originalGoal;
@@ -18,13 +22,18 @@ public class GoalMove : MonoBehaviour
     public bool isTutorial = false;
     
     private bool hideCompleteModel = false;
-    private float distance;
     private GoalValue goalValue;
     private float destroyPiecesDuration = 5.0f;
     private LaserControl laserControl;
+    private float maxSpeed;
+    private Tweener moveTween;
+    private Vector3 distroyPos;
+    [HideInInspector]public LongClickButton shootBtn;
+    
     void Start()
     {
         goalValue = GetComponent<GoalValue>();
+        maxSpeed = 2.5f * moveSpeed;
     }
 
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
@@ -37,12 +46,18 @@ public class GoalMove : MonoBehaviour
         {
             GetComponent<RotateBySelf>().enabled = false;
         }
+        isReturn = true;
+        // enable long click button
+        shootBtn.isActive = true;
         this.laserControl = laserControl;
-        distance = Vector3.Distance(transform.position, distroyPos);
+        this.distroyPos = distroyPos;
+        float distance = Vector3.Distance(transform.position, distroyPos);
         laserControl.ChangeBackStatus(true);
-        gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
+        moveTween = gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
         {
             laserControl.ChangeBackStatus(false);
+            // disable long click button
+            shootBtn.isActive = false;
             AfterReturn();
         });
     }
@@ -97,5 +112,13 @@ public class GoalMove : MonoBehaviour
         }
         // change speed to lase line speed after explosion
         moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+    }
+
+    public void SpeedUp(float targetSpeed)
+    {
+        if (moveSpeed > maxSpeed) return;
+        moveSpeed = targetSpeed;
+        float distance = Vector3.Distance(transform.position, distroyPos);
+        moveTween.ChangeValues(transform.position, distroyPos, distance / moveSpeed);
     }
 }

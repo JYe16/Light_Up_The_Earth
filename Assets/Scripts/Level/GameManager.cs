@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     //mesh materials
     public Mesh[] platforms;
     public GameObject gamePlayMusic;
-    
+    public GameObject gameOverMusic;
     private int targetScore;
     private GameObject player;
 
@@ -47,13 +47,15 @@ public class GameManager : MonoBehaviour
         if (PlayerPrefs.HasKey("level"))
         {
             currentLevel = PlayerPrefs.GetInt("level") + 1;
-            //targetScore = 30 + (10 * (currentLevel - 1));
-            targetScore = 30 + (90 * (currentLevel - 1));
+            targetScore = PlayerPrefs.GetInt("t_score");
+            targetScore += (50 * (currentLevel - 1));
+            PlayerPrefs.SetInt("t_score", targetScore);
         }
         else
         {
             currentLevel = 1;
-            targetScore = 30;
+            targetScore = 100;
+            PlayerPrefs.SetInt("t_score", targetScore);
         }
         PlayerPrefs.SetInt("level", currentLevel);
         InitUI();
@@ -61,6 +63,7 @@ public class GameManager : MonoBehaviour
         InitSpawner();
         gm.gameState = GameState.Playing;
         //start playing music if no bgm is currently playing
+		DontDestroyOnLoad(gameOverMusic.gameObject);
         if(TutorialManager.isPlaying == false)
         {
             DontDestroyOnLoad(gamePlayMusic.gameObject);
@@ -113,8 +116,8 @@ public class GameManager : MonoBehaviour
                 //use dofade
                 AudioSource playMusicSource = playMusic.GetComponent<AudioSource>();
                 playMusicSource.DOFade(0, 2).OnComplete(() => Destroy(playMusic.gameObject));
-                //Destroy(playMusic.gameObject);
                 TutorialManager.isPlaying = false;
+				gameOverMusic.gameObject.GetComponent<AudioSource>().Play();
                 SceneManager.LoadScene("GameOver");
                 break;
         }
