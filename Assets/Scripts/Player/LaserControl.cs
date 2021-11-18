@@ -50,24 +50,20 @@ public class LaserControl : MonoBehaviour
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
         
-            // Console.WriteLine("this is the blackhole");
-            // endPos = curGoal.transform.position; 
-            // lineRenderer.SetPosition(1, endPos);
-            // laserBeam.transform.position = startPos;
-            // StartCoroutine(ReturnLaser(!curGoal));
-            
-       
             endPos = curGoal == null
                 ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
                 : curGoal.transform.position;
             lineRenderer.SetPosition(1, endPos);
             laserBeam.transform.position = startPos;
-            // return laser
-            StartCoroutine(ReturnLaser(!curGoal));
-            
-        
-
-       
+            if (curGoal != null && curGoal.GetComponent<GoalValue>().isBlackHole)
+            {
+                DisableLaserBeam();
+                curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
+            }
+            else
+            {
+                StartCoroutine(ReturnLaser(!curGoal));
+            }
     }
 
     //光束的返回
