@@ -25,6 +25,7 @@ public class RandomSpawner : MonoBehaviour
         public int valuelessSum;
 		//道具总数
         public int propsSum;
+        
     }
 
     [System.Serializable]
@@ -47,6 +48,7 @@ public class RandomSpawner : MonoBehaviour
         AddObject(spawnerData.valuelessSum, valuelessPrefabList);
         AddObject(spawnerData.valuableSum, valuablePrefabList);
         AddObject(spawnerData.propsSum, propsPrefabList);
+       
     }
 
     private void AddObject(int count, GameObject[] prefabs)
@@ -66,7 +68,7 @@ public class RandomSpawner : MonoBehaviour
         }
     }
 
-    // spawn in a ring area
+    // spawn in a ring area 在一个区域内产生一个物体
     public Vector3 RingAreaPos(float innerRadius, float outerRadius, Vector3 centerPos, float objHeight)
     {
         Vector3 position;

@@ -52,6 +52,7 @@ public class GoalValue : MonoBehaviour
                 }
             }
         }
+        
         // for tutorial level
         if (SimpleGameManager.gm != null)
         {
