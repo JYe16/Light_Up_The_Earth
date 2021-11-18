@@ -22,8 +22,8 @@ public class BlackHoleMovement : MonoBehaviour
     public void SpaceshipMovement()
     {
         float distance = Vector3.Distance(SpaceShip.transform.position, transform.position)-100f;
-        SpaceShip.transform.DOMove(transform.position, distance / AbsorbSpeed);
-        StartCoroutine(Reach(10f));
+        SpaceShip.transform.DOMove(transform.position, distance/3/ AbsorbSpeed);
+        StartCoroutine(Reach(3f));
     }
 
     IEnumerator Reach(float delay)
