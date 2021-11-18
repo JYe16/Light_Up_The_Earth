@@ -11,6 +11,8 @@ public class DisplayRank : MonoBehaviour
     public Text rankNameText;
     public Text rankScoreText;
     public Text rankLevelText;
+	
+    public GameObject loadPanel;
     
     // private string rank = "";
 	string rankName = "";
@@ -20,6 +22,7 @@ public class DisplayRank : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		loadPanel.SetActive(true);
        	string content = Utils.ReadDataFromFile("Rank.json");
         if (content != "")
         {

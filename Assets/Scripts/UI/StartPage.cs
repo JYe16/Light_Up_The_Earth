@@ -17,6 +17,9 @@ public class StartPage : MonoBehaviour
     public Button musicBtn;
     public GameObject soundOffImg;
     public GameObject musicOffImg;
+
+	public GameObject fadePanel;
+    public GameObject loadPanel;
     
 	public GameObject gameLaunchMusic;
 	public Button startBtn;
@@ -27,6 +30,7 @@ public class StartPage : MonoBehaviour
 	private GameObject settingPanelBody;
     void Start()
     {
+		loadPanel.SetActive(true);
 	    //add onClick functions to all buttons
         AddEventListeners();
         //set playerprefs for sound&music settings
@@ -146,6 +150,7 @@ public class StartPage : MonoBehaviour
 	public void NewGameOnClick()
     {
         Utils.clearCache();
+		fadePanel.SetActive(true);
         SceneManager.LoadScene("Story_Plot");
     }
 }
