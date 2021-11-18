@@ -10,9 +10,11 @@ public class StoryPlot : MonoBehaviour
 	public GameObject[] storyPics;
 	public Button continue_btn;
 	private int curIndex = 0;
+	public GameObject loadPanel;
 
 	private void Start()
 	{
+		loadPanel.SetActive(true);
 		continue_btn.onClick.AddListener(OnClickContinue);
 		DisplayStory();
 	}
