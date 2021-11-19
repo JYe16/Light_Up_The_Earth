@@ -12,6 +12,8 @@ public class LaserControl : MonoBehaviour
     public Transform shootPosition;
     public GameObject laserBeam;
     public bool isTutorial = false;
+    public bool blackhole=false;
+    public GameObject BlackHolePos;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
     private Vector3 startPos, endPos;
@@ -47,13 +49,24 @@ public class LaserControl : MonoBehaviour
         lineRenderer.SetPosition(0, startPos);
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
-        endPos = curGoal == null ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4) : curGoal.transform.position;
-        lineRenderer.SetPosition(1, endPos);
-        laserBeam.transform.position = startPos;
-        // return laser
-        StartCoroutine(ReturnLaser(!curGoal));
+        
+            endPos = curGoal == null
+                ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
+                : curGoal.transform.position;
+            lineRenderer.SetPosition(1, endPos);
+            laserBeam.transform.position = startPos;
+            if (curGoal != null && curGoal.GetComponent<GoalValue>().isBlackHole)
+            {
+                DisableLaserBeam();
+                curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
+            }
+            else
+            {
+                StartCoroutine(ReturnLaser(!curGoal));
+            }
     }
 
+    //光束的返回
     IEnumerator ReturnLaser(bool withNothing)
     {
         yield return new WaitForSeconds(1);
@@ -62,7 +75,7 @@ public class LaserControl : MonoBehaviour
             float duration = Gloable.BACK_WITH_NOTHING_RADIUS / Gloable.LASER_LINE_MOVE_SPEED;
             DragBack(duration);
         }
-        else
+        else 
         {
             if (curGoal != null && curGoal.transform != null)
             {
@@ -74,6 +87,9 @@ public class LaserControl : MonoBehaviour
         }
     }
 
+
+
+    //将物体从远处拖回来
     private void DragBack(float duration)
     {
         DOTween.To(() => lineRenderer.GetPosition(1), newVal =>
@@ -88,7 +104,7 @@ public class LaserControl : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(middlePos);
         return initialPos + ray.direction.normalized * distance;
     }
-
+    
     private void DisableLaserBeam()
     {
         laserBeam.SetActive(false);

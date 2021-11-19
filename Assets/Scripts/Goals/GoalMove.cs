@@ -38,10 +38,13 @@ public class GoalMove : MonoBehaviour
 
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
     {
+        //判断当前游戏状态
         bool isPause = isTutorial
             ? SimpleGameManager.gm.pauseGame
             : GameManager.gm.gameState == GameManager.GameState.Pausing;
+        //看是不是暂停或者已经抓住了
         if (isPause || goalValue.isCaptured) return;
+        //如果在return了，那么停止之前的旋转
         if (GetComponent<RotateBySelf>())
         {
             GetComponent<RotateBySelf>().enabled = false;
@@ -62,6 +65,7 @@ public class GoalMove : MonoBehaviour
         });
     }
 
+    //在拉回物体会的状态
     private void AfterReturn()
     {
         goalValue.isCaptured = true;
@@ -71,6 +75,7 @@ public class GoalMove : MonoBehaviour
         DestroyGoal();
     }
 
+    //销毁物体
     private void DestroyGoal()
     {
         foreach (Transform child in transform) {
