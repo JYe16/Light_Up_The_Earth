@@ -1642,8 +1642,12 @@ MonoBehaviour:
   SpaceShip: {fileID: 8616685848858191198}
   laserControl: {fileID: 0}
   AbsorbSpeed: 130
+  canvasGroup: {fileID: 1495845378}
   isArrived: 0
+  isCaptured: 0
   isBlackHole: 1
+  alpha: 1
+  darken: 2
 --- !u!114 &668481582
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4702,13 +4706,15 @@ GameObject:
   - component: {fileID: 1495845377}
   - component: {fileID: 1495845380}
   - component: {fileID: 1495845379}
+  - component: {fileID: 1495845378}
+  - component: {fileID: 1495845381}
   m_Layer: 5
   m_Name: Panel Mask
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1495845377
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4718,7 +4724,7 @@ RectTransform:
   m_GameObject: {fileID: 1495845376}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.82142854, y: 0.82142854, z: 0.82142854}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
   m_Children:
   - {fileID: 581581047}
   - {fileID: 140814659}
@@ -4728,8 +4734,20 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 290, y: 133.92859}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &1495845378
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495845376}
+  m_Enabled: 1
+  m_Alpha: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
 --- !u!114 &1495845379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4743,7 +4761,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.7058824}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4768,6 +4786,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495845376}
   m_CullTransparentMesh: 1
+--- !u!114 &1495845381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495845376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb7c133f084444079a0c291b7e79999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1495845378}
+  darken: 2
+  alpha: 1
 --- !u!1 &1524692076
 GameObject:
   m_ObjectHideFlags: 0
