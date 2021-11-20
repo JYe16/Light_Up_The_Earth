@@ -33,9 +33,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverMusic;
     private int targetScore;
     private GameObject player;
+	public GameObject movingObstacle;
 
     void Start()
     {
+		Debug.Log(movingObstacle.transform.position);
         //generate a random number for selecting skybox
         RenderSettings.skybox = skyboxes[Random.Range(0, skyboxes.Length)];
         //TODO: get correct mesh files and then uncomment the next line
@@ -102,7 +104,7 @@ public class GameManager : MonoBehaviour
                         gm.gameState = GameState.Winning;
                     }
                 }
-                break;
+				break;
             case GameState.Winning:
                 //calculate the base score for the next level
                 int newBase = currentScore - targetScore;

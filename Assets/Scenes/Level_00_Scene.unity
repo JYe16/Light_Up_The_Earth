@@ -3240,7 +3240,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1201463266}
   m_LocalRotation: {x: -0.6532815, y: 0.27059805, z: 0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0, y: -40, z: -350}
+  m_LocalPosition: {x: -50, y: -40, z: -450}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children:
   - {fileID: 1706018129}
@@ -4740,6 +4740,7 @@ MonoBehaviour:
   - {fileID: 5711235773885862091, guid: 24913bd607afc4cc5b156f89aaf876a0, type: 3}
   gamePlayMusic: {fileID: 1525737366}
   gameOverMusic: {fileID: 1662734671}
+  movingObstacle: {fileID: 1201463266}
 --- !u!4 &1547580588
 Transform:
   m_ObjectHideFlags: 0
