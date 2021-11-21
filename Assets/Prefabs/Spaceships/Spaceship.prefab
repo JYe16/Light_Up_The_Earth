@@ -174,7 +174,6 @@ GameObject:
   - component: {fileID: 4422859826265167020}
   - component: {fileID: 4422859826266166892}
   - component: {fileID: 646287725}
-  - component: {fileID: 539488021}
   m_Layer: 8
   m_Name: Spaceship
   m_TagString: Spaceship
@@ -261,22 +260,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 5.551433, y: 5.195125, z: 1.8846619}
   m_Center: {x: -0.7261924, y: -0.3131798, z: -0.08532429}
---- !u!114 &539488021
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4422859826264164524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e1beae92e154d8380c5c5f01b34d4ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damage: 10
-  shootPosition: {fileID: 4422859826264396938}
-  shootingRange: 1000
-  fireLaserPrefab: {fileID: 1196979219824787962, guid: 0064470fb145b4ab49bcce6912d6a4e4, type: 3}
 --- !u!1 &4422859826264164526
 GameObject:
   m_ObjectHideFlags: 0

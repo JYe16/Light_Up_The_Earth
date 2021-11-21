@@ -14,7 +14,7 @@ public static class Utils
     public static string ReadDataFromFile(string fileName)
     {
         string path = GetFilePath(fileName);
-		Debug.Log(path);
+		// Debug.Log(path);
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))

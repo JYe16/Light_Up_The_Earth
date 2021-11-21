@@ -11,7 +11,8 @@ public class LaserControl : MonoBehaviour
     public GameObject laserBeamPrefab;
     public Transform shootPosition;
     public bool isTutorial = false;
-    
+
+    private bool isActive = false;
     private GameObject laserBeam;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
@@ -44,6 +45,7 @@ public class LaserControl : MonoBehaviour
     
     public void ShootingLaser()
     {
+        isActive = true;
         EnableLaserBeam();
         startPos = shootPosition.transform.position;
         lineRenderer.SetPosition(0, startPos);
@@ -116,5 +118,19 @@ public class LaserControl : MonoBehaviour
         PlayerCapture playerCapture = GetComponent<PlayerCapture>();
         playerCapture.isShoot = false;
         playerCapture.ChangeMoveStatus(true);
+        isActive = false;
+    }
+
+    // when fire
+    public void StopCapture()
+    {
+        if (isActive)
+        {
+            if (curGoal != null)
+            {
+                curGoal.GetComponent<GoalMove>().StopMove();
+            }
+            HideLaserEnableMove();
+        }
     }
 }

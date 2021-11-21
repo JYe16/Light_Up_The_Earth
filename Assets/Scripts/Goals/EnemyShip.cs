@@ -103,7 +103,10 @@ public class EnemyShip : MonoBehaviour
         
         int score = GameManager.gm.currentScore >= damage ? damage : GameManager.gm.currentScore;
         GameManager.gm.currentScore -= score;
-        ShowCenterTip(failTip, score.ToString(), "crystals");
+        if (score > 0)
+        {
+            ShowCenterTip(failTip, score.ToString(), "crystals");
+        }
         DestroyEnemy();
     }
 
@@ -114,7 +117,10 @@ public class EnemyShip : MonoBehaviour
         if (health <= 0)
         {
             GameManager.gm.currentScore += value;
-            ShowCenterTip(successTip, value.ToString(), "crystals");
+            if (value > 0)
+            {
+                ShowCenterTip(successTip, value.ToString(), "crystals");
+            }
             DestroyEnemy();
         }
     }

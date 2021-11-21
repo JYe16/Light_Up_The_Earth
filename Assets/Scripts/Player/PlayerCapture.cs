@@ -12,7 +12,7 @@ public class PlayerCapture : MonoBehaviour
     public bool isTutorial = false;
     public LayerMask goalMask;
     public LongClickButton shootBtn;
-    
+
     private GameObject player;
     private float timer;                // count intervals between two captures
     private FirstPersonController playerController;
@@ -91,5 +91,10 @@ public class PlayerCapture : MonoBehaviour
         GameObject goal = SimpleGameManager.gm != null ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
         GoalMove _goalMove = goal.GetComponent<GoalMove>();
         _goalMove.SpeedUp(_goalMove.moveSpeed + 10);
+    }
+
+    public void StopCapture()
+    {
+        
     }
 }

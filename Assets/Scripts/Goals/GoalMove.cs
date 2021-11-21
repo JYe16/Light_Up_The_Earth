@@ -7,6 +7,7 @@ using DG.Tweening.Plugins.Options;
 using Player;
 //using TreeEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GoalMove : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class GoalMove : MonoBehaviour
     public bool isTutorial = false;
     
     private bool hideCompleteModel = false;
+    private bool isDestroy = false;
     private GoalValue goalValue;
     private float destroyPiecesDuration = 5.0f;
     private LaserControl laserControl;
@@ -34,6 +36,15 @@ public class GoalMove : MonoBehaviour
     {
         goalValue = GetComponent<GoalValue>();
         maxSpeed = 2.5f * moveSpeed;
+    }
+
+    private void Update()
+    {
+        if (isDestroy)
+        {
+            StartCoroutine(CoolDownShootButton());
+            isDestroy = false;
+        }
     }
 
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
@@ -51,24 +62,29 @@ public class GoalMove : MonoBehaviour
         shootBtn.isActive = true;
         this.laserControl = laserControl;
         this.distroyPos = distroyPos;
-        float distance = Vector3.Distance(transform.position, distroyPos);
         laserControl.ChangeBackStatus(true);
-        moveTween = gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
-        {
-            laserControl.ChangeBackStatus(false);
-            // disable long click button
-            shootBtn.isActive = false;
-            AfterReturn();
-        });
+        // move goal
+        float distance = Vector3.Distance(transform.position, distroyPos);
+        moveTween = gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(AfterReturn);
     }
 
     private void AfterReturn()
     {
+        laserControl.ChangeBackStatus(false);
+        // disable long click button
+        shootBtn.isActive = false;
         goalValue.isCaptured = true;
         if(!hideCompleteModel) goalValue.CapturedEffect();
         // hide laser line
         laserControl.HideLaserEnableMove();
         DestroyGoal();
+    }
+
+    IEnumerator CoolDownShootButton()
+    {
+        shootBtn.gameObject.GetComponent<Button>().interactable = false;
+        yield return new WaitForSeconds(1);
+        shootBtn.gameObject.GetComponent<Button>().interactable = true;
     }
 
     private void DestroyGoal()
@@ -77,6 +93,7 @@ public class GoalMove : MonoBehaviour
             Destroy(child.gameObject);
         }
         Destroy(gameObject);
+        isDestroy = true;
     }
 
     public void ExplosionAndHide()
@@ -120,5 +137,10 @@ public class GoalMove : MonoBehaviour
         moveSpeed = targetSpeed;
         float distance = Vector3.Distance(transform.position, distroyPos);
         moveTween.ChangeValues(transform.position, distroyPos, distance / moveSpeed);
+    }
+
+    public void StopMove()
+    {
+        moveSpeed = 0;
     }
 }

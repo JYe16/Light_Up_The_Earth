@@ -22,15 +22,13 @@ public class FireShoot : MonoBehaviour
 		DisableLaser();
 	}
 
-	private void Update()
+	public void Fire()
 	{
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			Shoot();
-		}
+		SendMessage("StopCapture", SendMessageOptions.DontRequireReceiver);
+		DisplayFire();
 	}
 
-	private void Shoot()
+	private void DisplayFire()
 	{
 		Vector2 middlePos = new Vector2(Screen.width / 2, Screen.height / 2);
 		Ray ray = mainCam.ScreenPointToRay(middlePos);
@@ -51,7 +49,7 @@ public class FireShoot : MonoBehaviour
 			}
 		}
 	}
-
+	
 	IEnumerator DisplayFireLaser(Vector3 startPos, Vector3 endPos)
 	{
 		EnableLaser();
