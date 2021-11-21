@@ -370,7 +370,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3786948766358546220}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 40, y: 40, z: 40}
   m_Children:
@@ -378,7 +378,7 @@ Transform:
   - {fileID: 8498784207741147695}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &3272195044080919058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -393,12 +393,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
+  isReturn: 0
   fracturedPieces: {fileID: 7368555882940184080}
   originalGoal: {fileID: 6610194256137682340}
   force: 90
   radius: 20
   moveSpeed: 32
   isTutorial: 0
+  shootBtn: {fileID: 0}
 --- !u!114 &934872175360610150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,6 +416,7 @@ MonoBehaviour:
   value: 70
   captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
   isProps: 0
+  isBlackHole: 0
   isCaptured: 0
 --- !u!65 &613009055340283002
 BoxCollider:
