@@ -7,16 +7,10 @@ public class BlackHoleMovement : MonoBehaviour
 {
 
     public GameObject SpaceShip;
-    public LaserControl laserControl;
     public float AbsorbSpeed;
     public CanvasGroup canvasGroup;
     public bool isCaptured=false;
     public float darken = 2.0f;
-    
-    void Start()
-    {
-        laserControl = GetComponent<LaserControl>();
-    }
 
     private void Update()
     {
@@ -39,5 +33,4 @@ public class BlackHoleMovement : MonoBehaviour
         yield return new WaitForSeconds(delay);
         GameManager.gm.gameState = GameManager.GameState.GameOver;
     }
-
 }

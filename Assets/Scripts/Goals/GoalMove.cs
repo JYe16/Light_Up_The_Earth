@@ -104,6 +104,8 @@ public class GoalMove : MonoBehaviour
         Vector3 boundCenter = originalGoal.GetComponent<MeshFilter>().sharedMesh.bounds.center;
         Vector3 center = fracturedPieces.transform.localToWorldMatrix.MultiplyPoint(boundCenter);
         Transform rootTrans = fracturedPieces.transform;
+        // change speed to lase line speed after explosion
+        curSpeed = maxSpeed * 2;
         for (int i = 0; i < rootTrans.childCount; i++)
         {
             Transform pieceTrans = rootTrans.GetChild(i);
@@ -114,8 +116,6 @@ public class GoalMove : MonoBehaviour
                 Destroy(rootTrans.GetChild(i).gameObject, destroyPiecesDuration);
             }
         }
-        // change speed to lase line speed after explosion
-        curSpeed = Gloable.LASER_LINE_MOVE_SPEED * 2;
     }
 
     public void SpeedUp(float targetSpeed)

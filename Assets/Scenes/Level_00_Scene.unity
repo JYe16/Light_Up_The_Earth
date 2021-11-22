@@ -1784,7 +1784,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668481573}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
   m_Name: 
@@ -1813,11 +1813,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpaceShip: {fileID: 8616685848858191198}
-  laserControl: {fileID: 0}
   AbsorbSpeed: 130
   canvasGroup: {fileID: 1495845378}
   isCaptured: 0
-  alpha: 1
   darken: 2
 --- !u!114 &668481582
 MonoBehaviour:
@@ -5457,6 +5455,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1495845376}
   m_CullTransparentMesh: 1
+--- !u!114 &1495845381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495845376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfb7c133f084444079a0c291b7e79999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasGroup: {fileID: 1495845378}
+  darken: 2
+  alpha: 1
 --- !u!1 &1514620804
 GameObject:
   m_ObjectHideFlags: 0
@@ -5536,21 +5549,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1514620804}
   m_CullTransparentMesh: 1
---- !u!114 &1495845381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1495845376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bfb7c133f084444079a0c291b7e79999, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canvasGroup: {fileID: 1495845378}
-  darken: 2
-  alpha: 1
 --- !u!1 &1524692076
 GameObject:
   m_ObjectHideFlags: 0
