@@ -15,6 +15,8 @@ public class EnemyShip : MonoBehaviour
     
     public Image alert;
     public GameObject centerTip;
+
+    public GameObject infoItem;
     
     public Transform player;
     public LayerMask whatIsPlayer;
@@ -144,6 +146,7 @@ public class EnemyShip : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        Destroy(infoItem);
         Destroy(markDot, 0.5f);
         Destroy(gameObject, 0.5f);
     }
