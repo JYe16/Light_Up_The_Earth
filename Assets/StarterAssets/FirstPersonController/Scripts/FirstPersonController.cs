@@ -56,6 +56,10 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 		private const float _threshold = 2f; 
 		public bool canMove;
+
+		public Camera globalCamera;
+		public Canvas globalCamCanvas;
+		public RectTransform markDot;
 		
 		private void Awake()
 		{
@@ -79,6 +83,8 @@ namespace StarterAssets
 			{
 				Move();
 			}
+			// mark dot for player
+			Utils.WorldPosMapInCanvas(globalCamera, globalCamCanvas, markDot, transform);
 		}
 
 		private void LateUpdate()
@@ -144,11 +150,6 @@ namespace StarterAssets
 			else Gizmos.color = transparentRed;
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
-		}
-		
-		public void changeMoveStatus(bool status)
-		{
-			canMove = status;
 		}
 	}
 }
