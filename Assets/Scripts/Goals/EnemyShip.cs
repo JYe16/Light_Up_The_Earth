@@ -9,16 +9,18 @@ public class EnemyShip : MonoBehaviour
 {
     private NavMeshAgent agent;
     
-    public GameObject markDot;
-    public Canvas gloabalCamCanvas;
-    public Camera globalCamera;
+    [HideInInspector]public GameObject markDot;
+    [HideInInspector]public Canvas globalCamCanvas;
+    [HideInInspector]public Camera globalCamera;
     
-    public Image alert;
-    public GameObject centerTip;
+    [HideInInspector]public Image alert;
+    [HideInInspector]public GameObject centerTip;
 
-    public GameObject infoItem;
+    public Text no;
+
+    [HideInInspector]public GameObject infoItem;
     
-    public Transform player;
+    [HideInInspector]public Transform player;
     public LayerMask whatIsPlayer;
     
     public Slider healthBar;
@@ -154,7 +156,7 @@ public class EnemyShip : MonoBehaviour
     private void MarkDotFollowShip()
     {
         RectTransform rt = markDot.GetComponent<RectTransform>();
-        Utils.WorldPosMapInCanvas(globalCamera, gloabalCamCanvas, rt, transform);
+        Utils.WorldPosMapInCanvas(globalCamera, globalCamCanvas, rt, transform);
     }
 
     private void OnDrawGizmosSelected()

@@ -56,6 +56,10 @@ namespace StarterAssets
 		private GameObject _mainCamera;
 		private const float _threshold = 2f; 
 		public bool canMove;
+
+		public Camera globalCamera;
+		public Canvas globalCamCanvas;
+		public RectTransform markDot;
 		
 		private void Awake()
 		{
@@ -79,6 +83,8 @@ namespace StarterAssets
 			{
 				Move();
 			}
+			// mark dot for player
+			Utils.WorldPosMapInCanvas(globalCamera, globalCamCanvas, markDot, transform);
 		}
 
 		private void LateUpdate()

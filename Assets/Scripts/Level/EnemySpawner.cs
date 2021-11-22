@@ -68,11 +68,12 @@ public class EnemySpawner : MonoBehaviour
 	{
 		GameObject dot = Instantiate(markDotPrefab, gloabalCamCanvas.transform);
 		enemyShip.markDot = dot;
-		enemyShip.gloabalCamCanvas = gloabalCamCanvas;
+		enemyShip.globalCamCanvas = gloabalCamCanvas;
 		enemyShip.globalCamera = globalCamera;
 		enemyShip.player = player;
 		enemyShip.centerTip = centerTip;
 		enemyShip.alert = alert;
+		enemyShip.no.text = (total + 1).ToString();
 	}
 
 	private void DisplayInfoList(bool show)

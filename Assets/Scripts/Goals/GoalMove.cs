@@ -115,7 +115,7 @@ public class GoalMove : MonoBehaviour
             }
         }
         // change speed to lase line speed after explosion
-        curSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+        curSpeed = Gloable.LASER_LINE_MOVE_SPEED * 2;
     }
 
     public void SpeedUp(float targetSpeed)
