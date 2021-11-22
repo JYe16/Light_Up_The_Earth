@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
-    
     public Slider timeBar;
     public float timeRemaining;
     [HideInInspector]public int currentScore;
@@ -56,7 +55,7 @@ public class GameManager : MonoBehaviour
         else
         {
             currentLevel = 1;
-            targetScore = 100;
+            targetScore = 150;
             PlayerPrefs.SetInt("t_score", targetScore);
         }
         PlayerPrefs.SetInt("level", currentLevel);

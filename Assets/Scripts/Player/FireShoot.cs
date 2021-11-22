@@ -12,6 +12,9 @@ public class FireShoot : MonoBehaviour
 	private LineRenderer lr;
 	private GameObject fireLaser;
 	private Camera mainCam;
+	
+	//add audio for fire
+	public GameObject fireAudio;
 
 	private void Start()
 	{
@@ -25,6 +28,10 @@ public class FireShoot : MonoBehaviour
 	public void Fire()
 	{
 		SendMessage("StopCapture", SendMessageOptions.DontRequireReceiver);
+		if (fireAudio != null  && PlayerPrefs.GetInt("sound") == 1)
+		{
+			fireAudio.gameObject.GetComponent<AudioSource>().Play();
+		}
 		DisplayFire();
 	}
 
