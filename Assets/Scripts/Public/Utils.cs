@@ -14,7 +14,7 @@ public static class Utils
     public static string ReadDataFromFile(string fileName)
     {
         string path = GetFilePath(fileName);
-		Debug.Log(path);
+		// Debug.Log(path);
         if (File.Exists(path))
         {
             using (StreamReader reader = new StreamReader(path))
@@ -42,5 +42,14 @@ public static class Utils
         PlayerPrefs.DeleteKey("POWER_WATER");
         PlayerPrefs.DeleteKey("TIME_INCREASE");
         PlayerPrefs.DeleteKey("SCORE_INCREASE");
+    }
+
+    public static void WorldPosMapInCanvas(Camera camera, Canvas canvas, RectTransform uiRectTransform, Transform worldTransform)
+    {
+        Vector2 localPos = Vector3.zero;
+        RectTransform rt = canvas.GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rt,
+            camera.WorldToScreenPoint(worldTransform.position), camera, out localPos);
+        uiRectTransform.localPosition = localPos;
     }
 }
