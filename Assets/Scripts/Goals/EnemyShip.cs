@@ -8,13 +8,20 @@ using Random = UnityEngine.Random;
 public class EnemyShip : MonoBehaviour
 {
     private NavMeshAgent agent;
+    
+    public GameObject markDot;
+    public Canvas gloabalCamCanvas;
+    public Camera globalCamera;
+    
     public Image alert;
     public GameObject centerTip;
+    
     public Transform player;
     public LayerMask whatIsPlayer;
+    
     public Slider healthBar;
     public float health;
-    public int value;
+    public int crystals;
     public int damage;
     //States
     public float alertRange, stealRange;
@@ -24,6 +31,7 @@ public class EnemyShip : MonoBehaviour
     private string failTip = "You were stolen";
 
     private bool hasAlert = false;
+    private bool hasStolen = false;
 
     private Text line1;
     private Text line2;
@@ -32,7 +40,6 @@ public class EnemyShip : MonoBehaviour
     private void Start()
     {
         Init();
-        RotateToPlayer();
     }
 
     private void Init()
@@ -49,6 +56,8 @@ public class EnemyShip : MonoBehaviour
         line2 = lines[1];
         line3 = lines[2];
 
+        MarkDotFollowShip();
+
         healthBar.maxValue = health;
         healthBar.value = health;
     }
@@ -62,6 +71,11 @@ public class EnemyShip : MonoBehaviour
 
     private void Update()
     {
+        if (markDot != null)
+        {
+            MarkDotFollowShip();
+        }
+        RotateToPlayer();
         //Check for sight and attack range
         playerInAlertRange = Physics.CheckSphere(transform.position, alertRange, whatIsPlayer);
         playerInStealRange = Physics.CheckSphere(transform.position, stealRange, whatIsPlayer);
@@ -72,8 +86,11 @@ public class EnemyShip : MonoBehaviour
             Alert();
         }
 
-        if (playerInStealRange) 
+        if (playerInStealRange && !hasStolen)
+        {
+            hasStolen = true;
             StealCrystal();
+        }
         else 
             ChasePlayer();
 
@@ -102,9 +119,9 @@ public class EnemyShip : MonoBehaviour
         RotateToPlayer();
         
         int score = GameManager.gm.currentScore >= damage ? damage : GameManager.gm.currentScore;
-        GameManager.gm.currentScore -= score;
         if (score > 0)
         {
+            GameManager.gm.currentScore -= score;
             ShowCenterTip(failTip, score.ToString(), "crystals");
         }
         DestroyEnemy();
@@ -116,10 +133,10 @@ public class EnemyShip : MonoBehaviour
 
         if (health <= 0)
         {
-            GameManager.gm.currentScore += value;
-            if (value > 0)
+            if (crystals > 0)
             {
-                ShowCenterTip(successTip, value.ToString(), "crystals");
+                GameManager.gm.currentScore += crystals;
+                ShowCenterTip(successTip, crystals.ToString(), "crystals");
             }
             DestroyEnemy();
         }
@@ -127,7 +144,14 @@ public class EnemyShip : MonoBehaviour
 
     private void DestroyEnemy()
     {
+        Destroy(markDot, 0.5f);
         Destroy(gameObject, 0.5f);
+    }
+
+    private void MarkDotFollowShip()
+    {
+        RectTransform rt = markDot.GetComponent<RectTransform>();
+        Utils.WorldPosMapInCanvas(globalCamera, gloabalCamCanvas, rt, transform);
     }
 
     private void OnDrawGizmosSelected()

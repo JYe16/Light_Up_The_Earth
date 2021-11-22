@@ -182,6 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b35bed620d02422cabe1cacd375c74be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  markDot: {fileID: 0}
+  globalCamera: {fileID: 0}
   alert: {fileID: 0}
   centerTip: {fileID: 0}
   player: {fileID: 0}
@@ -190,7 +192,7 @@ MonoBehaviour:
     m_Bits: 256
   healthBar: {fileID: 6037545917028736696}
   health: 100
-  value: 40
+  crystals: 20
   damage: 30
   alertRange: 200
   stealRange: 80

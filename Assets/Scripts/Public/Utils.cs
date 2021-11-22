@@ -43,4 +43,13 @@ public static class Utils
         PlayerPrefs.DeleteKey("TIME_INCREASE");
         PlayerPrefs.DeleteKey("SCORE_INCREASE");
     }
+
+    public static void WorldPosMapInCanvas(Camera camera, Canvas canvas, RectTransform uiRectTransform, Transform worldTransform)
+    {
+        Vector2 localPos = Vector3.zero;
+        RectTransform rt = canvas.GetComponent<RectTransform>();
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(rt,
+            camera.WorldToScreenPoint(worldTransform.position), camera, out localPos);
+        uiRectTransform.localPosition = localPos;
+    }
 }
