@@ -157,7 +157,8 @@ public class SimpleGameManager : MonoBehaviour
         bool canClick = currentGoal != null;
         if (canClick)
         {
-            currentGoal.GetComponent<GoalMove>().moveSpeed *= BONUS_SPEED;
+            GoalMove _goalMove = currentGoal.GetComponent<GoalMove>();
+            _goalMove.SpeedUp(_goalMove.curSpeed * BONUS_SPEED);
             //play sound effect
             if (powerWaterAudio != null && PlayerPrefs.GetInt("sound") == 1)
             {

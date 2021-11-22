@@ -20,6 +20,7 @@ public class GoalMove : MonoBehaviour
     public float force;
     public float radius;
     public float moveSpeed;
+    [HideInInspector] public float curSpeed;
     public bool isTutorial = false;
     
     private bool hideCompleteModel = false;
@@ -36,17 +37,9 @@ public class GoalMove : MonoBehaviour
     {
         goalValue = GetComponent<GoalValue>();
         maxSpeed = 2.5f * moveSpeed;
+        curSpeed = moveSpeed;
     }
-
-    private void Update()
-    {
-        if (isDestroy)
-        {
-            StartCoroutine(CoolDownShootButton());
-            isDestroy = false;
-        }
-    }
-
+    
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
     {
         bool isPause = isTutorial
@@ -65,7 +58,7 @@ public class GoalMove : MonoBehaviour
         laserControl.ChangeBackStatus(true);
         // move goal
         float distance = Vector3.Distance(transform.position, distroyPos);
-        moveTween = gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(AfterReturn);
+        moveTween = gameObject.transform.DOMove(distroyPos, distance / curSpeed).OnComplete(AfterReturn);
     }
 
     private void AfterReturn()
@@ -77,14 +70,9 @@ public class GoalMove : MonoBehaviour
         if(!hideCompleteModel) goalValue.CapturedEffect();
         // hide laser line
         laserControl.HideLaserEnableMove();
+        // send cool down message
+        laserControl.SendDestroyMessage();
         DestroyGoal();
-    }
-
-    IEnumerator CoolDownShootButton()
-    {
-        shootBtn.gameObject.GetComponent<Button>().interactable = false;
-        yield return new WaitForSeconds(1);
-        shootBtn.gameObject.GetComponent<Button>().interactable = true;
     }
 
     private void DestroyGoal()
@@ -93,7 +81,6 @@ public class GoalMove : MonoBehaviour
             Destroy(child.gameObject);
         }
         Destroy(gameObject);
-        isDestroy = true;
     }
 
     public void ExplosionAndHide()
@@ -128,19 +115,20 @@ public class GoalMove : MonoBehaviour
             }
         }
         // change speed to lase line speed after explosion
-        moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
+        curSpeed = Gloable.LASER_LINE_MOVE_SPEED;
     }
 
     public void SpeedUp(float targetSpeed)
     {
-        if (moveSpeed > maxSpeed) return;
-        moveSpeed = targetSpeed;
+        if (curSpeed > maxSpeed) return;
+        curSpeed = targetSpeed;
         float distance = Vector3.Distance(transform.position, distroyPos);
-        moveTween.ChangeValues(transform.position, distroyPos, distance / moveSpeed);
+        moveTween.ChangeValues(transform.position, distroyPos, distance / curSpeed);
     }
 
     public void StopMove()
     {
-        moveSpeed = 0;
+        moveTween.Kill();
+        curSpeed = moveSpeed;
     }
 }

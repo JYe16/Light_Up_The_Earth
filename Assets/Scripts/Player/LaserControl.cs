@@ -16,7 +16,6 @@ public class LaserControl : MonoBehaviour
     private GameObject laserBeam;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
-    private Vector3 startPos, endPos;
     private static float MIN_DISTORY_DISTANCE = 500.0f;
     
     void Start()
@@ -34,6 +33,7 @@ public class LaserControl : MonoBehaviour
             Vector3 endPos = isTutorial
                 ? SimpleGameManager.gm.currentGoal.transform.position
                 : GameManager.gm.currentGoal.transform.position;
+            lineRenderer.SetPosition(0, shootPosition.transform.position);
             lineRenderer.SetPosition(1, endPos);
         }
     }
@@ -47,15 +47,14 @@ public class LaserControl : MonoBehaviour
     {
         isActive = true;
         EnableLaserBeam();
-        startPos = shootPosition.transform.position;
-        lineRenderer.SetPosition(0, startPos);
+        lineRenderer.SetPosition(0,  shootPosition.transform.position);
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
-        endPos = curGoal == null
+        Vector3 endPos = curGoal == null
             ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
             : curGoal.transform.position;
         lineRenderer.SetPosition(1, endPos);
-        laserBeam.transform.position = startPos;
+        laserBeam.transform.position =  shootPosition.transform.position;
         if (curGoal != null && curGoal.GetComponent<GoalValue>().isBlackHole)
         {
             DisableLaserBeam();
@@ -117,7 +116,6 @@ public class LaserControl : MonoBehaviour
         DisableLaserBeam();
         PlayerCapture playerCapture = GetComponent<PlayerCapture>();
         playerCapture.isShoot = false;
-        playerCapture.ChangeMoveStatus(true);
         isActive = false;
     }
 
@@ -132,5 +130,10 @@ public class LaserControl : MonoBehaviour
             }
             HideLaserEnableMove();
         }
+    }
+
+    public void SendDestroyMessage()
+    {
+        SendMessage("DestroyCurrentGoal", SendMessageOptions.DontRequireReceiver);
     }
 }

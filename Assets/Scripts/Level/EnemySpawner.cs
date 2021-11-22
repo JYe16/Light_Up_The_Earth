@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
 	public Transform[] spawnerPoints;
 	public GameObject[] enemyShipPrefabs;
 	public float spawnInterval;
+	public float startWaitTime = 15f;
 	public int spawnNum;
 	public Transform player;
 	public GameObject centerTip;
@@ -18,16 +19,12 @@ public class EnemySpawner : MonoBehaviour
 
 	private void Start()
 	{
-		GenEnemyShips();
-	}
-
-	public void GenEnemyShips()
-	{
 		StartCoroutine(InstantiateEnemy());
 	}
 
 	IEnumerator InstantiateEnemy()
 	{
+		yield return new WaitForSeconds(startWaitTime);
 		while (total++ < spawnNum)
 		{
 			Transform center = spawnerPoints[Random.Range(0, spawnerPoints.Length)];
