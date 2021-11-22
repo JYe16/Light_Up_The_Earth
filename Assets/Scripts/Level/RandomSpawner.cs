@@ -48,7 +48,6 @@ public class RandomSpawner : MonoBehaviour
         AddObject(spawnerData.valuelessSum, valuelessPrefabList);
         AddObject(spawnerData.valuableSum, valuablePrefabList);
         AddObject(spawnerData.propsSum, propsPrefabList);
-       
     }
 
     private void AddObject(int count, GameObject[] prefabs)
@@ -92,7 +91,11 @@ public class RandomSpawner : MonoBehaviour
             generateSpawnData();
             json = Utils.ReadDataFromFile("SpawnerData.json");
         }
-        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
+
+        if (level < JsonUtility.FromJson<SpawnerOriginJson>(json).list.Count)
+        {
+	        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
+        }
     }
 
     //TODO: Write a method to generate level difficulty automatically

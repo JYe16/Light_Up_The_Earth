@@ -10,14 +10,14 @@ public class LaserControl : MonoBehaviour
     public bool backWithGoal = false;
     public GameObject laserBeamPrefab;
     public Transform shootPosition;
-    public GameObject laserBeam;
     public bool isTutorial = false;
-    public bool blackhole=false;
-    public GameObject BlackHolePos;
+
+    private bool isActive = false;
+    private GameObject laserBeam;
     private GameObject curGoal;
     private LineRenderer lineRenderer;
-    private Vector3 startPos, endPos;
     private static float MIN_DISTORY_DISTANCE = 500.0f;
+    
     void Start()
     {
         laserBeam = Instantiate(laserBeamPrefab, shootPosition);
@@ -33,6 +33,7 @@ public class LaserControl : MonoBehaviour
             Vector3 endPos = isTutorial
                 ? SimpleGameManager.gm.currentGoal.transform.position
                 : GameManager.gm.currentGoal.transform.position;
+            lineRenderer.SetPosition(0, shootPosition.transform.position);
             lineRenderer.SetPosition(1, endPos);
         }
     }
@@ -44,29 +45,27 @@ public class LaserControl : MonoBehaviour
     
     public void ShootingLaser()
     {
+        isActive = true;
         EnableLaserBeam();
-        startPos = shootPosition.transform.position;
-        lineRenderer.SetPosition(0, startPos);
+        lineRenderer.SetPosition(0,  shootPosition.transform.position);
         // launch laser
         curGoal = isTutorial ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
-        
-            endPos = curGoal == null
-                ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
-                : curGoal.transform.position;
-            lineRenderer.SetPosition(1, endPos);
-            laserBeam.transform.position = startPos;
-            if (curGoal != null && curGoal.GetComponent<GoalValue>().isBlackHole)
-            {
-                DisableLaserBeam();
-                curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
-            }
-            else
-            {
-                StartCoroutine(ReturnLaser(!curGoal));
-            }
+        Vector3 endPos = curGoal == null
+            ? GetBoundaryPosition(shootPosition.position, Gloable.MAX_CAPTURE_RADIUS / 4)
+            : curGoal.transform.position;
+        lineRenderer.SetPosition(1, endPos);
+        laserBeam.transform.position =  shootPosition.transform.position;
+        if (curGoal != null && curGoal.GetComponent<GoalValue>().isBlackHole)
+        {
+            DisableLaserBeam();
+            curGoal.GetComponent<BlackHoleMovement>().SpaceshipMovement();
+        }
+        else
+        {
+            StartCoroutine(ReturnLaser(!curGoal));
+        }
     }
 
-    //光束的返回
     IEnumerator ReturnLaser(bool withNothing)
     {
         yield return new WaitForSeconds(1);
@@ -87,9 +86,6 @@ public class LaserControl : MonoBehaviour
         }
     }
 
-
-
-    //将物体从远处拖回来
     private void DragBack(float duration)
     {
         DOTween.To(() => lineRenderer.GetPosition(1), newVal =>
@@ -120,6 +116,24 @@ public class LaserControl : MonoBehaviour
         DisableLaserBeam();
         PlayerCapture playerCapture = GetComponent<PlayerCapture>();
         playerCapture.isShoot = false;
-        playerCapture.ChangeMoveStatus(true);
+        isActive = false;
+    }
+
+    // when fire
+    public void StopCapture()
+    {
+        if (isActive)
+        {
+            if (curGoal != null)
+            {
+                curGoal.GetComponent<GoalMove>().StopMove();
+            }
+            HideLaserEnableMove();
+        }
+    }
+
+    public void SendDestroyMessage()
+    {
+        SendMessage("DestroyCurrentGoal", SendMessageOptions.DontRequireReceiver);
     }
 }

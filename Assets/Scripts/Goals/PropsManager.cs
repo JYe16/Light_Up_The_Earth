@@ -188,7 +188,7 @@ public class PropsManager : MonoBehaviour
     private void FastMove(GameObject goal)
     {
         GoalMove _goalMove = goal.GetComponent<GoalMove>();
-        _goalMove.SpeedUp(_goalMove.moveSpeed * BONUS_SPEED);
+        _goalMove.SpeedUp(_goalMove.curSpeed * BONUS_SPEED);
         propsCounter[Gloable.PropsType.POWER_WATER]--;
         //play sound effect
         if (powerWaterAudio != null && PlayerPrefs.GetInt("sound") == 1)

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Player;
 using StarterAssets;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCapture : MonoBehaviour
 {
@@ -12,10 +13,9 @@ public class PlayerCapture : MonoBehaviour
     public bool isTutorial = false;
     public LayerMask goalMask;
     public LongClickButton shootBtn;
-    
+
     private GameObject player;
     private float timer;                // count intervals between two captures
-    private FirstPersonController playerController;
     [HideInInspector]public bool isShoot = false;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
     
@@ -25,7 +25,6 @@ public class PlayerCapture : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         timer = 0.0f;
         shootBtn = GetComponentInChildren<LongClickButton>();
-        playerController = player.GetComponentInParent<FirstPersonController>();
     }
 
     void LateUpdate()
@@ -78,18 +77,24 @@ public class PlayerCapture : MonoBehaviour
             }
         }
         gameObject.SendMessage("ShootingLaser");
-        ChangeMoveStatus(false);
-    }
-
-    public void ChangeMoveStatus(bool status)
-    {
-        playerController.changeMoveStatus(status);
     }
 
     public void SpeedUpGoal()
     {
         GameObject goal = SimpleGameManager.gm != null ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
         GoalMove _goalMove = goal.GetComponent<GoalMove>();
-        _goalMove.SpeedUp(_goalMove.moveSpeed + 10);
+        _goalMove.SpeedUp(_goalMove.curSpeed + 10);
+    }
+
+    public void DestroyCurrentGoal()
+    {
+        StartCoroutine(CoolDownShootButton());
+    }
+    
+    IEnumerator CoolDownShootButton()
+    {
+        shootBtn.gameObject.GetComponent<Button>().interactable = false;
+        yield return new WaitForSeconds(1);
+        shootBtn.gameObject.GetComponent<Button>().interactable = true;
     }
 }
