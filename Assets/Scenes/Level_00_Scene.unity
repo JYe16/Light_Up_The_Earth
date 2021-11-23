@@ -1915,7 +1915,6 @@ GameObject:
   - component: {fileID: 668481574}
   - component: {fileID: 668481579}
   - component: {fileID: 668481578}
-  - component: {fileID: 668481580}
   - component: {fileID: 668481581}
   - component: {fileID: 668481582}
   m_Layer: 7
@@ -1994,14 +1993,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 668481573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 100, y: 2670, z: -300}
+  m_LocalRotation: {x: -0.23369306, y: -0, z: -0, w: 0.9723104}
+  m_LocalPosition: {x: 100, y: 1812, z: -1054}
   m_LocalScale: {x: 500, y: 500, z: 500}
   m_Children:
   - {fileID: 1203467840}
   m_Father: {fileID: 0}
   m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -27.029, y: 0, z: 0}
 --- !u!54 &668481578
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2031,29 +2030,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
---- !u!114 &668481580
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 668481573}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 164ce9b9d889046ce9cef6ecfc9be23b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destroyGoalAudio: {fileID: 0}
-  explosion: {fileID: 0}
-  isReturn: 0
-  fracturedPieces: {fileID: 0}
-  originalGoal: {fileID: 668481573}
-  force: 90
-  radius: 30
-  moveSpeed: 50
-  curSpeed: 0
-  isTutorial: 0
-  shootBtn: {fileID: 0}
 --- !u!114 &668481581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2067,7 +2043,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpaceShip: {fileID: 8616685848858191198}
-  AbsorbSpeed: 130
+  AbsorbSpeed: 200
   canvasGroup: {fileID: 1495845378}
   isCaptured: 0
   darken: 2
@@ -10938,7 +10914,6 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 4135013735425514501}
   TopClamp: 95
   BottomClamp: -95
-  canMove: 0
   globalCamera: {fileID: 1879123024}
   globalCamCanvas: {fileID: 1427925611}
   markDot: {fileID: 1704014336}
