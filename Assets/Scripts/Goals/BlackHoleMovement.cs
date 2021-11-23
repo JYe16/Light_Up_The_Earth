@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class BlackHoleMovement : MonoBehaviour
 {
-
     public GameObject SpaceShip;
     public float AbsorbSpeed;
     public CanvasGroup canvasGroup;
@@ -22,10 +21,12 @@ public class BlackHoleMovement : MonoBehaviour
 
     public void SpaceshipMovement()
     {
-        float distance = Vector3.Distance(SpaceShip.transform.position, transform.position)-100f;
-        SpaceShip.transform.DOMove(transform.position, distance/2/ AbsorbSpeed);
+        float distance = Vector3.Distance(SpaceShip.transform.position, transform.position) / 2;
+        transform.DOMove(SpaceShip.transform.position, distance/AbsorbSpeed);
+        SpaceShip.transform.DOShakeRotation(5f, 50, 5, 10f);
         isCaptured = true;
-        StartCoroutine(Reach(2.5f));
+        canvasGroup.gameObject.SetActive(true);
+        StartCoroutine(Reach(1.5f));
     }
 
     IEnumerator Reach(float delay)

@@ -8,7 +8,8 @@ using Random = UnityEngine.Random;
 public class GoalValue : MonoBehaviour
 {
     public int value;   // earned score after capture this goal
-    public AudioClip captureGoalAudio;
+    //public AudioClip captureGoalAudio;
+    private AudioSource audio;
     public bool isProps = false;
     public bool isBlackHole =false;
     [HideInInspector]public bool isCaptured;
@@ -26,8 +27,12 @@ public class GoalValue : MonoBehaviour
 
     public void CapturedEffect()
     {
-        if(captureGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
-            AudioSource.PlayClipAtPoint(captureGoalAudio, Camera.main.transform.position);
+        if (PlayerPrefs.GetInt("sound") == 1)
+        {
+            GameObject goalAudio = GameObject.Find("goalAudio");
+            goalAudio.GetComponent<AudioSource>().Play();
+        }
+            //AudioSource.PlayClipAtPoint(captureGoalAudio, Camera.main.transform.position);
         if (GameManager.gm != null)
         {
             if(!isProps)

@@ -1,13 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Player;
-//using TreeEditor;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GoalMove : MonoBehaviour
 {
@@ -97,6 +91,8 @@ public class GoalMove : MonoBehaviour
         // play explosion fire effect
         GameObject bombObj = Instantiate(explosion, screenCenter, Quaternion.identity);
         Destroy(bombObj, destroyPiecesDuration / 2);
+        // change speed to lase line speed after explosion
+        SpeedUp(maxSpeed);
         // play explosion sound effect
         if(destroyGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
             AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position, 0.3f);
@@ -104,8 +100,6 @@ public class GoalMove : MonoBehaviour
         Vector3 boundCenter = originalGoal.GetComponent<MeshFilter>().sharedMesh.bounds.center;
         Vector3 center = fracturedPieces.transform.localToWorldMatrix.MultiplyPoint(boundCenter);
         Transform rootTrans = fracturedPieces.transform;
-        // change speed to lase line speed after explosion
-        curSpeed = maxSpeed * 2;
         for (int i = 0; i < rootTrans.childCount; i++)
         {
             Transform pieceTrans = rootTrans.GetChild(i);
