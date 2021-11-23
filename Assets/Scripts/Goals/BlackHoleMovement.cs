@@ -1,15 +1,28 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using DG.Tweening;
+using JetBrains.Annotations;
+using UnityEditor;
+//using TreeEditor;
 using UnityEngine;
 
 public class BlackHoleMovement : MonoBehaviour
 {
     public GameObject SpaceShip;
+    public LaserControl laserControl;
     public float AbsorbSpeed;
     public CanvasGroup canvasGroup;
+    public bool isArrived=false;
     public bool isCaptured=false;
+    public bool isBlackHole=true;
+    public float alpha = 1.0f;
     public float darken = 2.0f;
+    
+    void Start()
+    {
+        laserControl = GetComponent<LaserControl>();
+    }
 
     private void Update()
     {
@@ -32,6 +45,8 @@ public class BlackHoleMovement : MonoBehaviour
     IEnumerator Reach(float delay)
     {
         yield return new WaitForSeconds(delay);
+        isArrived = true;
         GameManager.gm.gameState = GameManager.GameState.GameOver;
     }
+
 }
