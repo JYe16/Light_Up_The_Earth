@@ -73,7 +73,11 @@ public class PlayerCapture : MonoBehaviour
                 {
                     GameManager.gm.currentGoal = goal;
                 }
-                goal.GetComponent<GoalMove>().shootBtn = shootBtn;
+
+                if (goal.GetComponent<GoalMove>() != null)
+                {
+                    goal.GetComponent<GoalMove>().shootBtn = shootBtn;
+                }
             }
         }
         gameObject.SendMessage("ShootingLaser");
