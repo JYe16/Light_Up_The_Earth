@@ -8790,13 +8790,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 204d60f09e1984c88b449d4439a3ccf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
   isTutorial: 1
   goalMask:
     serializedVersion: 2
     m_Bits: 128
-  shootBtn: {fileID: 0}
+  shootBtn: {fileID: 258153656}
   isShoot: 0
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!114 &6751388636255219129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9188,7 +9188,6 @@ MonoBehaviour:
   CinemachineCameraTarget: {fileID: 248409785}
   TopClamp: 90
   BottomClamp: -90
-  canMove: 0
   globalCamera: {fileID: 1879123024}
   globalCamCanvas: {fileID: 985680904}
   markDot: {fileID: 1458180237}
