@@ -14,6 +14,8 @@ public class PurchasePopup : MonoBehaviour
     [HideInInspector] public int score;
     private GameObject panelBody;
     private CanvasGroup canvasGroup;
+    //shop audio
+    public GameObject shopAudio;
     void Start()
     {
         canvasGroup = GetComponent<CanvasGroup>();
@@ -49,6 +51,7 @@ public class PurchasePopup : MonoBehaviour
             ShopSystem.shopSystem.UpdateScore();
             ShopSystem.shopSystem.ClearAfterCheck();
             toast.GetComponent<Toast>().ShowToast("Thanks for your purchase!");
+            shopAudio.GetComponent<AudioSource>().Play();
             DisplayPopup(false);
         }
     }
