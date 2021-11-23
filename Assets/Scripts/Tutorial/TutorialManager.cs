@@ -24,6 +24,8 @@ public class TutorialManager : MonoBehaviour
 	public Button goBtn;
 	public Button startBtn;
 
+	public GameObject enemyGuide;
+
 	private int curStep = 0;
 	private string WELCOME_INTRO = "Hi, stranger.\r\nWelcome to the training ground.";
 	private string OPERATIONS_INTRO = "Firstly, there are some operations you need to know.";
@@ -150,13 +152,31 @@ public class TutorialManager : MonoBehaviour
 				StartType(GOAL_GUIDE_2);
 				break;
 			case 12:
+				ClearContent();
+				DisplayEnemyGuide(true);
+				canClickBlank = true;
+				break;
+			case 13:
+				DisplayEnemyGuide(false);
 				StartType(FINISH_INTRO);
 				break;
-			case 13: // end of tutorial
+			case 14: // end of tutorial
 				startBtn.gameObject.SetActive(true);
 				break;
 		}
 		curStep++;
+	}
+
+	private void DisplayEnemyGuide(bool show)
+	{
+		if (show)
+		{
+			enemyGuide.SetActive(true);
+		}
+		else
+		{
+			enemyGuide.SetActive(false);
+		}
 	}
 
 	private void StartType(string info)
