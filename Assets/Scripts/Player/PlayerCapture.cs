@@ -9,14 +9,13 @@ using UnityEngine.UI;
 public class PlayerCapture : MonoBehaviour
 {
     //add sound file for shooting
-    public AudioClip shootAudio;
     public bool isTutorial = false;
     public LayerMask goalMask;
     public LongClickButton shootBtn;
-
     private GameObject player;
     private float timer;                // count intervals between two captures
     [HideInInspector]public bool isShoot = false;
+    public GameObject shootAudio;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
     
     void Start()
@@ -49,9 +48,9 @@ public class PlayerCapture : MonoBehaviour
     public void Shoot()
     {
         isShoot = true;
-        if (shootAudio != null  && PlayerPrefs.GetInt("sound") == 1)
+        if (PlayerPrefs.GetInt("sound") == 1 && !shootAudio.gameObject.GetComponent<AudioSource>().isPlaying)
         {
-            AudioSource.PlayClipAtPoint(shootAudio, Camera.main.transform.position, 0.3f);
+            shootAudio.gameObject.GetComponent<AudioSource>().Play();
         }
     }
 
