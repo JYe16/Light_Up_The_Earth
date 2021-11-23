@@ -11,7 +11,7 @@ public class LaserControl : MonoBehaviour
     public GameObject laserBeamPrefab;
     public Transform shootPosition;
     public bool isTutorial = false;
-
+    public AudioSource shootAudio;
     private bool isActive = false;
     private GameObject laserBeam;
     private GameObject curGoal;
@@ -46,6 +46,10 @@ public class LaserControl : MonoBehaviour
     public void ShootingLaser()
     {
         isActive = true;
+        if (PlayerPrefs.GetInt("sound") == 1 && !shootAudio.isPlaying)
+        {
+            shootAudio.Play();
+        }
         EnableLaserBeam();
         lineRenderer.SetPosition(0,  shootPosition.transform.position);
         // launch laser

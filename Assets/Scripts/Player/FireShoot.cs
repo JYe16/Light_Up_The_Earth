@@ -28,7 +28,7 @@ public class FireShoot : MonoBehaviour
 	public void Fire()
 	{
 		SendMessage("StopCapture", SendMessageOptions.DontRequireReceiver);
-		if (fireAudio != null  && PlayerPrefs.GetInt("sound") == 1)
+		if (PlayerPrefs.GetInt("sound") == 1)
 		{
 			fireAudio.gameObject.GetComponent<AudioSource>().Play();
 		}

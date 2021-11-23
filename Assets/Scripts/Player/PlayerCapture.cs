@@ -15,7 +15,7 @@ public class PlayerCapture : MonoBehaviour
     private GameObject player;
     private float timer;                // count intervals between two captures
     [HideInInspector]public bool isShoot = false;
-    public GameObject shootAudio;
+    public AudioSource longPressAudio;
     private static float TIME_BETWEEN_CAPTURE = 1.0f;    // min intervals between two captures
     
     void Start()
@@ -48,10 +48,6 @@ public class PlayerCapture : MonoBehaviour
     public void Shoot()
     {
         isShoot = true;
-        if (PlayerPrefs.GetInt("sound") == 1 && !shootAudio.gameObject.GetComponent<AudioSource>().isPlaying)
-        {
-            shootAudio.gameObject.GetComponent<AudioSource>().Play();
-        }
     }
 
     void CaptureGoals()
@@ -84,6 +80,10 @@ public class PlayerCapture : MonoBehaviour
 
     public void SpeedUpGoal()
     {
+        if (PlayerPrefs.GetInt("sound") == 1 && !longPressAudio.isPlaying)
+        {
+            longPressAudio.Play();
+        }
         GameObject goal = SimpleGameManager.gm != null ? SimpleGameManager.gm.currentGoal : GameManager.gm.currentGoal;
         GoalMove _goalMove = goal.GetComponent<GoalMove>();
         _goalMove.SpeedUp(_goalMove.curSpeed + 10);
