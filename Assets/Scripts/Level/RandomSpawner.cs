@@ -106,11 +106,11 @@ public class RandomSpawner : MonoBehaviour
 		{
 			SpawnerData spawner = new SpawnerData();
         	spawner.valuelessSum = 30;
-       		spawner.valuableSum = 8;
+       		spawner.valuableSum = 8 + i;
         	spawner.propsSum = 10;
         	spawner.collisionCheckRadius = 100.0f;
-        	spawner.outerRadius = 550.0f;
-        	spawner.innerRadius = 450.0f;
+        	spawner.outerRadius = 700.0f;
+        	spawner.innerRadius = 600.0f;
         	spawnData.list.Add(spawner);	
 		}
         string content = JsonUtility.ToJson(spawnData);

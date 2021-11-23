@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     static public GameManager gm;
-    
     public Slider timeBar;
     public float timeRemaining;
     [HideInInspector]public int currentScore;
@@ -33,9 +32,11 @@ public class GameManager : MonoBehaviour
     public GameObject gameOverMusic;
     private int targetScore;
     private GameObject player;
+	public GameObject movingObstacle;
 
     void Start()
     {
+		Debug.Log(movingObstacle.transform.position);
         //generate a random number for selecting skybox
         RenderSettings.skybox = skyboxes[Random.Range(0, skyboxes.Length)];
         //TODO: get correct mesh files and then uncomment the next line
@@ -54,7 +55,7 @@ public class GameManager : MonoBehaviour
         else
         {
             currentLevel = 1;
-            targetScore = 100;
+            targetScore = 150;
             PlayerPrefs.SetInt("t_score", targetScore);
         }
         PlayerPrefs.SetInt("level", currentLevel);
@@ -102,7 +103,7 @@ public class GameManager : MonoBehaviour
                         gm.gameState = GameState.Winning;
                     }
                 }
-                break;
+				break;
             case GameState.Winning:
                 //calculate the base score for the next level
                 int newBase = currentScore - targetScore;

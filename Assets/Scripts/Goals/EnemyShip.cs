@@ -52,7 +52,12 @@ public class EnemyShip : MonoBehaviour
         agent.updateRotation = false;
 
         alert.gameObject.SetActive(false);
-        
+        //play warning audio
+        if (PlayerPrefs.GetInt("sound") == 1)
+        {
+            GameObject warningAudio = GameObject.Find("warningAudio");
+            warningAudio.GetComponent<AudioSource>().Play();
+        }
         centerTip.transform.localScale = Vector3.zero;
         centerTip.SetActive(false);
         Text[] lines = centerTip.GetComponentsInChildren<Text>();

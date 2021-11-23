@@ -424,12 +424,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   destroyGoalAudio: {fileID: 8300000, guid: d6e67a1ff93d440ab8f776cf4fb00f68, type: 3}
   explosion: {fileID: 141070, guid: 805832771bf9f5f48bead8310975480e, type: 3}
+  isReturn: 0
   fracturedPieces: {fileID: 2639492282601308240}
   originalGoal: {fileID: 2827228086540746158}
   force: 100
   radius: 8
   moveSpeed: 40
+  curSpeed: 0
   isTutorial: 0
+  shootBtn: {fileID: 0}
 --- !u!114 &238210994093641873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -445,6 +448,7 @@ MonoBehaviour:
   value: 8
   captureGoalAudio: {fileID: 8300000, guid: 6c06972e7fabc90478fb63233f354c65, type: 3}
   isProps: 0
+  isBlackHole: 0
   isCaptured: 0
 --- !u!65 &5660265239949932483
 BoxCollider:
