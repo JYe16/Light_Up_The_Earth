@@ -2258,9 +2258,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpaceShip: {fileID: 8616685848858191198}
+  laserControl: {fileID: 0}
   AbsorbSpeed: 200
   canvasGroup: {fileID: 248400698}
+  isArrived: 0
   isCaptured: 0
+  isBlackHole: 1
+  alpha: 1
   darken: 2
 --- !u!114 &668481582
 MonoBehaviour:
@@ -8060,7 +8064,7 @@ Camera:
   m_Depth: 9
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 375
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 8400000, guid: 1532e01cd745e498288aa6606e9ff15e, type: 2}
   m_TargetDisplay: 0
