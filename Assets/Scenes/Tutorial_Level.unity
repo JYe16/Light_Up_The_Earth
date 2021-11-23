@@ -9048,9 +9048,9 @@ MonoBehaviour:
   goalMask:
     serializedVersion: 2
     m_Bits: 128
-  shootBtn: {fileID: 0}
+  shootBtn: {fileID: 258153656}
   isShoot: 0
-  shootAudio: {fileID: 531500699}
+  shootAudio: {fileID: 8300000, guid: bb6cdd13aeb95f743847b1cd460889bc, type: 3}
 --- !u!114 &6751388636255219129
 MonoBehaviour:
   m_ObjectHideFlags: 0

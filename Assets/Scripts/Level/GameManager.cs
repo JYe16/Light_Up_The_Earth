@@ -27,7 +27,6 @@ public class GameManager : MonoBehaviour
     //declare skyboxes
     public Material[] skyboxes;
     //mesh materials
-    public Mesh[] platforms;
     public GameObject gamePlayMusic;
     public GameObject gameOverMusic;
     private int targetScore;
@@ -36,11 +35,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-		Debug.Log(movingObstacle.transform.position);
         //generate a random number for selecting skybox
         RenderSettings.skybox = skyboxes[Random.Range(0, skyboxes.Length)];
-        //TODO: get correct mesh files and then uncomment the next line
-        // platform.GetComponent<MeshFilter>().mesh = platforms[Random.Range(0, platforms.Length)];
         if(gm == null) 
             gm = GetComponent<GameManager>();
         if (player == null)

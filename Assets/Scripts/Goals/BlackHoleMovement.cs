@@ -25,6 +25,7 @@ public class BlackHoleMovement : MonoBehaviour
         transform.DOMove(SpaceShip.transform.position, distance/AbsorbSpeed);
         SpaceShip.transform.DOShakeRotation(5f, 50, 5, 10f);
         isCaptured = true;
+        canvasGroup.gameObject.SetActive(true);
         StartCoroutine(Reach(1.5f));
     }
 
