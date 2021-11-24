@@ -263,7 +263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   markDot: {fileID: 0}
-  gloabalCamCanvas: {fileID: 0}
+  globalCamCanvas: {fileID: 0}
   globalCamera: {fileID: 0}
   alert: {fileID: 0}
   centerTip: {fileID: 0}
@@ -272,7 +272,7 @@ MonoBehaviour:
   player: {fileID: 0}
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 8
   healthBar: {fileID: 6037545917028736696}
   health: 100
   crystals: 20
