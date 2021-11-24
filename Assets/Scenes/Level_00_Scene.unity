@@ -2363,10 +2363,7 @@ MonoBehaviour:
   laserControl: {fileID: 0}
   AbsorbSpeed: 200
   canvasGroup: {fileID: 248400698}
-  isArrived: 0
   isCaptured: 0
-  isBlackHole: 1
-  alpha: 1
   darken: 2
 --- !u!114 &668481582
 MonoBehaviour:
@@ -6276,8 +6273,8 @@ MonoBehaviour:
   - {fileID: 9121465199088562380, guid: 58e18218257dc448b81efb5dc14a1307, type: 3}
   - {fileID: 1710062581333795903, guid: b62795a9072da4e088f31242ee5dd117, type: 3}
   spawnInterval: 5
-  maxStartWaitTIme: 0
-  minStartWaitTime: 0
+  maxStartWaitTIme: 40
+  minStartWaitTime: 15
   spawnNum: 4
   player: {fileID: 1433787969325446563}
   centerTip: {fileID: 1102767739}
