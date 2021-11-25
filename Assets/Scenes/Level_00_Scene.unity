@@ -6700,13 +6700,11 @@ MonoBehaviour:
   skyboxes:
   - {fileID: 2100000, guid: 322d37007d1f147df8b6698172d3b05c, type: 2}
   - {fileID: 2100000, guid: 4e8f8d3fb3cd74bc995bb58527d6faaa, type: 2}
-  - {fileID: 2100000, guid: 9d1f550bbdb354801b16e3ca898dc4a8, type: 2}
+  - {fileID: 2100000, guid: 21457153d6b924a4097107a323bce2f9, type: 2}
   - {fileID: 2100000, guid: fb22132c114384ff68436f07c4d79ce4, type: 2}
   - {fileID: 2100000, guid: 49677cb62de534674b0f8edf51fd3289, type: 2}
   - {fileID: 2100000, guid: edeebc3550c2a4075a99e16c994e9340, type: 2}
   - {fileID: 2100000, guid: dcea52fcbe0274df584f170d079668de, type: 2}
-  - {fileID: 2100000, guid: fb22132c114384ff68436f07c4d79ce4, type: 2}
-  - {fileID: 2100000, guid: 21457153d6b924a4097107a323bce2f9, type: 2}
   - {fileID: 2100000, guid: 27e798b230e474dc3a7734ccc05c0b7c, type: 2}
   gamePlayMusic: {fileID: 1525737366}
   gameOverMusic: {fileID: 1662734671}
