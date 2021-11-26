@@ -25,6 +25,7 @@ public class RandomSpawner : MonoBehaviour
         public int valuelessSum;
 		//道具总数
         public int propsSum;
+        
     }
 
     [System.Serializable]
@@ -66,7 +67,7 @@ public class RandomSpawner : MonoBehaviour
         }
     }
 
-    // spawn in a ring area
+    // spawn in a ring area 在一个区域内产生一个物体
     public Vector3 RingAreaPos(float innerRadius, float outerRadius, Vector3 centerPos, float objHeight)
     {
         Vector3 position;
@@ -90,7 +91,11 @@ public class RandomSpawner : MonoBehaviour
             generateSpawnData();
             json = Utils.ReadDataFromFile("SpawnerData.json");
         }
-        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
+
+        if (level < JsonUtility.FromJson<SpawnerOriginJson>(json).list.Count)
+        {
+	        spawnerData = JsonUtility.FromJson<SpawnerOriginJson>(json).list[level];
+        }
     }
 
     //TODO: Write a method to generate level difficulty automatically
@@ -101,11 +106,11 @@ public class RandomSpawner : MonoBehaviour
 		{
 			SpawnerData spawner = new SpawnerData();
         	spawner.valuelessSum = 30;
-       		spawner.valuableSum = 8;
+       		spawner.valuableSum = 8 + i;
         	spawner.propsSum = 10;
         	spawner.collisionCheckRadius = 100.0f;
-        	spawner.outerRadius = 550.0f;
-        	spawner.innerRadius = 450.0f;
+        	spawner.outerRadius = 700.0f;
+        	spawner.innerRadius = 600.0f;
         	spawnData.list.Add(spawner);	
 		}
         string content = JsonUtility.ToJson(spawnData);

@@ -1,11 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Player;
-//using TreeEditor;
 using UnityEngine;
 
 public class GoalMove : MonoBehaviour
@@ -19,9 +14,11 @@ public class GoalMove : MonoBehaviour
     public float force;
     public float radius;
     public float moveSpeed;
+    [HideInInspector] public float curSpeed;
     public bool isTutorial = false;
     
     private bool hideCompleteModel = false;
+    private bool isDestroy = false;
     private GoalValue goalValue;
     private float destroyPiecesDuration = 5.0f;
     private LaserControl laserControl;
@@ -34,8 +31,9 @@ public class GoalMove : MonoBehaviour
     {
         goalValue = GetComponent<GoalValue>();
         maxSpeed = 2.5f * moveSpeed;
+        curSpeed = moveSpeed;
     }
-
+    
     public void ReturnGoal(Vector3 distroyPos, LaserControl laserControl)
     {
         bool isPause = isTutorial
@@ -51,23 +49,23 @@ public class GoalMove : MonoBehaviour
         shootBtn.isActive = true;
         this.laserControl = laserControl;
         this.distroyPos = distroyPos;
-        float distance = Vector3.Distance(transform.position, distroyPos);
         laserControl.ChangeBackStatus(true);
-        moveTween = gameObject.transform.DOMove(distroyPos, distance / moveSpeed).OnComplete(() =>
-        {
-            laserControl.ChangeBackStatus(false);
-            // disable long click button
-            shootBtn.isActive = false;
-            AfterReturn();
-        });
+        // move goal
+        float distance = Vector3.Distance(transform.position, distroyPos);
+        moveTween = gameObject.transform.DOMove(distroyPos, distance / curSpeed).OnComplete(AfterReturn);
     }
 
     private void AfterReturn()
     {
+        laserControl.ChangeBackStatus(false);
+        // disable long click button
+        shootBtn.isActive = false;
         goalValue.isCaptured = true;
         if(!hideCompleteModel) goalValue.CapturedEffect();
         // hide laser line
         laserControl.HideLaserEnableMove();
+        // send cool down message
+        laserControl.SendDestroyMessage();
         DestroyGoal();
     }
 
@@ -93,6 +91,8 @@ public class GoalMove : MonoBehaviour
         // play explosion fire effect
         GameObject bombObj = Instantiate(explosion, screenCenter, Quaternion.identity);
         Destroy(bombObj, destroyPiecesDuration / 2);
+        // change speed to lase line speed after explosion
+        SpeedUp(maxSpeed);
         // play explosion sound effect
         if(destroyGoalAudio != null && PlayerPrefs.GetInt("sound") == 1) 
             AudioSource.PlayClipAtPoint(destroyGoalAudio, Camera.main.transform.position, 0.3f);
@@ -110,15 +110,19 @@ public class GoalMove : MonoBehaviour
                 Destroy(rootTrans.GetChild(i).gameObject, destroyPiecesDuration);
             }
         }
-        // change speed to lase line speed after explosion
-        moveSpeed = Gloable.LASER_LINE_MOVE_SPEED;
     }
 
     public void SpeedUp(float targetSpeed)
     {
-        if (moveSpeed > maxSpeed) return;
-        moveSpeed = targetSpeed;
+        if (curSpeed > maxSpeed) return;
+        curSpeed = targetSpeed;
         float distance = Vector3.Distance(transform.position, distroyPos);
-        moveTween.ChangeValues(transform.position, distroyPos, distance / moveSpeed);
+        moveTween.ChangeValues(transform.position, distroyPos, distance / curSpeed);
+    }
+
+    public void StopMove()
+    {
+        moveTween.Kill();
+        curSpeed = moveSpeed;
     }
 }

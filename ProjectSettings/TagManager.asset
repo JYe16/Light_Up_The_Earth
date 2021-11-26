@@ -10,16 +10,18 @@ TagManager:
   - TimeHandle
   - CinemachineTarget
   - Shoot Button
+  - Enemy
+  - Spaceship
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Spaceship
   - Water
   - UI
-  - 
+  - Platform
   - Goals
-  - 
+  - Player
   - 
   - 
   - 
