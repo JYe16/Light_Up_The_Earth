@@ -31,8 +31,8 @@ public class EnemyShip : MonoBehaviour
     public float alertRange, stealRange;
     private bool playerInAlertRange, playerInStealRange;
 
-    private string successTip = "You got";
-    private string failTip = "You were stolen";
+    private string successTip = "You earned";
+    private string failTip = "You lost";
 
     private bool hasAlert = false;
     private bool hasStolen = false;
@@ -131,7 +131,7 @@ public class EnemyShip : MonoBehaviour
         if (score > 0)
         {
             GameManager.gm.currentScore -= score;
-            ShowCenterTip(failTip, score.ToString(), "crystals");
+            ShowCenterTip(failTip, score.ToString(), "points", true);
         }
         DestroyEnemy();
     }
@@ -145,7 +145,7 @@ public class EnemyShip : MonoBehaviour
             if (crystals > 0)
             {
                 GameManager.gm.currentScore += crystals;
-                ShowCenterTip(successTip, crystals.ToString(), "crystals");
+                ShowCenterTip(successTip, crystals.ToString(), "points", false);
             }
             DestroyEnemy();
         }
@@ -172,12 +172,22 @@ public class EnemyShip : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, alertRange);
     }
 
-    private void ShowCenterTip(string text1, string text2, string text3)
+    private void ShowCenterTip(string text1, string text2, string text3, bool stolen)
     {
         centerTip.SetActive(true);
         line1.text = text1;
         line2.text = text2;
         line3.text = text3;
+		if(!stolen)
+		{
+			line1.color = Color.cyan;
+			line2.color = Color.cyan;
+			line3.color = Color.cyan;
+		}else{
+			line1.color = Color.red;
+			line2.color = Color.red;
+			line3.color = Color.red;
+		}
         DOTween.Sequence().Append(centerTip.transform.DOScale(Vector3.one, 0.6f))
             .Append(centerTip.transform.DOShakePosition(1.5f, 10f, 8, 50))
             .Append(centerTip.transform.DOScale(Vector3.zero, 0.6f)).OnComplete(
